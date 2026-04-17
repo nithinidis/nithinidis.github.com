@@ -1,0 +1,4107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MixTechBook — Thematic Analysis | Nithin Lanka Dissanayake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#faf8f3;
+  --paper:#fff;
+  --ink:#16130e;
+  --ink2:#4a4539;
+  --ink3:#887f6e;
+  --line:#e8e0cf;
+  --line2:#c9bfa8;
+
+  /* TEACHERS — coral/peach */
+  --t-1:#ffe8dc;
+  --t-2:#ffb894;
+  --t-3:#e86f3b;
+  --t-4:#c54a15;
+  --t-ink:#5a1f05;
+
+  /* EXPERTS — deep teal/blue */
+  --e-1:#d9ebe8;
+  --e-2:#7fc4bd;
+  --e-3:#2e8c81;
+  --e-4:#156058;
+  --e-ink:#072823;
+
+  /* CASES — mustard/gold */
+  --c-1:#fceec4;
+  --c-2:#f2cd5e;
+  --c-3:#d49a15;
+  --c-4:#996b00;
+  --c-ink:#3d2800;
+
+  /* FINAL — plum/purple */
+  --f-1:#ece4f3;
+  --f-2:#c4a8d9;
+  --f-3:#8655aa;
+  --f-4:#5a2f7a;
+  --f-ink:#2e0f45;
+
+  --r:14px;
+  --rs:8px;
+}
+html,body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased}
+
+/* ══════ HERO ══════ */
+.hero{min-height:100vh;background:var(--ink);color:var(--bg);display:flex;align-items:center;padding:60px 40px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(circle at 18% 30%, var(--t-3) 0%, transparent 35%),
+  radial-gradient(circle at 82% 70%, var(--e-3) 0%, transparent 40%),
+  radial-gradient(circle at 50% 95%, var(--c-3) 0%, transparent 35%),
+  radial-gradient(circle at 90% 15%, var(--f-3) 0%, transparent 30%);
+  opacity:.45;filter:blur(80px)}
+.hero-inner{max-width:1180px;margin:0 auto;position:relative;width:100%}
+.hero-meta{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,248,243,.55);margin-bottom:24px;font-weight:500}
+.hero-meta span{display:inline-block;padding:4px 10px;border:1px solid rgba(250,248,243,.2);border-radius:100px;margin-right:6px;margin-bottom:6px}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(44px,7.5vw,112px);font-weight:600;line-height:0.95;letter-spacing:-0.035em;margin-bottom:20px}
+.hero h1 em{font-style:italic;font-weight:400;color:rgba(250,248,243,.5);display:block;font-size:0.48em;line-height:1.15;margin-top:8px;letter-spacing:-0.01em}
+.hero-aim{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(16px,1.9vw,22px);color:rgba(250,248,243,.72);max-width:720px;line-height:1.55;margin:32px 0 40px;font-weight:400}
+.hero-stats{display:flex;flex-wrap:wrap;gap:32px;margin-bottom:44px}
+.hs-item strong{display:block;font-family:'Fraunces',serif;font-size:44px;line-height:1;font-weight:600;margin-bottom:4px}
+.hs-item span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,248,243,.55)}
+.hs-item.t strong{color:var(--t-2)}
+.hs-item.e strong{color:var(--e-2)}
+.hs-item.c strong{color:var(--c-2)}
+.hs-item.f strong{color:var(--f-2)}
+.enter-btn{background:var(--bg);color:var(--ink);border:none;font-family:'Inter',sans-serif;font-size:15px;font-weight:500;padding:18px 36px;border-radius:100px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:transform .15s,box-shadow .15s}
+.enter-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.enter-btn svg{width:18px;height:18px}
+.hero-footer{position:absolute;bottom:32px;left:40px;right:40px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,248,243,.35)}
+
+/* ══════ MAIN APP ══════ */
+.app{display:none}
+.app.on{display:block}
+
+/* ══════ STICKY HEADER ══════ */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(250,248,243,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;cursor:pointer}
+.brand-logo{width:34px;height:34px;border-radius:10px;background:var(--ink);display:flex;align-items:center;justify-content:center;color:var(--bg);font-family:'Fraunces',serif;font-weight:600;font-size:17px}
+.brand-text{display:flex;flex-direction:column}
+.brand-text strong{font-family:'Fraunces',serif;font-size:16px;font-weight:600;line-height:1}
+.brand-text span{font-size:10px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+
+/* ══════ STAGE PROGRESS ══════ */
+.steps{display:flex;align-items:center;gap:0;flex:1;max-width:620px;justify-content:center}
+.step{display:flex;align-items:center;gap:9px;padding:7px 14px;border-radius:100px;cursor:pointer;transition:all .15s;border:1px solid transparent;font-family:'Inter',sans-serif;background:none;font-size:13px;color:var(--ink3)}
+.step:hover{background:var(--paper);border-color:var(--line)}
+.step.on{background:var(--ink);color:var(--bg);font-weight:500}
+.step-num{width:22px;height:22px;border-radius:50%;background:var(--line);color:var(--ink2);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif}
+.step.on .step-num{background:rgba(250,248,243,.22);color:var(--bg)}
+.step-arrow{color:var(--line2);font-size:13px;margin:0 2px}
+
+/* ══════ CONTENT CONTAINER ══════ */
+.wrap{max-width:1180px;margin:0 auto;padding:40px 32px 100px}
+
+/* ══════ STAGE HEADER ══════ */
+.stage-header{margin-bottom:36px}
+.stage-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);font-weight:500;margin-bottom:10px}
+.stage-title{font-family:'Fraunces',serif;font-size:clamp(34px,5vw,58px);font-weight:600;line-height:1.02;letter-spacing:-0.025em;margin-bottom:14px}
+.stage-title em{font-style:italic;font-weight:400;color:var(--ink3)}
+.stage-desc{font-family:'Fraunces',serif;font-style:italic;font-size:18px;color:var(--ink2);max-width:780px;line-height:1.55}
+
+/* ══════ SOURCE TABS ══════ */
+.src-tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:2px solid var(--line)}
+.src-tab{background:none;border:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;padding:14px 22px;cursor:pointer;color:var(--ink3);position:relative;display:flex;align-items:center;gap:10px;transition:color .15s}
+.src-tab::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:3px;background:transparent;transition:background .15s}
+.src-tab:hover{color:var(--ink2)}
+.src-tab .src-dot{width:9px;height:9px;border-radius:50%}
+.src-tab.t .src-dot{background:var(--t-3)}
+.src-tab.e .src-dot{background:var(--e-3)}
+.src-tab.c .src-dot{background:var(--c-3)}
+.src-tab.on{color:var(--ink)}
+.src-tab.on.t::after{background:var(--t-3)}
+.src-tab.on.e::after{background:var(--e-3)}
+.src-tab.on.c::after{background:var(--c-3)}
+.src-tab .src-count{font-size:11px;color:var(--ink3);background:var(--line);padding:2px 8px;border-radius:100px;font-weight:500;font-variant-numeric:tabular-nums}
+
+/* ══════ STAGE 1 — PARTICIPANT SELECTOR ══════ */
+.p-select{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.p-chip{background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:9px 16px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;color:var(--ink2);transition:all .12s;display:flex;align-items:center;gap:8px}
+.p-chip:hover{border-color:var(--line2)}
+.p-chip.on{color:var(--bg)}
+.p-chip .p-idx{font-family:'Fraunces',serif;font-weight:600;font-size:13px;opacity:.7}
+.p-chip.on .p-idx{opacity:1}
+
+.t .p-chip.on{background:var(--t-4);border-color:var(--t-4)}
+.e .p-chip.on{background:var(--e-4);border-color:var(--e-4)}
+.c .p-chip.on{background:var(--c-4);border-color:var(--c-4)}
+
+/* ══════ STAGE 1 — SEGMENTS ══════ */
+.participant-info{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin-bottom:24px;display:flex;align-items:center;gap:16px}
+.pi-avatar{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:600;font-size:18px;flex-shrink:0}
+.t .pi-avatar{background:var(--t-1);color:var(--t-ink)}
+.e .pi-avatar{background:var(--e-1);color:var(--e-ink)}
+.c .pi-avatar{background:var(--c-1);color:var(--c-ink)}
+.pi-text{flex:1}
+.pi-label{font-family:'Fraunces',serif;font-size:16px;font-weight:600;line-height:1.3;margin-bottom:2px}
+.pi-sub{font-size:12px;color:var(--ink3)}
+
+.segment{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);margin-bottom:14px;overflow:hidden}
+.seg-header{padding:14px 20px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;transition:background .12s}
+.seg-header:hover{background:var(--bg)}
+.seg-num{font-family:'Fraunces',serif;font-size:13px;font-weight:600;color:var(--ink3);width:22px;flex-shrink:0}
+.seg-title{font-family:'Fraunces',serif;font-size:16px;font-weight:600;flex:1;line-height:1.3}
+.seg-count{font-size:11px;color:var(--ink3);background:var(--bg);padding:3px 10px;border-radius:100px;font-variant-numeric:tabular-nums}
+.seg-toggle{color:var(--ink3);font-size:12px;transition:transform .15s}
+.segment.open .seg-toggle{transform:rotate(90deg)}
+.seg-body{display:none;border-top:1px solid var(--line);padding:18px 20px 22px;background:linear-gradient(to bottom, rgba(0,0,0,0.01), transparent)}
+.segment.open .seg-body{display:block}
+
+.extract{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:14px 0;border-bottom:1px dashed var(--line)}
+.extract:last-child{border-bottom:none;padding-bottom:0}
+.extract:first-child{padding-top:0}
+.ex-quote{font-family:'Fraunces',serif;font-style:italic;font-size:15px;line-height:1.55;color:var(--ink);padding-left:14px;border-left:3px solid}
+.t .ex-quote{border-left-color:var(--t-3)}
+.e .ex-quote{border-left-color:var(--e-3)}
+.c .ex-quote{border-left-color:var(--c-3)}
+.ex-code{font-size:13px;color:var(--ink2);line-height:1.5;display:flex;align-items:flex-start;gap:10px}
+.ex-code::before{content:"→";color:var(--ink3);font-weight:500;flex-shrink:0}
+
+@media(max-width:720px){
+  .extract{grid-template-columns:1fr;gap:10px}
+}
+
+/* ══════ STAGE 2 — FOCUSED CODES ══════ */
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.fc-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:22px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
+.fc-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px}
+.t .fc-card::before{background:linear-gradient(to bottom,var(--t-3),var(--t-4))}
+.e .fc-card::before{background:linear-gradient(to bottom,var(--e-3),var(--e-4))}
+.c .fc-card::before{background:linear-gradient(to bottom,var(--c-3),var(--c-4))}
+.fc-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.fc-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:10px;padding-left:12px}
+.t .fc-label{color:var(--t-4)}
+.e .fc-label{color:var(--e-4)}
+.c .fc-label{color:var(--c-4)}
+.fc-title{font-family:'Fraunces',serif;font-size:17px;font-weight:600;line-height:1.3;padding-left:12px;margin-bottom:16px}
+.fc-divider{height:1px;background:var(--line);margin:16px 0 14px 12px}
+.fc-section-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--ink3);margin-bottom:9px;padding-left:12px}
+.fc-codes{padding-left:12px;margin-bottom:14px}
+.fc-code-item{font-size:13px;color:var(--ink2);line-height:1.5;padding:2px 0}
+.fc-quote{font-family:'Fraunces',serif;font-style:italic;font-size:14px;line-height:1.55;padding-left:12px;color:var(--ink);margin-bottom:14px;white-space:pre-line}
+.fc-why{background:var(--bg);border-radius:var(--rs);padding:12px 14px;font-size:13px;color:var(--ink2);line-height:1.5;margin-left:12px}
+.fc-why strong{font-weight:600;color:var(--ink);display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+
+/* ══════ STAGE 3 — SOURCE THEMES ══════ */
+.t-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:18px}
+.t-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:26px;position:relative}
+.t-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:5px 12px;border-radius:100px;margin-bottom:16px}
+.t .t-badge{background:var(--t-1);color:var(--t-ink)}
+.e .t-badge{background:var(--e-1);color:var(--e-ink)}
+.c .t-badge{background:var(--c-1);color:var(--c-ink)}
+.t-statement{font-family:'Fraunces',serif;font-size:20px;font-weight:600;line-height:1.3;margin-bottom:20px;letter-spacing:-0.01em}
+.t-section{margin-bottom:18px}
+.t-section:last-child{margin-bottom:0}
+.t-section-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--ink3);margin-bottom:9px}
+.t-fc-list{list-style:none;padding:0}
+.t-fc-list li{font-size:13px;color:var(--ink2);padding:5px 0 5px 18px;position:relative;line-height:1.45}
+.t-fc-list li::before{content:"";position:absolute;left:0;top:13px;width:8px;height:1px;background:var(--ink3)}
+.t-explanation{font-size:14px;line-height:1.62;color:var(--ink2)}
+.t-explanation p{margin-bottom:7px;white-space:pre-line}
+.t-explanation p:last-child{margin-bottom:0}
+.t-explanation .bullet-list{margin:4px 0 4px 4px;padding-left:14px}
+.t-explanation .bullet-list li{padding:2px 0}
+.t-quotes{display:flex;flex-direction:column;gap:8px}
+.t-quote{font-family:'Fraunces',serif;font-style:italic;font-size:14px;line-height:1.55;padding:10px 14px;border-radius:var(--rs);color:var(--ink)}
+.t .t-quote{background:var(--t-1)}
+.e .t-quote{background:var(--e-1)}
+.c .t-quote{background:var(--c-1)}
+
+/* ══════ FINAL ══════ */
+.final-wrap{}
+.final-section{margin-bottom:48px}
+.final-section-header{display:flex;align-items:baseline;gap:16px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--line)}
+.final-section-title{font-family:'Fraunces',serif;font-size:28px;font-weight:600;letter-spacing:-0.02em}
+.final-section-count{font-size:12px;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+
+/* Final themes — grouped by sub-question */
+.sq-group{margin-bottom:28px}
+.sq-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.sq-pill{background:var(--f-4);color:var(--bg);font-family:'Fraunces',serif;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:100px}
+.sq-label{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--ink2)}
+.ft-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:14px}
+.ft-card{background:linear-gradient(135deg, var(--f-1) 0%, #fff 100%);border:1px solid var(--f-2);border-radius:var(--r);padding:22px;position:relative;overflow:hidden}
+.ft-num{font-family:'Fraunces',serif;font-size:42px;font-weight:600;color:var(--f-3);line-height:1;position:absolute;top:16px;right:22px;opacity:.3}
+.ft-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--f-4);font-weight:700;margin-bottom:10px}
+.ft-text{font-family:'Fraunces',serif;font-size:17px;font-weight:600;line-height:1.4;color:var(--ink);padding-right:40px}
+
+/* Design directions */
+.dd-grid{display:grid;grid-template-columns:1fr;gap:14px}
+.dd-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 28px;display:flex;gap:20px;align-items:flex-start;position:relative;overflow:hidden}
+.dd-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(to bottom, var(--f-3), var(--f-4))}
+.dd-num{width:54px;height:54px;border-radius:16px;background:var(--f-4);color:var(--bg);font-family:'Fraunces',serif;font-size:22px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dd-body{flex:1}
+.dd-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--f-4);font-weight:700;margin-bottom:6px}
+.dd-text{font-family:'Fraunces',serif;font-size:17px;font-weight:600;line-height:1.45;color:var(--ink);text-transform:uppercase;letter-spacing:0.01em}
+
+/* ══════ FOOTER ══════ */
+.footer{text-align:center;padding:40px 20px;color:var(--ink3);font-size:12px;letter-spacing:.08em}
+.footer strong{color:var(--ink2);font-weight:500}
+
+/* ══════ RESPONSIVE ══════ */
+@media(max-width:880px){
+  .steps{display:none}
+  .topbar{padding:12px 20px}
+  .wrap{padding:28px 20px 80px}
+}
+@media(max-width:560px){
+  .hero{padding:40px 20px}
+  .hero-footer{display:none}
+  .hero-stats{gap:18px}
+  .hs-item strong{font-size:32px}
+  .src-tab{padding:12px 14px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ HERO ══════ -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-meta">
+      <span>AcademyEX</span>
+      <span>MTFC9890</span>
+      <span>Technological Futures Project</span>
+    </div>
+    <h1>MixTechBook<em>The Future of<br>Immersive Learning</em></h1>
+    <p class="hero-aim">How can AR, VR, and 3D simulation technologies be used to create immersive learning experiences for teaching human body systems to Year 9 students, in alignment with Level 5 of the Making Sense of the Living World strand in the New Zealand Science Curriculum?</p>
+    <div class="hero-stats">
+      <div class="hs-item t"><strong>08</strong><span>Teacher interviews</span></div>
+      <div class="hs-item e"><strong>03</strong><span>Expert interviews</span></div>
+      <div class="hs-item c"><strong>03</strong><span>Global case studies</span></div>
+      <div class="hs-item f"><strong>09+5</strong><span>Themes + directions</span></div>
+    </div>
+    <button class="enter-btn" onclick="enterApp()">
+      Enter thematic analysis
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+  <div class="hero-footer">
+    <span>Nithin Lanka Dissanayake</span>
+    <span>Braun &amp; Clarke Thematic Analysis</span>
+  </div>
+</section>
+
+<!-- ══════ APP ══════ -->
+<div class="app" id="app">
+  <header class="topbar">
+    <div class="brand" onclick="goHome()">
+      <div class="brand-logo">M</div>
+      <div class="brand-text"><strong>MixTechBook</strong><span>Thematic Analysis</span></div>
+    </div>
+    <nav class="steps" id="steps"></nav>
+    <div style="width:180px;text-align:right;font-size:11px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase">Nithin Lanka Dissanayake</div>
+  </header>
+  <main class="wrap" id="content"></main>
+  <footer class="footer">
+    <strong>MixTechBook</strong> &nbsp;·&nbsp; Research Board &nbsp;·&nbsp; Nithin Lanka Dissanayake &nbsp;·&nbsp; AcademyEX &nbsp;·&nbsp; MTFC9890
+  </footer>
+</div>
+
+<script>
+const DATA = {
+  "stage1": {
+    "teachers": [
+      {
+        "label": "TEACHER 01",
+        "segments": [
+          {
+            "title": "Segment 1 – Understanding questions & expectations",
+            "extracts": [
+              {
+                "q": "“One of the biggest problems they have is interpreting written questions and extracting information from questions.”",
+                "c": "Difficulty interpreting written science questions and extracting relevant information"
+              },
+              {
+                "q": "“Understanding what is necessary and what is extraneous information they don’t need.”",
+                "c": "Students struggle to distinguish relevant from irrelevant information in science tasks"
+              },
+              {
+                "q": "“They will sometimes race off and start putting down lots of information.”",
+                "c": "Students responding impulsively without fully understanding task requirements"
+              },
+              {
+                "q": "“Not actually consider what they’re being asked and whether it’s necessary.”",
+                "c": "Lack of careful reading and reflection before answering science questions"
+              }
+            ]
+          },
+          {
+            "title": "Segment 2 – Transfer of skills & abstraction",
+            "extracts": [
+              {
+                "q": "“Bringing skills they already have from other subjects, primarily maths and English, into physics.”",
+                "c": "Difficulty transferring literacy and numeracy skills into science learning"
+              },
+              {
+                "q": "“Chemistry, when it can get quite abstract… students struggle.”",
+                "c": "Struggle with abstract scientific concepts in chemistry"
+              },
+              {
+                "q": "“What exactly is an atom… it’s almost like a faith thing.”",
+                "c": "Difficulty accepting unseen scientific entities such as atoms"
+              },
+              {
+                "q": "“It’s hard for them to take stuff on board at face value when you can’t actually see it.”",
+                "c": "Learning challenges caused by inability to directly observe scientific phenomena"
+              }
+            ]
+          },
+          {
+            "title": "Segment 3 – Textbooks and traditional materials",
+            "extracts": [
+              {
+                "q": "“I have a love-hate relationship with textbooks.”",
+                "c": "Mixed teacher perceptions of textbook usefulness"
+              },
+              {
+                "q": "“They’re very closed learning… if it’s in the textbook, it’s to be learned.”",
+                "c": "Textbooks promoting a closed and fixed view of knowledge"
+              },
+              {
+                "q": "“Students think everything about the topic is in the textbook.”",
+                "c": "Student over-reliance on textbooks as complete sources of knowledge"
+              },
+              {
+                "q": "“They don’t have to draw it or write the information down.”",
+                "c": "Textbooks reducing active engagement through passive consumption"
+              },
+              {
+                "q": "“They are supportive but limited.”",
+                "c": "Textbooks offering support while restricting deeper exploration"
+              }
+            ]
+          },
+          {
+            "title": "Segment 4 – Technology comfort & classroom management",
+            "extracts": [
+              {
+                "q": "“They’re digital natives… no fear at all.”",
+                "c": "Students showing high confidence and familiarity with digital technology"
+              },
+              {
+                "q": "“They open the device without being asked.”",
+                "c": "Technology use becoming habitual rather than purposeful"
+              },
+              {
+                "q": "“Their use has to be managed.”",
+                "c": "Need for teacher regulation of student technology use"
+              },
+              {
+                "q": "“In terms of comfort… it’s second nature.”",
+                "c": "Technology use perceived as natural and effortless for students"
+              }
+            ]
+          },
+          {
+            "title": "Segment 5 – Use of simulations and interactive tools",
+            "extracts": [
+              {
+                "q": "“Using simulations is fantastic when we don’t have the equipment.”",
+                "c": "Simulations compensating for lack of physical laboratory resources"
+              },
+              {
+                "q": "“Simulations are perfect… they do what they’re told.”",
+                "c": "Simulations providing idealised and controlled learning environments"
+              },
+              {
+                "q": "“Practical equipment doesn’t always work properly.”",
+                "c": "Limitations of physical experiments in demonstrating theory accurately"
+              },
+              {
+                "q": "“Doing the practical first, then backing it up with simulation is powerful.”",
+                "c": "Combining hands-on experiments with simulations to enhance learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 6 – Awareness of AR, VR, and 3D simulations",
+            "extracts": [
+              {
+                "q": "“Students are getting into AI very rapidly.”",
+                "c": "Rapid student adoption of AI tools for learning support"
+              },
+              {
+                "q": "“I think they have to be led to 3D simulations.”",
+                "c": "Students not independently seeking immersive learning tools"
+              },
+              {
+                "q": "“3D simulations are fantastic for biology.”",
+                "c": "Perceived strong value of 3D simulations for biological concepts"
+              },
+              {
+                "q": "“Students don’t gravitate towards that themselves.”",
+                "c": "Limited student self-directed engagement with immersive technologies"
+              }
+            ]
+          },
+          {
+            "title": "Segment 7 – Teacher familiarity with immersive technologies",
+            "extracts": [
+              {
+                "q": "“I’ve used 3D simulations for teaching the skeleton.”",
+                "c": "Teacher experience using 3D simulations in biology teaching"
+              },
+              {
+                "q": "“Augmented reality… I’ve seen other teachers use it.”",
+                "c": "Indirect awareness of AR through colleagues"
+              },
+              {
+                "q": "“I’ve never used a proper VR set.”",
+                "c": "Limited direct teacher experience with VR technology"
+              }
+            ]
+          },
+          {
+            "title": "Segment 8 – Value of combining real and virtual experiences",
+            "extracts": [
+              {
+                "q": "“Dissecting a heart is valuable but messy.”",
+                "c": "Practical biology lessons offering authenticity but limited clarity"
+              },
+              {
+                "q": "“Students don’t see everything in dissections.”",
+                "c": "Physical practicals failing to fully reveal internal structures"
+              },
+              {
+                "q": "“Backing that up with 3D simulation is very valuable.”",
+                "c": "3D simulations enhancing understanding of anatomical processes"
+              },
+              {
+                "q": "“It would be a shame to see practicals disappear.”",
+                "c": "Concern about replacing hands-on learning entirely with technology"
+              },
+              {
+                "q": "“You need both.”",
+                "c": "Advocacy for blended physical and digital learning approaches"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Barriers and implementation challenges",
+            "extracts": [
+              {
+                "q": "“Budget.”",
+                "c": "Financial constraints limiting adoption of immersive technologies"
+              },
+              {
+                "q": "“School size makes implementation difficult.”",
+                "c": "Organisational complexity affecting technology adoption"
+              },
+              {
+                "q": "“Change would be gradual over time.”",
+                "c": "Incremental nature of pedagogical and technological change"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "TEACHER 02",
+        "segments": [
+          {
+            "title": "Segment 1 – Classroom context & structural constraints",
+            "extracts": [
+              {
+                "q": "“Right now, I’m a relief teacher… for science subjects year 7, 9, and 10.”",
+                "c": "Teaching science across multiple year levels as a relief teacher"
+              },
+              {
+                "q": "“Because they will be having their final exams in two weeks, I have to expedite all of the subjects.”",
+                "c": "Time pressure to cover curriculum content quickly due to upcoming exams"
+              }
+            ]
+          },
+          {
+            "title": "Segment 2 – Teaching approach and student engagement differences",
+            "extracts": [
+              {
+                "q": "“Teachers are more unfaceted… not lecturing directly.”",
+                "c": "Shift from lecture-based teaching to multifaceted instructional approaches"
+              },
+              {
+                "q": "“I provide a little bit of lecture, then YouTube videos, then activities.”",
+                "c": "Blended teaching approach combining instruction, video, and activities"
+              },
+              {
+                "q": "“Some students are very attentive… while the others don’t care.”",
+                "c": "Clear division between highly engaged and disengaged students"
+              },
+              {
+                "q": "“Classes are cut in half.”",
+                "c": "Polarisation of student engagement levels within the same classroom"
+              }
+            ]
+          },
+          {
+            "title": "Segment 3 – Student motivation and assessment culture",
+            "extracts": [
+              {
+                "q": "“You go up a year level based on your age.”",
+                "c": "Automatic student progression regardless of academic achievement"
+              },
+              {
+                "q": "“They don’t fail students here.”",
+                "c": "Lack of academic consequence affecting student motivation"
+              },
+              {
+                "q": "“Students are really not pressured.”",
+                "c": "Low academic pressure influencing student effort"
+              },
+              {
+                "q": "“You can count on your fingers who are excelling.”",
+                "c": "Small proportion of highly motivated students"
+              }
+            ]
+          },
+          {
+            "title": "Segment 4 – Technology use, distraction, and control",
+            "extracts": [
+              {
+                "q": "“I tried to confiscate their cell phones, gadgets, and laptops.”",
+                "c": "Teacher intervention to limit digital distractions"
+              },
+              {
+                "q": "“No social media use.”",
+                "c": "Managing off-task technology use in class"
+              },
+              {
+                "q": "“All their attention is with me.”",
+                "c": "Attempt to refocus student attention through device restriction"
+              },
+              {
+                "q": "“Unless I allow them to use laptops for activities.”",
+                "c": "Conditional and teacher-controlled use of digital devices"
+              }
+            ]
+          },
+          {
+            "title": "Segment 5 – Textbooks, note-taking, and learning responsibility",
+            "extracts": [
+              {
+                "q": "“I encourage them to write something on their notebook.”",
+                "c": "Encouraging handwriting and note-taking for learning"
+              },
+              {
+                "q": "“Some students were typing out my objectives.”",
+                "c": "Shift from handwritten to digital note-taking"
+              },
+              {
+                "q": "“You cannot force the students to do what you want.”",
+                "c": "Student autonomy limiting teacher authority over learning"
+              },
+              {
+                "q": "“It is up to them if they want to study or not.”",
+                "c": "Responsibility for learning placed on students"
+              }
+            ]
+          },
+          {
+            "title": "Segment 6 – Cultural and socio-economic influences on learning",
+            "extracts": [
+              {
+                "q": "“Students that are really excelling are immigrants.”",
+                "c": "Immigrant students perceived as more academically motivated"
+              },
+              {
+                "q": "“They were trained really hard to study.”",
+                "c": "Cultural background influencing learning attitudes"
+              },
+              {
+                "q": "“In New Zealand, students would rather work than go to university.”",
+                "c": "Perceived limited academic aspiration among some students"
+              }
+            ]
+          },
+          {
+            "title": "Segment 7 – Learning preferences and generational characteristics",
+            "extracts": [
+              {
+                "q": "“They prefer using gadgets.”",
+                "c": "Preference for gadget-based learning"
+              },
+              {
+                "q": "“They work by pair or collaboratively.”",
+                "c": "Preference for collaborative learning approaches"
+              },
+              {
+                "q": "“They are Generation Z… YouTube generation.”",
+                "c": "Students characterised as digital-native Generation Z learners"
+              }
+            ]
+          },
+          {
+            "title": "Segment 8 – Comfort with technology",
+            "extracts": [
+              {
+                "q": "“They’re very comfortable with the devices.”",
+                "c": "High student comfort with digital devices"
+              },
+              {
+                "q": "“You cannot use your phones unless I allow you.”",
+                "c": "Teacher-regulated technology access in class"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Classroom technology infrastructure",
+            "extracts": [
+              {
+                "q": "“They usually provide an HP laptop.”",
+                "c": "School provision of teacher laptops"
+              },
+              {
+                "q": "“They have an interactive TV.”",
+                "c": "Availability of large interactive display technology"
+              },
+              {
+                "q": "“I don’t know how to use it… I’m old school.”",
+                "c": "Teacher learning curve with new classroom technologies"
+              },
+              {
+                "q": "“I might skip the videos and proceed with lectures.”",
+                "c": "Adjusting teaching strategies due to technical limitations"
+              }
+            ]
+          },
+          {
+            "title": "Segment 10 – Interactive and immersive tools",
+            "extracts": [
+              {
+                "q": "“I have not used AR or VR in my class.”",
+                "c": "Lack of teacher experience using AR and VR"
+              },
+              {
+                "q": "“Students use Minecraft Education.”",
+                "c": "Use of educational gaming platforms in school"
+              },
+              {
+                "q": "“They prefer Minecraft Education during free time.”",
+                "c": "Student preference for interactive digital environments"
+              },
+              {
+                "q": "“I might skip the videos and proceed with lectures.”",
+                "c": "Adjusting teaching strategies due to technical limitations"
+              }
+            ]
+          },
+          {
+            "title": "Segment 11 – Student familiarity with immersive technologies",
+            "extracts": [
+              {
+                "q": "“I have not used AR or VR in my class.”",
+                "c": "Lack of teacher experience using AR and VR"
+              },
+              {
+                "q": "“Students use Minecraft Education.”",
+                "c": "Use of educational gaming platforms in school"
+              },
+              {
+                "q": "“They prefer Minecraft Education during free time.”",
+                "c": "Student preference for interactive digital environments"
+              },
+              {
+                "q": "“I might skip the videos and proceed with lectures.”",
+                "c": "Adjusting teaching strategies due to technical limitations"
+              }
+            ]
+          },
+          {
+            "title": "Segment 12 – Teacher awareness and experience with VR",
+            "extracts": [
+              {
+                "q": "“I’m really familiar with VR from gaming history.”",
+                "c": "Prior awareness of VR through gaming culture"
+              },
+              {
+                "q": "“I experienced VR in Singapore.”",
+                "c": "Personal exposure to VR outside education"
+              },
+              {
+                "q": "“Schools in the US already have VR.”",
+                "c": "Awareness of international VR use in education"
+              },
+              {
+                "q": "“These are very expensive equipment.”",
+                "c": "Cost as a major barrier to classroom VR adoption"
+              }
+            ]
+          },
+          {
+            "title": "Segment 13 – Attitudes toward immersive technologies",
+            "extracts": [
+              {
+                "q": "“Nothing beats real life experience.”",
+                "c": "Preference for physical hands-on learning"
+              },
+              {
+                "q": "“VR would be an alternative when materials are unavailable.”",
+                "c": "Viewing VR as a supplement rather than replacement"
+              },
+              {
+                "q": "“Combining chemicals safely through VR.”",
+                "c": "Perceived safety benefits of immersive simulations"
+              }
+            ]
+          },
+          {
+            "title": "Segment 14 – Perceived risks and limitations",
+            "extracts": [
+              {
+                "q": "“Budget is the number one concern.”",
+                "c": "Financial constraints limiting immersive technology adoption"
+              },
+              {
+                "q": "“Health concerns like dizziness or seizures.”",
+                "c": "Concerns about physical and neurological risks of VR"
+              },
+              {
+                "q": "“Students might get sick.”",
+                "c": "Worry about student well-being when using immersive tools"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "TEACHER 03",
+        "segments": [
+          {
+            "title": "Segment 1 – Nature of science learning and abstraction",
+            "extracts": [
+              {
+                "q": "“Most of the science concepts are abstract.”",
+                "c": "Science concepts being largely abstract for students"
+              },
+              {
+                "q": "“Students struggle to learn through imagination.”",
+                "c": "Difficulty learning science concepts that rely on imagination"
+              },
+              {
+                "q": "“They can’t see atoms or molecules.”",
+                "c": "Challenges understanding microscopic and invisible scientific entities"
+              },
+              {
+                "q": "“They find it hard to picture what is happening.”",
+                "c": "Difficulty visualising scientific processes"
+              }
+            ]
+          },
+          {
+            "title": "Segment 2 – Student engagement and attitudes toward science",
+            "extracts": [
+              {
+                "q": "“Students feel bored during science lessons.”",
+                "c": "Student boredom during traditional science teaching"
+              },
+              {
+                "q": "“They think science is very hard.”",
+                "c": "Perception of science as a difficult subject"
+              },
+              {
+                "q": "“Some students don’t choose science streams later.”",
+                "c": "Avoidance of advanced science subjects due to negative perceptions"
+              },
+              {
+                "q": "“They lose interest easily.”",
+                "c": "Low sustained engagement in science learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 3 – Use of textbooks and traditional materials",
+            "extracts": [
+              {
+                "q": "“Students don’t like reading textbooks.”",
+                "c": "Student resistance to textbook-based learning"
+              },
+              {
+                "q": "“Textbooks are not attractive to them.”",
+                "c": "Textbooks failing to capture student interest"
+              },
+              {
+                "q": "“They just memorise instead of understanding.”",
+                "c": "Rote learning encouraged by textbook use"
+              },
+              {
+                "q": "“They forget what they memorised later.”",
+                "c": "Superficial learning leading to poor retention"
+              }
+            ]
+          },
+          {
+            "title": "Segment 4 – Learning preferences and hands-on experiences",
+            "extracts": [
+              {
+                "q": "“Students learn better when they do activities.”",
+                "c": "Preference for activity-based learning"
+              },
+              {
+                "q": "“They like experiments and practical work.”",
+                "c": "Student preference for hands-on science experiences"
+              },
+              {
+                "q": "“They remember better when they experience it.”",
+                "c": "Experiential learning supporting long-term retention"
+              },
+              {
+                "q": "“First-hand experience helps understanding.”",
+                "c": "Value of direct experience in science learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 5 – Technology use and student behaviour",
+            "extracts": [
+              {
+                "q": "“Students are very comfortable using technology.”",
+                "c": "High student comfort with digital technologies"
+              },
+              {
+                "q": "“They use phones and tablets every day.”",
+                "c": "Frequent daily use of digital devices by students"
+              },
+              {
+                "q": "“They like learning with screens.”",
+                "c": "Student preference for screen-based learning"
+              },
+              {
+                "q": "“Technology attracts their attention.”",
+                "c": "Digital tools increasing student attention"
+              }
+            ]
+          },
+          {
+            "title": "Segment 6 – Interactive and digital tools in teaching",
+            "extracts": [
+              {
+                "q": "“I sometimes use videos or animations.”",
+                "c": "Use of visual digital resources to support teaching"
+              },
+              {
+                "q": "“Animations help them understand processes.”",
+                "c": "Visual animations supporting conceptual understanding"
+              },
+              {
+                "q": "“Static pictures are not enough.”",
+                "c": "Limitations of static images for explaining science concepts"
+              }
+            ]
+          },
+          {
+            "title": "Segment 7 – Awareness of AR, VR, and 3D simulations",
+            "extracts": [
+              {
+                "q": "“Students play games with 3D environments.”",
+                "c": "Student familiarity with 3D environments through gaming"
+              },
+              {
+                "q": "“They know about VR from games and apps.”",
+                "c": "Informal exposure to VR through entertainment"
+              },
+              {
+                "q": "“They would be interested in learning like that.”",
+                "c": "Anticipated student interest in immersive learning technologies"
+              }
+            ]
+          },
+          {
+            "title": "Segment 8 – Perceived educational value of immersive technologies",
+            "extracts": [
+              {
+                "q": "“Seeing inside the body would help them understand.”",
+                "c": "Visualising internal body systems improving understanding"
+              },
+              {
+                "q": "“3D models could explain organs better.”",
+                "c": "3D representations supporting anatomical learning"
+              },
+              {
+                "q": "“It would make lessons more interesting.”",
+                "c": "Immersive tools increasing student engagement"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Teacher familiarity and readiness",
+            "extracts": [
+              {
+                "q": "“I haven’t used AR or VR in my teaching.”",
+                "c": "Lack of teacher experience with immersive technologies"
+              },
+              {
+                "q": "“I would like training before using them.”",
+                "c": "Need for professional development to adopt new technologies"
+              },
+              {
+                "q": "“Teachers need support.”",
+                "c": "Institutional support required for immersive technology use"
+              }
+            ]
+          },
+          {
+            "title": "Segment 10 – Constraints and limitations",
+            "extracts": [
+              {
+                "q": "“We don’t have enough resources.”",
+                "c": "Resource limitations affecting technology adoption"
+              },
+              {
+                "q": "“Not all students have access.”",
+                "c": "Inequitable student access to technology"
+              },
+              {
+                "q": "“Time is limited.”",
+                "c": "Curriculum time constraints restricting new methods"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "TEACHER 04",
+        "segments": [
+          {
+            "title": "Segment 1 – Nature of science learning and dimensionality",
+            "extracts": [
+              {
+                "q": "“Science is very hard for students because many concepts are three-dimensional.”",
+                "c": "Science concepts requiring three-dimensional understanding"
+              },
+              {
+                "q": "“We teach them using two-dimensional resources.”",
+                "c": "Mismatch between 3D science concepts and 2D teaching materials"
+              },
+              {
+                "q": "“Students can’t imagine the structure properly.”",
+                "c": "Difficulty mentally visualising scientific structures"
+              }
+            ]
+          },
+          {
+            "title": "Segment 2 – Limitations of textbooks and static images",
+            "extracts": [
+              {
+                "q": "“Textbooks only show flat pictures.”",
+                "c": "Textbooks presenting science content in flat, static formats"
+              },
+              {
+                "q": "“Students don’t really understand from diagrams alone.”",
+                "c": "Diagrams alone being insufficient for conceptual understanding"
+              },
+              {
+                "q": "“They memorise pictures without understanding.”",
+                "c": "Rote memorisation replacing conceptual learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 3 – Student engagement and motivation",
+            "extracts": [
+              {
+                "q": "“Students lose interest very quickly.”",
+                "c": "Rapid decline in student attention during lessons"
+              },
+              {
+                "q": "“They feel science is boring.”",
+                "c": "Perception of science as boring"
+              },
+              {
+                "q": "“They disengage when they don’t understand.”",
+                "c": "Loss of engagement linked to lack of understanding"
+              }
+            ]
+          },
+          {
+            "title": "Segment 4 – Learning preferences and experiential learning",
+            "extracts": [
+              {
+                "q": "“Students learn better when they can see and interact.”",
+                "c": "Preference for interactive and visual learning"
+              },
+              {
+                "q": "“Hands-on learning helps them remember.”",
+                "c": "Hands-on experiences supporting memory retention"
+              },
+              {
+                "q": "“They understand better when they explore.”",
+                "c": "Active exploration improving understanding"
+              }
+            ]
+          },
+          {
+            "title": "Segment 5 – Technology use in the classroom",
+            "extracts": [
+              {
+                "q": "“Students are very comfortable using technology.”",
+                "c": "High student comfort with digital technologies"
+              },
+              {
+                "q": "“They use devices all the time.”",
+                "c": "Frequent and habitual use of digital devices"
+              },
+              {
+                "q": "“Technology immediately attracts their attention.”",
+                "c": "Technology increasing student engagement"
+              }
+            ]
+          },
+          {
+            "title": "Segment 6 – Use of digital tools and simulations",
+            "extracts": [
+              {
+                "q": "“I use videos and simulations to explain concepts.”",
+                "c": "Use of simulations and videos to support teaching"
+              },
+              {
+                "q": "“Simulations show processes that we can’t demonstrate.”",
+                "c": "Simulations enabling visualisation of otherwise inaccessible processes"
+              },
+              {
+                "q": "“It helps students understand how systems work.”",
+                "c": "Digital simulations supporting systems-level understanding"
+              }
+            ]
+          },
+          {
+            "title": "Segment 7 – Awareness of AR, VR, and 3D simulations",
+            "extracts": [
+              {
+                "q": "“Students are familiar with 3D games.”",
+                "c": "Familiarity with 3D environments through gaming"
+              },
+              {
+                "q": "“They would be excited to use this for learning.”",
+                "c": "Anticipated student excitement toward immersive learning"
+              },
+              {
+                "q": "“3D simulations are very suitable for biology.”",
+                "c": "Perceived suitability of 3D tools for biological topics"
+              }
+            ]
+          },
+          {
+            "title": "Segment 8 – Pedagogical value of immersive technologies",
+            "extracts": [
+              {
+                "q": "“Students could see organs from all angles.”",
+                "c": "3D visualisation enabling multi-perspective understanding"
+              },
+              {
+                "q": "“They can understand how systems connect.”",
+                "c": "Immersive tools supporting understanding of system interconnections"
+              },
+              {
+                "q": "“It would make learning more meaningful.”",
+                "c": "Immersive technologies enhancing meaningful learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Teacher familiarity and readiness",
+            "extracts": [
+              {
+                "q": "“I haven’t used VR in my teaching.”",
+                "c": "Limited direct experience using VR in classrooms"
+              },
+              {
+                "q": "“I am interested in learning how to use it.”",
+                "c": "Teacher openness to adopting immersive technologies"
+              },
+              {
+                "q": "“Training would be necessary.”",
+                "c": "Need for professional development to support adoption"
+              }
+            ]
+          },
+          {
+            "title": "Segment 10 – Constraints and implementation challenges",
+            "extracts": [
+              {
+                "q": "“Cost is a big issue.”",
+                "c": "Financial constraints limiting immersive technology use"
+              },
+              {
+                "q": "“Not all schools can afford this.”",
+                "c": "Inequity in school access to advanced technologies"
+              },
+              {
+                "q": "“Time and curriculum pressure exist.”",
+                "c": "Curriculum time constraints affecting innovation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "TEACHER 05",
+        "segments": [
+          {
+            "title": "Segment 1 – Core learning challenges in Year 9 biology",
+            "extracts": [
+              {
+                "q": "“For Year 9 biology, it’s mostly about visualizing what’s going on inside the body.”",
+                "c": "Difficulty visualising internal human body systems"
+              },
+              {
+                "q": "“I can explain how blood flows through the heart or enzymes work in the stomach.”",
+                "c": "Teacher verbal explanation of complex biological processes"
+              },
+              {
+                "q": "“Unless they can see it, a lot of it just floats over them.”",
+                "c": "Lack of visual representation limiting student understanding"
+              }
+            ]
+          },
+          {
+            "title": "Segment 2 – Observable signs of student struggle",
+            "extracts": [
+              {
+                "q": "“I notice signs like fidgeting, doodling.”",
+                "c": "Physical restlessness as an indicator of confusion"
+              },
+              {
+                "q": "“Sometimes they just stare blankly at their workbook.”",
+                "c": "Passive disengagement during science lessons"
+              }
+            ]
+          },
+          {
+            "title": "Segment 3 – Impact of AR on student engagement and understanding",
+            "extracts": [
+              {
+                "q": "“When I introduce an AR model of the heart…”",
+                "c": "Use of AR models to support biology teaching"
+              },
+              {
+                "q": "“Suddenly they’re leaning forward, pointing at valves.”",
+                "c": "Increased physical and cognitive engagement when using AR"
+              },
+              {
+                "q": "“Asking questions like ‘Oh, so the oxygenated blood goes there first?’”",
+                "c": "AR prompting deeper conceptual questioning"
+              },
+              {
+                "q": "“It’s amazing to watch.”",
+                "c": "Teacher perception of AR as transformative for engagement"
+              }
+            ]
+          },
+          {
+            "title": "Segment 4 – Perceptions of textbooks",
+            "extracts": [
+              {
+                "q": "“Textbooks are a mixed bag.”",
+                "c": "Ambivalent teacher perception of textbooks"
+              },
+              {
+                "q": "“They’re structured, reliable, diagrams are clear.”",
+                "c": "Textbooks providing structure and clarity"
+              },
+              {
+                "q": "“They’re static.”",
+                "c": "Static nature of textbooks limiting learning"
+              },
+              {
+                "q": "“You can’t manipulate a lung or see blood flow.”",
+                "c": "Inability of textbooks to represent dynamic biological processes"
+              },
+              {
+                "q": "“Supportive, but not engaging enough on their own.”",
+                "c": "Textbooks insufficient as standalone learning tools"
+              }
+            ]
+          },
+          {
+            "title": "Segment 5 – Changing learning preferences over time",
+            "extracts": [
+              {
+                "q": "“Massive shift.”",
+                "c": "Perceived generational change in learning preferences"
+              },
+              {
+                "q": "“Students now want engagement, manipulation, exploration.”",
+                "c": "Preference for interactive and exploratory learning"
+              },
+              {
+                "q": "“They get frustrated with static diagrams.”",
+                "c": "Student frustration with non-interactive resources"
+              },
+              {
+                "q": "“Passive explanations don’t work anymore.”",
+                "c": "Declining effectiveness of traditional lecture-based teaching"
+              }
+            ]
+          },
+          {
+            "title": "Segment 6 – Student comfort with technology and need for structure",
+            "extracts": [
+              {
+                "q": "“They’re confident with technology — almost second nature.”",
+                "c": "High student confidence with digital technologies"
+              },
+              {
+                "q": "“I have to keep lessons structured.”",
+                "c": "Need for pedagogical structure when using technology"
+              },
+              {
+                "q": "“Otherwise, they can get lost exploring the tools.”",
+                "c": "Risk of unfocused exploration during technology use"
+              }
+            ]
+          },
+          {
+            "title": "Segment 7 – Tools currently used in teaching",
+            "extracts": [
+              {
+                "q": "“Mostly AR apps for anatomy.”",
+                "c": "Regular use of AR for anatomy teaching"
+              },
+              {
+                "q": "“VR labs for circulation.”",
+                "c": "Use of VR labs to teach circulatory systems"
+              },
+              {
+                "q": "“Google Classroom for resources.”",
+                "c": "Use of learning management systems for content delivery"
+              },
+              {
+                "q": "“Interactive quizzes.”",
+                "c": "Use of interactive assessment tools"
+              }
+            ]
+          },
+          {
+            "title": "Segment 8 – Perceived benefits of immersive tools",
+            "extracts": [
+              {
+                "q": "“They boost understanding.”",
+                "c": "Immersive tools enhancing conceptual understanding"
+              },
+              {
+                "q": "“They boost engagement.”",
+                "c": "Increased student engagement through immersive tools"
+              },
+              {
+                "q": "“They boost retention.”",
+                "c": "Improved memory and retention linked to immersive learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Challenges of implementation",
+            "extracts": [
+              {
+                "q": "“Prep time.”",
+                "c": "Increased teacher workload when using immersive tools"
+              },
+              {
+                "q": "“Occasional tech glitches.”",
+                "c": "Technical reliability issues"
+              },
+              {
+                "q": "“Classroom management challenges.”",
+                "c": "Managing student behaviour during immersive activities"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "TEACHER 06",
+        "segments": [
+          {
+            "title": "Segment 1 – Observed challenges in learning science concepts",
+            "extracts": [
+              {
+                "q": "“Students struggle when they can’t see what’s actually happening.”",
+                "c": "Learning difficulties caused by inability to observe scientific processes"
+              },
+              {
+                "q": "“A lot of biology happens inside the body, which they can’t visualise.”",
+                "c": "Difficulty visualising internal biological processes"
+              },
+              {
+                "q": "“They often memorise without understanding.”",
+                "c": "Surface learning strategies replacing conceptual understanding"
+              }
+            ]
+          },
+          {
+            "title": "Segment 2 – Student engagement and behaviour in science lessons",
+            "extracts": [
+              {
+                "q": "“They switch off pretty quickly.”",
+                "c": "Rapid loss of student attention during lessons"
+              },
+              {
+                "q": "“You can tell they’re disengaged by their body language.”",
+                "c": "Physical disengagement indicating lack of understanding"
+              },
+              {
+                "q": "“They don’t ask many questions when they’re confused.”",
+                "c": "Passive disengagement rather than active questioning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 3 – Views on textbooks and traditional instruction",
+            "extracts": [
+              {
+                "q": "“Textbooks are useful for information.”",
+                "c": "Textbooks valued as information sources"
+              },
+              {
+                "q": "“But they’re not great for understanding processes.”",
+                "c": "Textbooks insufficient for explaining dynamic processes"
+              },
+              {
+                "q": "“Students don’t engage deeply with the text.”",
+                "c": "Limited student engagement with textbook content"
+              }
+            ]
+          },
+          {
+            "title": "Segment 4 – Learning preferences and practical work",
+            "extracts": [
+              {
+                "q": "“They learn best when they’re doing something.”",
+                "c": "Preference for active, hands-on learning"
+              },
+              {
+                "q": "“Practical work helps them make sense of theory.”",
+                "c": "Hands-on activities supporting conceptual understanding"
+              },
+              {
+                "q": "“They remember experiments better than notes.”",
+                "c": "Experiential learning leading to better retention"
+              }
+            ]
+          },
+          {
+            "title": "Segment 5 – Technology use and student familiarity",
+            "extracts": [
+              {
+                "q": "“Students are very comfortable with devices.”",
+                "c": "High student comfort with digital technologies"
+              },
+              {
+                "q": "“They use technology constantly outside school.”",
+                "c": "Frequent exposure to digital technology beyond the classroom"
+              },
+              {
+                "q": "“Technology gets their attention straight away.”",
+                "c": "Digital tools increasing initial engagement"
+              }
+            ]
+          },
+          {
+            "title": "Segment 6 – Digital tools and simulations in teaching",
+            "extracts": [
+              {
+                "q": "“I use videos and simulations when I can.”",
+                "c": "Use of digital simulations to support teaching"
+              },
+              {
+                "q": "“Simulations help show processes we can’t demonstrate.”",
+                "c": "Simulations enabling visualisation of invisible processes"
+              },
+              {
+                "q": "“They help link theory to reality.”",
+                "c": "Digital tools supporting theory–practice connections"
+              }
+            ]
+          },
+          {
+            "title": "Segment 7 – Awareness of AR, VR, and 3D simulations",
+            "extracts": [
+              {
+                "q": "“Students know about VR from gaming.”",
+                "c": "Student familiarity with VR through gaming culture"
+              },
+              {
+                "q": "“They’d be interested in learning that way.”",
+                "c": "Anticipated student interest in immersive learning"
+              },
+              {
+                "q": "“3D models would really help in biology.”",
+                "c": "Perceived suitability of 3D models for biological topics"
+              }
+            ]
+          },
+          {
+            "title": "Segment 8 – Perceived pedagogical value of immersive tools",
+            "extracts": [
+              {
+                "q": "“They could see how systems connect.”",
+                "c": "Immersive tools supporting understanding of system interactions"
+              },
+              {
+                "q": "“It would make abstract ideas clearer.”",
+                "c": "Immersive technologies reducing abstraction"
+              },
+              {
+                "q": "“It would improve engagement.”",
+                "c": "Increased engagement expected from immersive learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Teacher readiness and confidence",
+            "extracts": [
+              {
+                "q": "“I haven’t used VR in my class.”",
+                "c": "Lack of direct experience using VR in teaching"
+              },
+              {
+                "q": "“I’d need training before using it.”",
+                "c": "Need for professional development for immersive technologies"
+              },
+              {
+                "q": "“Support would be important.”",
+                "c": "Importance of institutional support for adoption"
+              }
+            ]
+          },
+          {
+            "title": "Segment 10 – Barriers and constraints",
+            "extracts": [
+              {
+                "q": "“Cost is a big barrier.”",
+                "c": "Financial constraints limiting immersive technology adoption"
+              },
+              {
+                "q": "“Time is always an issue.”",
+                "c": "Curriculum time pressures restricting innovation"
+              },
+              {
+                "q": "“Not all students have access.”",
+                "c": "Inequity in student access to technology"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "TEACHER 07",
+        "segments": [
+          {
+            "title": "Segment 1 – Observed student learning challenges in science",
+            "extracts": [
+              {
+                "q": "“A lot of students struggle to understand what’s going on inside the body.”",
+                "c": "Difficulty understanding internal human body processes"
+              },
+              {
+                "q": "“They can repeat definitions but don’t really get it.”",
+                "c": "Superficial learning without deep conceptual understanding"
+              },
+              {
+                "q": "“If they can’t visualise it, they lose confidence.”",
+                "c": "Lack of visualisation leading to reduced student confidence"
+              }
+            ]
+          },
+          {
+            "title": "Segment 2 – Engagement, confidence, and classroom behaviour",
+            "extracts": [
+              {
+                "q": "“You can see them disengage quite quickly.”",
+                "c": "Rapid disengagement during science lessons"
+              },
+              {
+                "q": "“They stop asking questions when they feel lost.”",
+                "c": "Withdrawal from participation when confused"
+              },
+              {
+                "q": "“Some students feel embarrassed to ask for help.”",
+                "c": "Fear of embarrassment limiting student questioning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 3 – Limitations of traditional teaching materials",
+            "extracts": [
+              {
+                "q": "“Textbooks explain things, but they’re very static.”",
+                "c": "Static nature of textbooks limiting learning"
+              },
+              {
+                "q": "“Diagrams don’t show how things move or change.”",
+                "c": "Diagrams failing to represent dynamic biological processes"
+              },
+              {
+                "q": "“Students don’t connect diagrams to real processes.”",
+                "c": "Difficulty linking textbook images to real biological functions"
+              }
+            ]
+          },
+          {
+            "title": "Segment 4 – Learning preferences and experiential understanding",
+            "extracts": [
+              {
+                "q": "“Students understand better when they can see it happening.”",
+                "c": "Visual observation supporting conceptual understanding"
+              },
+              {
+                "q": "“Hands-on learning builds confidence.”",
+                "c": "Experiential learning increasing student confidence"
+              },
+              {
+                "q": "“They’re more willing to participate when they understand.”",
+                "c": "Understanding leading to increased engagement"
+              }
+            ]
+          },
+          {
+            "title": "Segment 5 – Student comfort with technology",
+            "extracts": [
+              {
+                "q": "“They’re very comfortable with technology.”",
+                "c": "High student comfort with digital technologies"
+              },
+              {
+                "q": "“They pick things up quickly.”",
+                "c": "Rapid student adaptation to new digital tools"
+              },
+              {
+                "q": "“Technology makes them more confident.”",
+                "c": "Digital tools supporting learner confidence"
+              }
+            ]
+          },
+          {
+            "title": "Segment 6 – Current use of digital tools",
+            "extracts": [
+              {
+                "q": "“I use videos and animations regularly.”",
+                "c": "Frequent use of visual digital resources"
+              },
+              {
+                "q": "“Animations help explain processes better than pictures.”",
+                "c": "Animated visuals improving understanding of processes"
+              },
+              {
+                "q": "“Students respond well to visual explanations.”",
+                "c": "Positive student response to visual teaching methods"
+              }
+            ]
+          },
+          {
+            "title": "Segment 7 – Awareness of immersive technologies",
+            "extracts": [
+              {
+                "q": "“Students know about VR from gaming.”",
+                "c": "Student familiarity with VR through gaming"
+              },
+              {
+                "q": "“They would be excited to try this in class.”",
+                "c": "Anticipated enthusiasm for immersive learning"
+              },
+              {
+                "q": "“3D models would be very helpful for anatomy.”",
+                "c": "Perceived usefulness of 3D models for anatomy teaching"
+              }
+            ]
+          },
+          {
+            "title": "Segment 8 – Pedagogical potential of AR, VR, and 3D simulations",
+            "extracts": [
+              {
+                "q": "“They could explore organs without fear of getting it wrong.”",
+                "c": "Safe exploration enabled by immersive tools"
+              },
+              {
+                "q": "“Seeing systems working together would help understanding.”",
+                "c": "Immersive tools supporting systems thinking"
+              },
+              {
+                "q": "“It would make abstract concepts more concrete.”",
+                "c": "Immersive learning reducing abstraction"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Teacher readiness and professional learning",
+            "extracts": [
+              {
+                "q": "“I haven’t used VR myself.”",
+                "c": "Lack of direct teacher experience with VR"
+              },
+              {
+                "q": "“I’d need training to feel confident.”",
+                "c": "Need for professional development"
+              },
+              {
+                "q": "“Support from the school would be important.”",
+                "c": "Institutional support required for adoption"
+              }
+            ]
+          },
+          {
+            "title": "Segment 10 – Barriers and constraints",
+            "extracts": [
+              {
+                "q": "“Cost would be an issue.”",
+                "c": "Financial barriers to immersive technology adoption"
+              },
+              {
+                "q": "“Time is always tight.”",
+                "c": "Curriculum time constraints"
+              },
+              {
+                "q": "“Not all students would have equal access.”",
+                "c": "Equity concerns related to technology access"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "TEACHER 08",
+        "segments": [
+          {
+            "title": "Segment 1 – Challenges in teaching complex science concepts",
+            "extracts": [
+              {
+                "q": "“A lot of science concepts are really hard for students to picture.”",
+                "c": "Difficulty picturing complex scientific concepts"
+              },
+              {
+                "q": "“When we talk about body systems, it’s all happening internally.”",
+                "c": "Internal nature of body systems making learning challenging"
+              },
+              {
+                "q": "“They can’t see what’s going on, so they struggle.”",
+                "c": "Lack of visibility contributing to learning difficulties"
+              }
+            ]
+          },
+          {
+            "title": "Segment 2 – Student engagement and understanding",
+            "extracts": [
+              {
+                "q": "“You can tell when students don’t understand because they disengage.”",
+                "c": "Disengagement as an indicator of lack of understanding"
+              },
+              {
+                "q": "“They stop participating when things get confusing.”",
+                "c": "Withdrawal from participation when concepts are unclear"
+              },
+              {
+                "q": "“Confidence drops when they feel lost.”",
+                "c": "Reduced confidence linked to conceptual confusion"
+              }
+            ]
+          },
+          {
+            "title": "Segment 3 – Limitations of textbooks and static resources",
+            "extracts": [
+              {
+                "q": "“Textbooks explain things, but they’re flat.”",
+                "c": "Textbooks presenting content in flat, non-dynamic ways"
+              },
+              {
+                "q": "“Static diagrams don’t show processes very well.”",
+                "c": "Inadequacy of static diagrams for explaining processes"
+              },
+              {
+                "q": "“Students memorise diagrams without really understanding.”",
+                "c": "Rote memorisation replacing conceptual understanding"
+              }
+            ]
+          },
+          {
+            "title": "Segment 4 – Learning preferences and experiential approaches",
+            "extracts": [
+              {
+                "q": "“Students learn best when they can interact with content.”",
+                "c": "Preference for interactive learning experiences"
+              },
+              {
+                "q": "“Hands-on activities help them make sense of theory.”",
+                "c": "Experiential learning supporting theoretical understanding"
+              },
+              {
+                "q": "“They remember lessons better when they’ve done something.”",
+                "c": "Active learning improving retention"
+              }
+            ]
+          },
+          {
+            "title": "Segment 5 – Student comfort with technology",
+            "extracts": [
+              {
+                "q": "“They’re very comfortable using technology.”",
+                "c": "High student comfort with digital tools"
+              },
+              {
+                "q": "“They pick up new apps really quickly.”",
+                "c": "Rapid student adaptation to new technologies"
+              },
+              {
+                "q": "“Technology keeps them engaged.”",
+                "c": "Digital tools sustaining student engagement"
+              }
+            ]
+          },
+          {
+            "title": "Segment 6 – Use of digital tools in teaching",
+            "extracts": [
+              {
+                "q": "“I use videos and simulations regularly.”",
+                "c": "Regular use of digital simulations and videos"
+              },
+              {
+                "q": "“Simulations help explain processes we can’t show in class.”",
+                "c": "Simulations enabling visualisation of inaccessible processes"
+              },
+              {
+                "q": "“It bridges the gap between theory and reality.”",
+                "c": "Digital tools linking abstract theory to concrete understanding"
+              }
+            ]
+          },
+          {
+            "title": "Segment 7 – Awareness of AR, VR, and 3D simulations",
+            "extracts": [
+              {
+                "q": "“Students know about VR from gaming.”",
+                "c": "Student familiarity with VR through gaming"
+              },
+              {
+                "q": "“They’d be excited to learn like that.”",
+                "c": "Anticipated enthusiasm for immersive learning"
+              },
+              {
+                "q": "“3D models would be ideal for anatomy.”",
+                "c": "Suitability of 3D models for anatomical learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 8 – Pedagogical potential of immersive technologies",
+            "extracts": [
+              {
+                "q": "“They could explore organs from different angles.”",
+                "c": "Multi-perspective exploration enabled by immersive tools"
+              },
+              {
+                "q": "“Seeing systems working together would help understanding.”",
+                "c": "Immersive tools supporting systems thinking"
+              },
+              {
+                "q": "“It would make lessons more engaging.”",
+                "c": "Immersive learning increasing engagement"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Teacher readiness and professional development",
+            "extracts": [
+              {
+                "q": "“I haven’t used VR in class yet.”",
+                "c": "Lack of direct experience using VR"
+              },
+              {
+                "q": "“I’d need training to feel confident.”",
+                "c": "Need for professional development before adoption"
+              },
+              {
+                "q": "“Support would make a big difference.”",
+                "c": "Importance of institutional support"
+              }
+            ]
+          },
+          {
+            "title": "Segment 10 – Constraints and implementation challenges",
+            "extracts": [
+              {
+                "q": "“Cost would be a barrier.”",
+                "c": "Financial constraints limiting immersive technology use"
+              },
+              {
+                "q": "“Time is always limited.”",
+                "c": "Curriculum time pressure restricting innovation"
+              },
+              {
+                "q": "“Not all students would have equal access.”",
+                "c": "Equity concerns related to technology availability"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "experts": [
+      {
+        "label": "EXPERT 01",
+        "segments": [
+          {
+            "title": "Segment 1 – Understanding questions & expectations",
+            "extracts": [
+              {
+                "q": "“I wouldn’t say I’m an expert in trends exactly.”",
+                "c": "Expert distancing herself from trend-driven narratives"
+              },
+              {
+                "q": "“A lot of people seem to be working with avatars and artificial intelligence.”",
+                "c": "Increased use of avatars and AI in XR research"
+              },
+              {
+                "q": "“I notice it when other people are doing it, because I usually try to steer away.”",
+                "c": "Deliberate avoidance of dominant XR trends"
+              },
+              {
+                "q": "“I don’t think that’s necessarily always positive.”",
+                "c": "Critical stance toward AI-avatar driven XR trends"
+              }
+            ]
+          },
+          {
+            "title": "Segment 2 – Alternative XR approaches: reality capture",
+            "extracts": [
+              {
+                "q": "“My work is in real capture, capture reality.”",
+                "c": "Focus on reality-capture approaches in XR"
+              },
+              {
+                "q": "“360 and stereoscopic video.”",
+                "c": "Use of immersive video technologies"
+              },
+              {
+                "q": "“Even with AR, I’m still using reality captured through sensors.”",
+                "c": "Preference for sensor-based realism over synthetic environments"
+              }
+            ]
+          },
+          {
+            "title": "Segment 3 – Perspective on leadership and global exemplars",
+            "extracts": [
+              {
+                "q": "“I don’t really believe there’s a centre.”",
+                "c": "Rejection of hierarchical leadership models in XR"
+              },
+              {
+                "q": "“I see it as a distributed field.”",
+                "c": "XR as a decentralised and diverse research space"
+              },
+              {
+                "q": "“All contributions are valid.”",
+                "c": "Valuing plural and local XR contributions"
+              },
+              {
+                "q": "“I don’t think in terms of competition.”",
+                "c": "Non-competitive framing of XR development"
+              }
+            ]
+          },
+          {
+            "title": "Segment 4 – XR for Indigenous knowledge and culture",
+            "extracts": [
+              {
+                "q": "“Extended realities can help Indigenous people communicate their realities.”",
+                "c": "XR supporting Indigenous knowledge expression"
+              },
+              {
+                "q": "“Different realities and knowledge.”",
+                "c": "XR enabling plural worldviews"
+              },
+              {
+                "q": "“Communicating First Nations vision.”",
+                "c": "XR as a medium for cultural storytelling"
+              }
+            ]
+          },
+          {
+            "title": "Segment 5 – Learning challenges suited to XR",
+            "extracts": [
+              {
+                "q": "“Co-creation and co-design are major challenges.”",
+                "c": "Collaboration as a key learning challenge"
+              },
+              {
+                "q": "“People get drawn in because it’s exciting.”",
+                "c": "Novelty of XR motivating participation"
+              },
+              {
+                "q": "“They have to learn how to collaborate.”",
+                "c": "XR environments requiring social learning skills"
+              }
+            ]
+          },
+          {
+            "title": "Segment 6 – XR as experiential exploration, not instruction",
+            "extracts": [
+              {
+                "q": "“I don’t tend to use it as a teaching tool.”",
+                "c": "XR framed as exploratory rather than instructional"
+              },
+              {
+                "q": "“Students explore and interpret.”",
+                "c": "Learner-led exploration enabled by XR"
+              },
+              {
+                "q": "“They get excited about history and place.”",
+                "c": "XR supporting contextual and place-based learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 7 – XR for visualising invisible processes",
+            "extracts": [
+              {
+                "q": "“Using VR to go into the body.”",
+                "c": "XR enabling internal body exploration"
+              },
+              {
+                "q": "“You’re taking students into the human body.”",
+                "c": "Immersion reducing conceptual distance"
+              },
+              {
+                "q": "“You’re really in it.”",
+                "c": "Embodied immersion enhancing engagement"
+              },
+              {
+                "q": "“It penetrates the mind and the heart.”",
+                "c": "XR eliciting emotional engagement in learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 8 – Barriers to implementation",
+            "extracts": [
+              {
+                "q": "“One barrier is financial.”",
+                "c": "Cost as a barrier to XR adoption"
+              },
+              {
+                "q": "“Access to knowledge is another.”",
+                "c": "Lack of technical knowledge limiting XR use"
+              },
+              {
+                "q": "“Relationships with developers are needed.”",
+                "c": "Dependency on interdisciplinary collaboration"
+              },
+              {
+                "q": "“Not everyone has access.”",
+                "c": "Equity issues in XR implementation"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Ethical and wellbeing considerations",
+            "extracts": [
+              {
+                "q": "“Health and safety requirements.”",
+                "c": "Physical safety considerations in XR use"
+              },
+              {
+                "q": "“Ask before touching someone’s head.”",
+                "c": "Cultural sensitivity in headset use"
+              },
+              {
+                "q": "“Ethical issues around content.”",
+                "c": "Risk of misleading or harmful content"
+              },
+              {
+                "q": "“AI chatbots can be damaging.”",
+                "c": "Ethical risks of AI-integrated XR systems"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "EXPERT 02",
+        "segments": [
+          {
+            "title": "Segment 1 – Perspective on immersive technologies in education",
+            "extracts": [
+              {
+                "q": "“Immersive technologies have been around for a while.”",
+                "c": "Immersive technologies seen as established rather than new"
+              },
+              {
+                "q": "“What’s changing is how accessible they are.”",
+                "c": "Increasing accessibility of immersive technologies"
+              },
+              {
+                "q": "“Schools are now able to experiment more.”",
+                "c": "Growing opportunity for schools to trial immersive tools"
+              }
+            ]
+          },
+          {
+            "title": "Segment 2 – Pedagogical value of AR, VR, and 3D simulations",
+            "extracts": [
+              {
+                "q": "“The strength of VR is experiential learning.”",
+                "c": "VR supporting experiential learning"
+              },
+              {
+                "q": "“Students learn by doing rather than being told.”",
+                "c": "Shift from transmission teaching to experiential learning"
+              },
+              {
+                "q": "“It supports deeper engagement.”",
+                "c": "Immersive technologies increasing depth of engagement"
+              }
+            ]
+          },
+          {
+            "title": "Segment 3 – Visualisation and abstraction in science learning",
+            "extracts": [
+              {
+                "q": "“Science often deals with phenomena students can’t see.”",
+                "c": "Invisibility of scientific phenomena creating learning challenges"
+              },
+              {
+                "q": "“Immersive technologies reduce abstraction.”",
+                "c": "Immersive tools lowering conceptual abstraction"
+              },
+              {
+                "q": "“They make invisible processes visible.”",
+                "c": "Visualisation of unseen scientific processes through XR"
+              }
+            ]
+          },
+          {
+            "title": "Segment 4 – Learning human body systems using immersive tools",
+            "extracts": [
+              {
+                "q": "“Biology is particularly well suited.”",
+                "c": "Biology identified as highly suitable for immersive learning"
+              },
+              {
+                "q": "“Students can explore organs spatially.”",
+                "c": "Spatial exploration of organs enabled by immersive tools"
+              },
+              {
+                "q": "“Understanding systems as interconnected.”",
+                "c": "Immersive learning supporting systems thinking"
+              },
+              {
+                "q": "“This is hard to do with textbooks.”",
+                "c": "Traditional resources insufficient for systems learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 5 – Cognitive and affective dimensions of immersive learning",
+            "extracts": [
+              {
+                "q": "“Immersion increases emotional engagement.”",
+                "c": "Emotional engagement enhanced through immersion"
+              },
+              {
+                "q": "“But cognitive overload is a risk.”",
+                "c": "Risk of cognitive overload in immersive environments"
+              },
+              {
+                "q": "“Design needs to be careful.”",
+                "c": "Importance of intentional pedagogical design"
+              }
+            ]
+          },
+          {
+            "title": "Segment 6 – Role of guidance and instructional design",
+            "extracts": [
+              {
+                "q": "“Immersion alone doesn’t guarantee learning.”",
+                "c": "Immersion not sufficient for learning on its own"
+              },
+              {
+                "q": "“Students need scaffolding.”",
+                "c": "Need for instructional scaffolding in immersive learning"
+              },
+              {
+                "q": "“Clear learning objectives are essential.”",
+                "c": "Importance of curriculum-aligned design"
+              }
+            ]
+          },
+          {
+            "title": "Segment 7 – Teachers’ role in immersive learning environment",
+            "extracts": [
+              {
+                "q": "“Teachers remain central.”",
+                "c": "Continued importance of teacher mediation"
+              },
+              {
+                "q": "“Technology should support pedagogy.”",
+                "c": "Technology positioned as pedagogical support"
+              },
+              {
+                "q": "“Professional development is key.”",
+                "c": "Teacher training as a requirement for adoption"
+              }
+            ]
+          },
+          {
+            "title": "Segment 8 – Barriers to adoption in schools",
+            "extracts": [
+              {
+                "q": "“Cost is still a major barrier.”",
+                "c": "Financial constraints limiting adoption"
+              },
+              {
+                "q": "“Infrastructure varies across schools.”",
+                "c": "Unequal school infrastructure"
+              },
+              {
+                "q": "“Time pressures in the curriculum.”",
+                "c": "Curriculum time limiting experimentation"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Ethical and equity considerations",
+            "extracts": [
+              {
+                "q": "“Equity of access is a concern.”",
+                "c": "Equity issues related to immersive technologies"
+              },
+              {
+                "q": "“Not all students will benefit equally.”",
+                "c": "Risk of unequal learning benefits"
+              },
+              {
+                "q": "“We need to think about inclusion.”",
+                "c": "Importance of inclusive design in immersive learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 10 – Future directions of immersive learning",
+            "extracts": [
+              {
+                "q": "“We’re moving toward blended immersive models.”",
+                "c": "Trend toward blended immersive and traditional learning"
+              },
+              {
+                "q": "“AR may be more scalable than VR.”",
+                "c": "AR viewed as more scalable than VR"
+              },
+              {
+                "q": "“3D simulations are a good middle ground.”",
+                "c": "3D simulations positioned as practical compromise"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "EXPERT 03",
+        "segments": [
+          {
+            "title": "Segment 1 – Perspective on immersive learning in education",
+            "extracts": [
+              {
+                "q": "“Immersive learning is about changing how learners experience content.”",
+                "c": "Immersive learning reframing how content is experienced"
+              },
+              {
+                "q": "“It’s not just about the technology itself.”",
+                "c": "Immersive learning extending beyond technological novelty"
+              },
+              {
+                "q": "“The experience design matters.”",
+                "c": "Importance of experience design in immersive learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 2 – Experiential and embodied learning",
+            "extracts": [
+              {
+                "q": "“Learning happens through experience.”",
+                "c": "Learning conceptualised as experiential"
+              },
+              {
+                "q": "“Embodied interaction supports understanding.”",
+                "c": "Physical and embodied interaction enhancing learning"
+              },
+              {
+                "q": "“Students remember experiences better than explanations.”",
+                "c": "Experiential learning improving retention"
+              }
+            ]
+          },
+          {
+            "title": "Segment 3 – Visualisation and complexity in science education",
+            "extracts": [
+              {
+                "q": "“Science often involves complex systems.”",
+                "c": "Science characterised by complex interconnected systems"
+              },
+              {
+                "q": "“Students struggle to understand systems from static images.”",
+                "c": "Static visuals insufficient for systems understanding"
+              },
+              {
+                "q": "“Immersive environments allow students to explore complexity.”",
+                "c": "Immersive tools supporting exploration of complex systems"
+              }
+            ]
+          },
+          {
+            "title": "Segment 4 – Teaching human body systems with immersive technologies",
+            "extracts": [
+              {
+                "q": "“Human biology is ideal for immersive learning.”",
+                "c": "Human biology identified as well-suited to immersive learning"
+              },
+              {
+                "q": "“Students can explore inside the body.”",
+                "c": "Internal exploration of the body enabled by immersive tools"
+              },
+              {
+                "q": "“They can see how systems interact.”",
+                "c": "Immersive learning supporting understanding of system interactions"
+              }
+            ]
+          },
+          {
+            "title": "Segment 5 – Engagement, motivation, and affect",
+            "extracts": [
+              {
+                "q": "“Immersion increases motivation.”",
+                "c": "Immersive environments enhancing learner motivation"
+              },
+              {
+                "q": "“Students become curious and exploratory.”",
+                "c": "Immersive learning promoting curiosity"
+              },
+              {
+                "q": "“Engagement alone isn’t enough.”",
+                "c": "Engagement not sufficient for learning outcomes"
+              }
+            ]
+          },
+          {
+            "title": "Segment 6 – Need for pedagogical structure",
+            "extracts": [
+              {
+                "q": "“Experiences must be designed carefully.”",
+                "c": "Need for intentional immersive experience design"
+              },
+              {
+                "q": "“Clear learning goals are essential.”",
+                "c": "Importance of explicit learning objectives"
+              },
+              {
+                "q": "“Without structure, immersion can distract.”",
+                "c": "Risk of distraction in poorly designed immersive learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 7 – Role of teachers in immersive learning",
+            "extracts": [
+              {
+                "q": "“Teachers guide meaning-making.”",
+                "c": "Teacher role in supporting interpretation"
+              },
+              {
+                "q": "“Technology doesn’t replace pedagogy.”",
+                "c": "Technology positioned as pedagogical support"
+              },
+              {
+                "q": "“Teacher confidence matters.”",
+                "c": "Teacher confidence influencing immersive learning success"
+              }
+            ]
+          },
+          {
+            "title": "Segment 8 – Barriers to implementation",
+            "extracts": [
+              {
+                "q": "“Cost is still an issue.”",
+                "c": "Financial barriers to immersive technology adoption"
+              },
+              {
+                "q": "“Infrastructure varies widely.”",
+                "c": "Unequal infrastructure across institutions"
+              },
+              {
+                "q": "“Time for experimentation is limited.”",
+                "c": "Time constraints limiting innovation"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Ethical, wellbeing, and accessibility considerations",
+            "extracts": [
+              {
+                "q": "“Wellbeing must be considered.”",
+                "c": "Importance of student wellbeing in immersive learning"
+              },
+              {
+                "q": "“Some learners may find immersion overwhelming.”",
+                "c": "Risk of sensory or cognitive overload"
+              },
+              {
+                "q": "“Accessibility should be built in.”",
+                "c": "Need for inclusive and accessible immersive design"
+              }
+            ]
+          },
+          {
+            "title": "Segment 10 –Future directions of immersive learning",
+            "extracts": [
+              {
+                "q": "“Blended immersive models are the future.”",
+                "c": "Trend toward blended immersive learning"
+              },
+              {
+                "q": "“AR and 3D tools are more scalable.”",
+                "c": "AR and 3D viewed as scalable immersive options"
+              },
+              {
+                "q": "“VR should be used strategically.”",
+                "c": "Strategic rather than widespread VR use"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "label": "CASE STUDY 01 — Singapore: Immersive VR Classroom, Riverside Secondary School",
+        "segments": [
+          {
+            "title": "Segment 2 – Pedagogical value of AR, VR, and 3D simulations",
+            "extracts": [
+              {
+                "q": "“The strength of VR is experiential learning.”",
+                "c": "VR supporting experiential learning"
+              },
+              {
+                "q": "“Students learn by doing rather than being told.”",
+                "c": "Shift from transmission teaching to experiential learning"
+              },
+              {
+                "q": "“It supports deeper engagement.”",
+                "c": "Immersive technologies increasing depth of engagement"
+              }
+            ]
+          },
+          {
+            "title": "Segment 3 – Visualisation and abstraction in science learning",
+            "extracts": [
+              {
+                "q": "“Science often deals with phenomena students can’t see.”",
+                "c": "Invisibility of scientific phenomena creating learning challenges"
+              },
+              {
+                "q": "“Immersive technologies reduce abstraction.”",
+                "c": "Immersive tools lowering conceptual abstraction"
+              },
+              {
+                "q": "“They make invisible processes visible.”",
+                "c": "Visualisation of unseen scientific processes through XR"
+              }
+            ]
+          },
+          {
+            "title": "Segment 4 – Learning human body systems using immersive tools",
+            "extracts": [
+              {
+                "q": "“Biology is particularly well suited.”",
+                "c": "Biology identified as highly suitable for immersive learning"
+              },
+              {
+                "q": "“Students can explore organs spatially.”",
+                "c": "Spatial exploration of organs enabled by immersive tools"
+              },
+              {
+                "q": "“Understanding systems as interconnected.”",
+                "c": "Immersive learning supporting systems thinking"
+              },
+              {
+                "q": "“This is hard to do with textbooks.”",
+                "c": "Traditional resources insufficient for systems learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 5 – Cognitive and affective dimensions of immersive learning",
+            "extracts": [
+              {
+                "q": "“Immersion increases emotional engagement.”",
+                "c": "Emotional engagement enhanced through immersion"
+              },
+              {
+                "q": "“But cognitive overload is a risk.”",
+                "c": "Risk of cognitive overload in immersive environments"
+              },
+              {
+                "q": "“Design needs to be careful.”",
+                "c": "Importance of intentional pedagogical design"
+              }
+            ]
+          },
+          {
+            "title": "Segment 6 – Role of guidance and instructional design",
+            "extracts": [
+              {
+                "q": "“Immersion alone doesn’t guarantee learning.”",
+                "c": "Immersion not sufficient for learning on its own"
+              },
+              {
+                "q": "“Students need scaffolding.”",
+                "c": "Need for instructional scaffolding in immersive learning"
+              },
+              {
+                "q": "“Clear learning objectives are essential.”",
+                "c": "Importance of curriculum-aligned design"
+              }
+            ]
+          },
+          {
+            "title": "Segment 7 – Teachers’ role in immersive learning environment",
+            "extracts": [
+              {
+                "q": "“Teachers remain central.”",
+                "c": "Continued importance of teacher mediation"
+              },
+              {
+                "q": "“Technology should support pedagogy.”",
+                "c": "Technology positioned as pedagogical support"
+              },
+              {
+                "q": "“Professional development is key.”",
+                "c": "Teacher training as a requirement for adoption"
+              }
+            ]
+          },
+          {
+            "title": "Segment 8 – Barriers to adoption in schools",
+            "extracts": [
+              {
+                "q": "“Cost is still a major barrier.”",
+                "c": "Financial constraints limiting adoption"
+              },
+              {
+                "q": "“Infrastructure varies across schools.”",
+                "c": "Unequal school infrastructure"
+              },
+              {
+                "q": "“Time pressures in the curriculum.”",
+                "c": "Curriculum time limiting experimentation"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Ethical and equity considerations",
+            "extracts": [
+              {
+                "q": "“Equity of access is a concern.”",
+                "c": "Equity issues related to immersive technologies"
+              },
+              {
+                "q": "“Not all students will benefit equally.”",
+                "c": "Risk of unequal learning benefits"
+              },
+              {
+                "q": "“We need to think about inclusion.”",
+                "c": "Importance of inclusive design in immersive learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Ethical and equity considerations",
+            "extracts": [
+              {
+                "q": "“Equity of access is a concern.”",
+                "c": "Equity issues related to immersive technologies"
+              },
+              {
+                "q": "“Not all students will benefit equally.”",
+                "c": "Risk of unequal learning benefits"
+              },
+              {
+                "q": "“We need to think about inclusion.”",
+                "c": "Importance of inclusive design in immersive learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 10 – Future directions of immersive learning",
+            "extracts": [
+              {
+                "q": "“We’re moving toward blended immersive models.”",
+                "c": "Trend toward blended immersive and traditional learning"
+              },
+              {
+                "q": "“AR may be more scalable than VR.”",
+                "c": "AR viewed as more scalable than VR"
+              },
+              {
+                "q": "“3D simulations are a good middle ground.”",
+                "c": "3D simulations positioned as practical compromise"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "CASE STUDY 02 — Australia, Port Lincoln High School (PLHS)",
+        "segments": [
+          {
+            "title": "Segment 2 – Infrastructure-led immersive learning implementation",
+            "extracts": [
+              {
+                "q": "“Partnered with Lumination to build a state-of-the-art Learning Lab.”",
+                "c": "Industry–school partnership to implement immersive learning"
+              },
+              {
+                "q": "“Integrating virtual and augmented reality.”",
+                "c": "Integration of AR and VR into school infrastructure"
+              },
+              {
+                "q": "“Transforms into an immersive hub in seconds.”",
+                "c": "Dedicated immersive learning spaces enabling rapid deployment"
+              }
+            ]
+          },
+          {
+            "title": "Segment 3 – Curriculum-linked immersive learning",
+            "extracts": [
+              {
+                "q": "“VR content linked to the curriculum.”",
+                "c": "Curriculum-aligned immersive content"
+              },
+              {
+                "q": "“Used extensively across various subjects.”",
+                "c": "Cross-curricular integration of immersive technologies"
+              },
+              {
+                "q": "“Enhancing engagement and collaboration.”",
+                "c": "Immersive learning supporting engagement and collaborative learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 4 – Teaching human body systems with immersive simulations",
+            "extracts": [
+              {
+                "q": "“Explore biomechanics and the intricacies of the human body.”",
+                "c": "Use of immersive simulations to teach human body systems"
+              },
+              {
+                "q": "“Visualise and analyse movement in a way traditional methods cannot.”",
+                "c": "Immersive tools enabling learning beyond traditional methods"
+              },
+              {
+                "q": "“The Body VR… Journey to the Center of the Cell.”",
+                "c": "Use of specialised VR applications for biology education"
+              },
+              {
+                "q": "“Explore cells in three dimensions.”",
+                "c": "3D visualisation supporting cellular biology understanding"
+              },
+              {
+                "q": "“Bridges the gap between theory and practice.”",
+                "c": "Immersive learning connecting theoretical and practical understanding"
+              }
+            ]
+          },
+          {
+            "title": "Segment 5 – Experiential and exploratory learning approaches",
+            "extracts": [
+              {
+                "q": "“Students step into their subject matter.”",
+                "c": "Embodied learning through immersive environments"
+              },
+              {
+                "q": "“Create 3D models to showcase ideas.”",
+                "c": "Student-generated 3D content as a learning activity"
+              },
+              {
+                "q": "“Visualising information alongside peers.”",
+                "c": "Collaborative meaning-making through immersive tools"
+              },
+              {
+                "q": "“Active learning.”",
+                "c": "Immersive technologies supporting active learning approaches"
+              }
+            ]
+          },
+          {
+            "title": "Segment 6 – Development of future-oriented skills",
+            "extracts": [
+              {
+                "q": "“Develop critical skills for the future workforce.”",
+                "c": "Immersive learning linked to future skills development"
+              },
+              {
+                "q": "“Coding, 3D creation, and virtual reality.”",
+                "c": "Integration of immersive technologies with digital skill development"
+              },
+              {
+                "q": "“Think creatively and critically.”",
+                "c": "Immersive learning supporting higher-order thinking skills"
+              }
+            ]
+          },
+          {
+            "title": "Segment 7 – Equity, inclusion, and neurodiverse learners",
+            "extracts": [
+              {
+                "q": "“Neurodiverse students also have access.”",
+                "c": "Inclusive access to immersive learning technologies"
+              },
+              {
+                "q": "“Cater to their unique needs.”",
+                "c": "Immersive learning adapted for diverse learning needs"
+              },
+              {
+                "q": "“Helps hold their attention.”",
+                "c": "Immersive environments supporting sustained attention"
+              },
+              {
+                "q": "“Make complex concepts more understandable.”",
+                "c": "Immersive learning simplifying complex content for neurodiverse learners"
+              },
+              {
+                "q": "“Reduce sensory overload by allowing students to control focus.”",
+                "c": "Immersive environments supporting sensory regulation"
+              }
+            ]
+          },
+          {
+            "title": "Segment 8 – Student voice and affective response",
+            "extracts": [
+              {
+                "q": "“I could see the video all around me.”",
+                "c": "360-degree immersion shaping student experience"
+              },
+              {
+                "q": "“It’s like you are in the real world.”",
+                "c": "Strong sense of presence experienced by students"
+              },
+              {
+                "q": "“Pretty cool.”",
+                "c": "Positive affective response to immersive learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Teacher professional development and support structures",
+            "extracts": [
+              {
+                "q": "“Onboarding sessions for Lab Champions.”",
+                "c": "Structured professional development for immersive learning"
+              },
+              {
+                "q": "“Teacher planning sessions.”",
+                "c": "Collaborative planning to integrate immersive technologies"
+              },
+              {
+                "q": "“Ongoing support sessions.”",
+                "c": "Sustained support for immersive learning adoption"
+              }
+            ]
+          },
+          {
+            "title": "Segment 10 – Shifts in teacher perceptions",
+            "extracts": [
+              {
+                "q": "“My perception has evolved.”",
+                "c": "Change in teacher attitudes toward immersive technologies"
+              },
+              {
+                "q": "“World of potential.”",
+                "c": "Recognition of immersive learning’s future possibilities"
+              },
+              {
+                "q": "“Personalised learning experiences.”",
+                "c": "Immersive technologies enabling personalised learning"
+              },
+              {
+                "q": "“Pathway to equity and excellence.”",
+                "c": "Immersive learning framed as equity-enhancing practice"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "CASE STUDY 03 — China: VR and AR Integration in Secondary Mathematics Education",
+        "segments": [
+          {
+            "title": "Segment 2 – Experiential and embodied learning",
+            "extracts": [
+              {
+                "q": "“Learning happens through experience.”",
+                "c": "Learning conceptualised as experiential"
+              },
+              {
+                "q": "“Embodied interaction supports understanding.”",
+                "c": "Physical and embodied interaction enhancing learning"
+              },
+              {
+                "q": "“Students remember experiences better than explanations.”",
+                "c": "Experiential learning improving retention"
+              }
+            ]
+          },
+          {
+            "title": "Segment 3 – Visualisation and complexity in science education",
+            "extracts": [
+              {
+                "q": "“Science often involves complex systems.”",
+                "c": "Science characterised by complex interconnected systems"
+              },
+              {
+                "q": "“Students struggle to understand systems from static images.”",
+                "c": "Static visuals insufficient for systems understanding"
+              },
+              {
+                "q": "“Immersive environments allow students to explore complexity.”",
+                "c": "Immersive tools supporting exploration of complex systems"
+              }
+            ]
+          },
+          {
+            "title": "Segment 4 – Teaching human body systems with immersive technologies",
+            "extracts": [
+              {
+                "q": "“Human biology is ideal for immersive learning.”",
+                "c": "Human biology identified as well-suited to immersive learning"
+              },
+              {
+                "q": "“Students can explore inside the body.”",
+                "c": "Internal exploration of the body enabled by immersive tools"
+              },
+              {
+                "q": "“They can see how systems interact.”",
+                "c": "Immersive learning supporting understanding of system interactions"
+              }
+            ]
+          },
+          {
+            "title": "Segment 5 – Engagement, motivation, and affect",
+            "extracts": [
+              {
+                "q": "“Immersion increases motivation.”",
+                "c": "Immersive environments enhancing learner motivation"
+              },
+              {
+                "q": "“Students become curious and exploratory.”",
+                "c": "Immersive learning promoting curiosity"
+              },
+              {
+                "q": "“Engagement alone isn’t enough.”",
+                "c": "Engagement not sufficient for learning outcomes"
+              }
+            ]
+          },
+          {
+            "title": "Segment 6 – Need for pedagogical structure",
+            "extracts": [
+              {
+                "q": "“Experiences must be designed carefully.”",
+                "c": "Need for intentional immersive experience design"
+              },
+              {
+                "q": "“Clear learning goals are essential.”",
+                "c": "Importance of explicit learning objectives"
+              },
+              {
+                "q": "“Without structure, immersion can distract.”",
+                "c": "Risk of distraction in poorly designed immersive learning"
+              }
+            ]
+          },
+          {
+            "title": "Segment 7 – Role of teachers in immersive learning",
+            "extracts": [
+              {
+                "q": "“Teachers guide meaning-making.”",
+                "c": "Teacher role in supporting interpretation"
+              },
+              {
+                "q": "“Technology doesn’t replace pedagogy.”",
+                "c": "Technology positioned as pedagogical support"
+              },
+              {
+                "q": "“Teacher confidence matters.”",
+                "c": "Teacher confidence influencing immersive learning success"
+              }
+            ]
+          },
+          {
+            "title": "Segment 8 – Barriers to implementation",
+            "extracts": [
+              {
+                "q": "“Cost is still an issue.”",
+                "c": "Financial barriers to immersive technology adoption"
+              },
+              {
+                "q": "“Infrastructure varies widely.”",
+                "c": "Unequal infrastructure across institutions"
+              },
+              {
+                "q": "“Time for experimentation is limited.”",
+                "c": "Time constraints limiting innovation"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Ethical, wellbeing, and accessibility considerations",
+            "extracts": [
+              {
+                "q": "“Wellbeing must be considered.”",
+                "c": "Importance of student wellbeing in immersive learning"
+              },
+              {
+                "q": "“Some learners may find immersion overwhelming.”",
+                "c": "Risk of sensory or cognitive overload"
+              },
+              {
+                "q": "“Accessibility should be built in.”",
+                "c": "Need for inclusive and accessible immersive design"
+              }
+            ]
+          },
+          {
+            "title": "Segment 9 – Ethical, wellbeing, and accessibility considerations",
+            "extracts": [
+              {
+                "q": "“Wellbeing must be considered.”",
+                "c": "Importance of student wellbeing in immersive learning"
+              },
+              {
+                "q": "“Some learners may find immersion overwhelming.”",
+                "c": "Risk of sensory or cognitive overload"
+              },
+              {
+                "q": "“Accessibility should be built in.”",
+                "c": "Need for inclusive and accessible immersive design"
+              }
+            ]
+          },
+          {
+            "title": "Segment 10 –Future directions of immersive learning",
+            "extracts": [
+              {
+                "q": "“Blended immersive models are the future.”",
+                "c": "Trend toward blended immersive learning"
+              },
+              {
+                "q": "“AR and 3D tools are more scalable.”",
+                "c": "AR and 3D viewed as scalable immersive options"
+              },
+              {
+                "q": "“VR should be used strategically.”",
+                "c": "Strategic rather than widespread VR use"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "stage2": {
+    "teachers": [
+      {
+        "title": "Focused Code 1",
+        "grouped": [
+          "*Difficulty visualising internal body systems",
+          "*Inability to see what is happening inside the body",
+          "*3D concepts taught with 2D materials",
+          "*Abstract processes being hard to imagine",
+          "*Static diagrams limiting understanding"
+        ],
+        "quote": "“A lot of biology happens inside the body, which they can’t visualise.”\n\n“Students can’t imagine the structure properly.”\n\n“Unless they can see it, it just floats over them.”",
+        "why": "📌 Why this focused code matters\nThis is the core problem immersive technologies are responding to."
+      },
+      {
+        "title": "Focused Code 2",
+        "grouped": [
+          "*Textbooks presenting flat images",
+          "*Textbooks presenting flat images",
+          "*Static diagrams insufficient for processes",
+          "*Memorisation without understanding",
+          "*Passive learning through reading and notes"
+        ],
+        "quote": "\"Textbooks are supportive, but they’re static.” \n\n“Students memorise diagrams without understanding.” \n\n“They don’t really engage deeply with the text.”",
+        "why": "📌 Why this focused code matters\nThis explains why traditional approaches are not enough."
+      },
+      {
+        "title": "Focused Code 3",
+        "grouped": [
+          "*Students losing interest quickly",
+          "*Fidgeting, doodling, staring blankly",
+          "*Reduced questioning when confused",
+          "*Declining confidence"
+        ],
+        "quote": "“They disengage when they don’t understand.” \n\n“You can tell by their body language.”",
+        "why": "📌 Why this focused code matters\nThis connects cognition ↔ affect ↔ behaviour."
+      },
+      {
+        "title": "Focused Code 4",
+        "grouped": [
+          "*Learning better through interaction",
+          "*Hands-on learning improving retention",
+          "*Active exploration supporting understanding",
+          "*Visual learning preferences"
+        ],
+        "quote": "“Students learn better when they can see and interact.” \n\n“They remember lessons better when they’ve done something.”",
+        "why": "📌 Why this focused code matters\nThis becomes a bridge to immersive technologies."
+      },
+      {
+        "title": "Focused Code 5",
+        "grouped": [
+          "*Use of AR/VR/simulations in class",
+          "*Increased questioning during AR/VR use",
+          "*Improved conceptual understanding",
+          "*Increased engagement and curiosity"
+        ],
+        "quote": "“Suddenly they’re leaning forward, asking questions.”\n\n“Simulations show processes we can’t demonstrate.”",
+        "why": "📌 Why this focused code matters\nThis is direct evidence."
+      },
+      {
+        "title": "Focused Code 6",
+        "grouped": [
+          "*Students comfortable with technology",
+          "*Familiarity with gaming and 3D environments",
+          "*Rapid uptake of new tools"
+        ],
+        "quote": "“They’re confident with technology — almost second nature.” \n\n“They know VR from gaming.”",
+        "why": "📌 Why this focused code matters\nThis supports feasibility."
+      },
+      {
+        "title": "Focused Code 7",
+        "grouped": [
+          "*Need for lesson structure",
+          "*Risk of students getting distracted",
+          "*Importance of clear learning goals"
+        ],
+        "quote": "“I have to keep lessons structured.” \n\n“Otherwise, they get lost exploring.”",
+        "why": "📌 Why this focused code matters\nVery important: teachers are not techno-utopian."
+      },
+      {
+        "title": "Focused Code 8",
+        "grouped": [
+          "*Cost and funding issues",
+          "*Time and curriculum pressure",
+          "*Equity of access",
+          "*Teacher training needs"
+        ],
+        "quote": "“Cost is a big barrier.” \n\n“Training would be necessary.”",
+        "why": "📌 Why this focused code matters\nThis prevents your study from sounding unrealistic."
+      }
+    ],
+    "experts": [
+      {
+        "title": "Focused Code 1",
+        "grouped": [
+          "*Difficulty visualising internal body systems",
+          "*Embodied interaction supporting understanding",
+          "*VR making invisible processes visible",
+          "*Learners being “inside” systems",
+          "*Reduction of cognitive distance between learner and content"
+        ],
+        "quote": "“You’re really in it.”\n\n“Immersion reduces abstraction.”\n\n“Embodied interaction supports understanding.”",
+        "why": "📌 Why this focused code matters\nThis is the core pedagogical justification for AR/VR/3D across all expert interviews."
+      },
+      {
+        "title": "Focused Code 2",
+        "grouped": [
+          "*Biology identified as ideal for immersive learning",
+          "*XR supporting systems thinking",
+          "*Exploration of interconnected processess",
+          "*Understanding relationships rather than isolated facts"
+        ],
+        "quote": "“Human biology is ideal for immersive learning.” (Expert 3)\n\n“Students can understand systems as interconnected.”",
+        "why": "📌 Why this focused code matters\nThis focused code aligns perfectly with: human body systems & Level 5 Making Sense of the Living World"
+      },
+      {
+        "title": "Focused Code 3",
+        "grouped": [
+          "*Immersion alone not guaranteeing learning",
+          "*Immersion alone not guaranteeing learning",
+          "*Importance of instructional scaffolding",
+          "*Risk of distraction or cognitive overload"
+        ],
+        "quote": "“Immersion alone doesn’t guarantee learning.” (Expert 2)\n\n“Experiences must be designed carefully.”",
+        "why": "📌 Why this focused code matters\nExperts strongly support immersive tech but reject unstructured use."
+      },
+      {
+        "title": "Focused Code 4",
+        "grouped": [
+          "*Teachers guiding meaning-making",
+          "*Technology supporting, not replacing, pedagogy",
+          "*Teacher confidence influencing success",
+          "*Professional judgement shaping immersive experiences"
+        ],
+        "quote": "“Teachers guide meaning-making.”\n\n“Technology should support pedagogy.”",
+        "why": "📌 Why this focused code matters\nThis strongly reinforces teacher interview findings."
+      },
+      {
+        "title": "Focused Code 5",
+        "grouped": [
+          "*Need for teacher training",
+          "*Ongoing professional learning",
+          "*Institutional support structures",
+          "*Collaboration with developers or designers"
+        ],
+        "quote": "“Professional development is key.”\n\n“Relationships with developers are needed.”",
+        "why": "📌 Why this focused code matters\nExperts consistently emphasise capacity building, not just tools."
+      },
+      {
+        "title": "Focused Code 6",
+        "grouped": [
+          "*Student wellbeing in immersive environments",
+          "*Sensory or cognitive overload",
+          "*Cultural sensitivity",
+          "*Accessibility and inclusion",
+          "*Equity of access"
+        ],
+        "quote": "“Some learners may find immersion overwhelming.”\n\n“Ethical issues around content.”",
+        "why": "📌 Why this focused code matters\nThis adds ethical depth."
+      },
+      {
+        "title": "Focused Code 7",
+        "grouped": [
+          "*Avoidance of hype-driven adoption",
+          "*Preference for blended immersive models",
+          "*AR and 3D simulations as scalable options",
+          "*VR used strategically rather than universally"
+        ],
+        "quote": "“We’re moving toward blended immersive models.” \n\n“It’s not about the technology itself.”",
+        "why": "📌 Why this focused code matters\nExperts emphasise purposeful use, not maximal use."
+      },
+      {
+        "title": "Focused Code 8",
+        "grouped": [
+          "*XR as a distributed field",
+          "*No single global leader",
+          "*Value of local and contextual innovation",
+          "*Plural approaches to XR design"
+        ],
+        "quote": "“I don’t really believe there’s a centre.”\n\n“All contributions are valid.”",
+        "why": "📌 Why this focused code matters\nThis aligns beautifully with the case study logic."
+      }
+    ],
+    "cases": [
+      {
+        "title": "Focused Code 1",
+        "grouped": [
+          "*XR making abstract concepts concrete",
+          "*Visualisation of microscopic or internal systems",
+          "*Making invisible processes visible",
+          "*Reduction of spatial misunderstanding",
+          "*Learning through 3D and immersive environments"
+        ],
+        "quote": "Australia: 3D exploration of cells and body systems\n\nChina: VR environments for abstract geometry and spatial reasoning\n\nSingapore: Immersive visualisation of cells and enzymes",
+        "why": "📌 Why this focused code matters\nThis is the strongest and most consistent global trend across all cases."
+      },
+      {
+        "title": "Focused Code 2",
+        "grouped": [
+          "*Curriculum-linked immersive content",
+          "*Alignment with learning objectives",
+          "*Use within regular classroom teaching",
+          "*XR embedded in existing subjects"
+        ],
+        "quote": "Australia: VR linked explicitly to subject curricula\n\nChina: Modular XR units aligned to mathematics curriculum\n\nSingapore: VR lessons designed around science learning objectives",
+        "why": "📌 Why this focused code matters\nImmersive technologies are not used as add-ons, but integrated into curricula."
+      },
+      {
+        "title": "Focused Code 3",
+        "grouped": [
+          "*Students “stepping into” content",
+          "*Embodied interaction with concepts",
+          "*Inquiry-based exploration",
+          "*Learning through doing and exploration"
+        ],
+        "quote": "Australia: Students creating 3D models and exploring environments\n\nChina: Students manipulating variables and exploring solutions\n\nSingapore: Embodied navigation of cellular environments",
+        "why": "📌 Why this focused code matters\nXR is being used to reframe pedagogy, not just delivery."
+      },
+      {
+        "title": "Focused Code 4",
+        "grouped": [
+          "*Increased interest and enjoyment",
+          "*Higher levels of participation",
+          "*Positive emotional responses",
+          "*Sense of presence and immersion"
+        ],
+        "quote": "Australia: Student enthusiasm and collaboration\n\nChina: Measured increases in participation and interest\n\nSingapore: Heightened motivation and enjoyment of science",
+        "why": "📌 Why this focused code matters\nThis aligns strongly with teacher interview findings."
+      },
+      {
+        "title": "Focused Code 5",
+        "grouped": [
+          "*Group problem-solving in immersive spaces",
+          "*Peer discussion in VR environments",
+          "*Shared exploration of content"
+        ],
+        "quote": "Australia: Collaborative 3D creation and exploration\n\nChina: Group problem-solving in virtual classrooms\n\nSingapore: Shared inquiry experiences guided by teachers",
+        "why": "📌 Why this focused code matters\nImmersive learning is not individualised isolation, but often social."
+      },
+      {
+        "title": "Focused Code 6",
+        "grouped": [
+          "*Structured learning modules",
+          "*Clear learning intentions",
+          "*Guided exploration",
+          "*Avoidance of cognitive overload"
+        ],
+        "quote": "Australia: Managed immersive lab environments\n\nChina: Modular XR lessons with feedback\n\nSingapore: Careful scaffolding and measured integration",
+        "why": "📌 Why this focused code matters\nThis mirrors expert concerns exactly."
+      },
+      {
+        "title": "Focused Code 7",
+        "grouped": [
+          "*Teacher training programmes",
+          "*Ongoing support",
+          "*Planning and onboarding sessions",
+          "*Teacher confidence development"
+        ],
+        "quote": "Australia: Lab Champions and ongoing teacher support\n\nChina: Emphasis on teacher technical proficiency\n\nSingapore: Structured professional learning communities",
+        "why": "📌 Why this focused code matters\nSuccessful XR adoption depends on teacher capability, not hardware alone."
+      },
+      {
+        "title": "Focused Code 8",
+        "grouped": [
+          "*Inclusive access to immersive tools",
+          "*Support for diverse learners",
+          "*Equity of opportunity",
+          "*Managing sensory and cognitive load"
+        ],
+        "quote": "Australia: Inclusion of neurodiverse learners\n\nChina: Emphasis on usability and accessibility\n\nSingapore: Differentiated instruction and learner diversity",
+        "why": "📌 Why this focused code matters\nThis gives my study ethical depth."
+      },
+      {
+        "title": "Focused Code 9",
+        "grouped": [
+          "*Whole-school immersive labs",
+          "*National or system-level integration",
+          "*Depth-over-scale approaches",
+          "*Strategic and selective adoption"
+        ],
+        "quote": "Australia: School-level innovation\n\nChina: Large-scale, data-driven rollout\n\nSingapore: Pedagogically focused, depth-oriented use",
+        "why": "📌 Why this focused code matters\nThere is no single global model, only shared patterns."
+      }
+    ]
+  },
+  "stage3": {
+    "teachers": [
+      {
+        "label": "TEACHER THEME 1",
+        "statement": "Persistent challenges in teaching abstract and internal science concepts using traditional methods",
+        "focused_codes": [
+          "Difficulty visualising internal and dynamic science concepts",
+          "Over-reliance on static and textbook-based teaching methods"
+        ],
+        "explanation": [
+          "Teachers consistently describe a mismatch between:",
+          "the abstract, internal, three-dimensional nature of science (especially biology), and",
+          "the two-dimensional, static tools traditionally used to teach it.",
+          "This mismatch creates ongoing learning difficulties for students."
+        ],
+        "quotes": [
+          "“A lot of biology happens inside the body, which they can’t visualise.” (Teacher 6)",
+          "“Textbooks only show flat pictures.” (Teacher 4)",
+          "“Students memorise diagrams without understanding.” (Teacher 8)"
+        ]
+      },
+      {
+        "label": "TEACHER THEME 2",
+        "statement": "Student disengagement emerges when understanding breaks down",
+        "focused_codes": [
+          "Student disengagement linked to lack of understanding",
+          "Declining confidence and participation"
+        ],
+        "explanation": [
+          "Teachers do not describe disengagement as a motivation problem.",
+          "Instead, disengagement is described as a consequence of confusion and loss of confidence.",
+          "This reframes disengagement as a learning design issue, not a student attitude issue."
+        ],
+        "quotes": [
+          "“They disengage when they don’t understand.” (Teacher 7)",
+          "“They stop asking questions when they feel lost.” (Teacher 6)"
+        ]
+      },
+      {
+        "label": "TEACHER THEME 3",
+        "statement": "Students show stronger engagement and understanding through visual, interactive, and experiential learning",
+        "focused_codes": [
+          "Preference for interactive, visual, and hands-on learning",
+          "Positive impact of digital simulations and immersive tools"
+        ],
+        "explanation": [
+          "Teachers consistently report that when students:",
+          "can see processes",
+          "can interact with representations",
+          "can explore content",
+          "…their understanding and engagement improve noticeably."
+        ],
+        "quotes": [
+          "“Students learn better when they can see and interact.” (Teacher 4)",
+          "“They remember lessons better when they’ve done something.” (Multiple Teachers)"
+        ]
+      },
+      {
+        "label": "TEACHER THEME 4",
+        "statement": "Immersive and simulation-based technologies align well with students’ existing digital practices",
+        "focused_codes": [
+          "Alignment between immersive tools and student digital familiarity"
+        ],
+        "explanation": [
+          "Teachers do not see immersive technologies as foreign or intimidating to students.",
+          "Instead, students’ familiarity with digital and 3D environments reduces barriers to adoption."
+        ],
+        "quotes": [
+          "“They’re confident with technology — almost second nature.” (Teacher 5)",
+          "“They know VR from gaming.” (Multiple teachers)"
+        ]
+      },
+      {
+        "label": "TEACHER THEME 5",
+        "statement": "Effective use of immersive technologies depends on pedagogical structure and teacher guidance",
+        "focused_codes": [
+          "Need for pedagogical structure and guidance"
+        ],
+        "explanation": [
+          "Teachers are not advocating unstructured exploration.",
+          "They emphasise that immersive tools must be:",
+          "carefully scaffolded",
+          "clearly aligned to learning goals",
+          "guided by the teacher"
+        ],
+        "quotes": [
+          "“Otherwise, they get distracted.” (Teacher 5)",
+          "“You still need structure.” (Teacher 5)"
+        ]
+      },
+      {
+        "label": "TEACHER THEME 6",
+        "statement": "Practical and systemic constraints shape teachers’ willingness to adopt immersive technologies",
+        "focused_codes": [
+          "Practical constraints and implementation challenges"
+        ],
+        "explanation": [
+          "Teachers express interest, but adoption is shaped by:",
+          "cost",
+          "time",
+          "access",
+          "training",
+          "These constraints are structural, not attitudinal."
+        ],
+        "quotes": [
+          "“Cost is a big barrier.” (Teachers 4, 6, 8)",
+          "“Training would be necessary.” (Teacher 4)"
+        ]
+      }
+    ],
+    "experts": [
+      {
+        "label": "EXPERT THEME 1",
+        "statement": "Immersive technologies enable embodied and experiential learning that reduces abstraction",
+        "focused_codes": [
+          "Immersive technologies reduce abstraction",
+          "Embodied and experiential learning",
+          "Making invisible processes visible"
+        ],
+        "explanation": [
+          "Experts consistently argue that the key educational value of AR, VR, and 3D simulation lies in their ability to:",
+          "place learners inside phenomena",
+          "reduce conceptual distance",
+          "transform abstract ideas into lived experiences",
+          "This is not about novelty, but about how learning is experienced."
+        ],
+        "quotes": [
+          "“You’re really in it.” (Expert 1)",
+          "“Immersion reduces abstraction.” (Expert 2)",
+          "“Embodied interaction supports understanding.” (Expert 3)"
+        ]
+      },
+      {
+        "label": "EXPERT THEME 2",
+        "statement": "Immersive technologies are particularly well suited to complex and systems-based domains such as biology",
+        "focused_codes": [
+          "Suitability for systems-based learning",
+          "Support for understanding interconnected processes"
+        ],
+        "explanation": [
+          "Experts emphasise that immersive technologies are not equally useful for all content.",
+          "They are most powerful when learning involves:",
+          "interdependent systems",
+          "spatial relationships",
+          "dynamic interactions",
+          "This makes biology and human body systems especially suitable."
+        ],
+        "quotes": [
+          "“Human biology is ideal for immersive learning.” (Expert 3)",
+          "“Students can understand systems as interconnected.” (Expert 2)"
+        ]
+      },
+      {
+        "label": "EXPERT THEME 3",
+        "statement": "Meaningful learning with immersive technologies depends on careful pedagogical design and scaffolding",
+        "focused_codes": [
+          "Pedagogical structure and scaffolding",
+          "Risks of distraction and cognitive overload"
+        ],
+        "explanation": [
+          "Experts strongly reject the idea that immersion alone guarantees learning.",
+          "They stress that immersive experiences must be:",
+          "intentionally designed",
+          "scaffolded",
+          "aligned to learning outcomes",
+          "Without this, immersion risks becoming distraction."
+        ],
+        "quotes": [
+          "“Immersion alone doesn’t guarantee learning.” (Expert 2)",
+          "“Experiences must be designed carefully.” (Expert 3)"
+        ]
+      },
+      {
+        "label": "EXPERT THEME 4",
+        "statement": "Teachers remain central as mediators, designers, and facilitators of immersive learning",
+        "focused_codes": [
+          "Teachers guiding meaning-making",
+          "Technology supporting pedagogy, not replacing it"
+        ],
+        "explanation": [
+          "Experts consistently position teachers as:",
+          "interpreters of immersive experiences",
+          "guides of meaning-making",
+          "designers of learning journeys",
+          "Immersive technologies extend, but do not replace, pedagogy."
+        ],
+        "quotes": [
+          "“Teachers guide meaning-making.” (Expert 3)",
+          "“Technology should support pedagogy.” (Expert 2)"
+        ]
+      },
+      {
+        "label": "EXPERT THEME 5",
+        "statement": "Professional development and institutional support are essential for sustainable adoption",
+        "focused_codes": [
+          "Need for teacher training",
+          "Institutional and organisational support"
+        ],
+        "explanation": [
+          "Experts highlight that successful adoption of immersive technologies requires:",
+          "ongoing professional learning",
+          "institutional commitment",
+          "collaborative support structures",
+          "Adoption is framed as a systemic change, not an individual choice."
+        ],
+        "quotes": [
+          "“Professional development is key.” (Expert 2)",
+          "“Relationships with developers are needed.” (Expert 1)"
+        ]
+      },
+      {
+        "label": "EXPERT THEME 6",
+        "statement": "Ethical, wellbeing, and accessibility considerations must shape immersive learning design",
+        "focused_codes": [
+          "Wellbeing and sensory considerations",
+          "Accessibility and inclusion",
+          "Ethical risks"
+        ],
+        "explanation": [
+          "Experts consistently caution that immersive learning must be:",
+          "ethically designed",
+          "sensitive to learner wellbeing",
+          "inclusive of diverse needs",
+          "This includes concerns about:",
+          "cognitive overload",
+          "cultural sensitivity",
+          "equitable access"
+        ],
+        "quotes": [
+          "“Some learners may find immersion overwhelming.” (Expert 3)",
+          "“Ethical issues around content.” (Expert 1)"
+        ]
+      },
+      {
+        "label": "EXPERT THEME 7",
+        "statement": "Effective adoption of immersive technologies requires strategic, selective, and blended approaches",
+        "focused_codes": [
+          "Strategic rather than hype-driven adoption",
+          "Preference for blended immersive models"
+        ],
+        "explanation": [
+          "Experts argue against “VR everywhere” thinking.",
+          "Instead, they advocate:",
+          "selective use",
+          "blended models (AR, VR, 3D + traditional methods)",
+          "purpose-driven implementation"
+        ],
+        "quotes": [
+          "“It’s not about the technology itself.” (Expert 3)",
+          "“We’re moving toward blended immersive models.” (Expert 2)"
+        ]
+      },
+      {
+        "label": "EXPERT THEME 8",
+        "statement": "Immersive learning is a diverse and decentralised global field",
+        "focused_codes": [
+          "Distributed nature of XR innovation",
+          "No single global leader"
+        ],
+        "explanation": [
+          "Experts reject the idea of a single best model.",
+          "Instead, immersive learning is described as:",
+          "context-dependent",
+          "locally shaped",
+          "plural in design and implementation"
+        ],
+        "quotes": [
+          "“I don’t really believe there’s a centre.” (Expert 1)",
+          "“All contributions are valid.” (Expert 1)"
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "label": "CASE STUDY THEME 1",
+        "statement": "Immersive technologies are increasingly used to make abstract and invisible concepts visible",
+        "focused_codes": [
+          "Reducing abstraction through immersive visualisation",
+          "Making invisible or internal processes observable",
+          "Addressing spatial misunderstanding"
+        ],
+        "explanation": [
+          "Across all three countries, immersive technologies are used to respond to a common educational challenge: learners struggle to understand abstract, internal, microscopic, or spatially complex phenomena when taught using static, two-dimensional resources.AR, VR, and 3D simulations are being adopted specifically to:\n\nvisualise internal systems\n\nrepresent dynamic processes\n\nreduce reliance on imagination alone",
+          "AR, VR, and 3D simulations are being adopted specifically to:",
+          "visualise internal systems",
+          "represent dynamic processes",
+          "reduce reliance on imagination alone"
+        ],
+        "quotes": [
+          "Australia: 3D exploration of cells, body systems, biomechanics",
+          "China: VR visualisation of geometric and spatial concepts",
+          "Singapore: Immersive exploration of cells and enzymes"
+        ]
+      },
+      {
+        "label": "CASE STUDY THEME 2",
+        "statement": "Immersive technologies are being integrated into existing curricula rather than used as standalone innovations",
+        "focused_codes": [
+          "Curriculum-aligned immersive learning",
+          "Subject-embedded use of AR/VR/3D",
+          "Alignment with learning objectives"
+        ],
+        "explanation": [
+          "Globally, immersive technologies are not positioned as add-ons or enrichment tools. Instead, they are increasingly:",
+          "embedded within subject curricula",
+          "aligned with learning outcomes",
+          "used during regular classroom instruction",
+          "This reflects a shift from experimentation toward institutionalisation."
+        ],
+        "quotes": [
+          "Australia: Curriculum-linked VR across subjects",
+          "China: Modular XR units aligned with mathematics curriculum",
+          "Singapore: VR lessons designed around science learning intentions"
+        ]
+      },
+      {
+        "label": "CASE STUDY THEME 3",
+        "statement": "Global adoption reflects a shift toward experiential, embodied, and inquiry-based learning",
+        "focused_codes": [
+          "Experiential and embodied learning",
+          "Inquiry-based exploration",
+          "Learning through interaction and manipulation"
+        ],
+        "explanation": [
+          "Across contexts, immersive technologies are being used to reshape pedagogy, not just content delivery. Learning is framed as:",
+          "something students experience",
+          "something they explore",
+          "something they interact with",
+          "This represents a move away from passive reception toward active knowledge construction."
+        ],
+        "quotes": [
+          "Australia: Students stepping into content and creating 3D models",
+          "China: Students manipulating variables and observing outcomes",
+          "Singapore: Embodied navigation of microscopic biological environments"
+        ]
+      },
+      {
+        "label": "CASE STUDY THEME 4",
+        "statement": "Increased student engagement and motivation are consistently associated with immersive learning",
+        "focused_codes": [
+          "Increased engagement and participation",
+          "Positive emotional responses",
+          "Sense of presence and enjoyment"
+        ],
+        "explanation": [
+          "All three case studies report heightened student engagement when immersive technologies are used. Engagement is described not only in behavioural terms (participation), but also affective terms (interest, enjoyment, motivation)."
+        ],
+        "quotes": [
+          "Australia: Student enthusiasm and collaborative engagement",
+          "China: Measured increases in participation and interest",
+          "Singapore: Increased enjoyment, motivation, and self-efficacy"
+        ]
+      },
+      {
+        "label": "CASE STUDY THEME 5",
+        "statement": "Immersive learning is often implemented as a collaborative and social experience",
+        "focused_codes": [
+          "Collaborative learning in immersive environments",
+          "Peer discussion and shared exploration"
+        ],
+        "explanation": [
+          "Contrary to assumptions that immersive learning is isolating, the case studies show that AR, VR, and 3D simulations are frequently used to:",
+          "support group problem-solving",
+          "enable peer discussion",
+          "encourage shared meaning-making"
+        ],
+        "quotes": [
+          "Australia: Collaborative VR exploration and 3D creation",
+          "China: Group problem-solving in virtual classrooms",
+          "Singapore: Teacher-guided shared inquiry in VR"
+        ]
+      },
+      {
+        "label": "CASE STUDY THEME 6",
+        "statement": "Successful implementation depends on structured pedagogical design and scaffolding",
+        "focused_codes": [
+          "Pedagogical structure and guidance",
+          "Avoidance of cognitive overload",
+          "Guided exploration"
+        ],
+        "explanation": [
+          "Across all contexts, immersive technologies are not used in an unstructured way. Instead, successful implementations emphasise:",
+          "clear learning goals",
+          "guided interaction",
+          "careful sequencing of activities",
+          "This reflects recognition that immersion alone does not guarantee learning."
+        ],
+        "quotes": [
+          "Australia: Managed immersive lab environments",
+          "China: Structured modules with real-time feedback",
+          "Singapore: Carefully scaffolded VR science lessons"
+        ]
+      },
+      {
+        "label": "CASE STUDY THEME 7",
+        "statement": "Teacher professional development is a key enabler of immersive learning adoption",
+        "focused_codes": [
+          "Teacher training and onboarding",
+          "Ongoing professional support",
+          "Capacity building"
+        ],
+        "explanation": [
+          "Globally, immersive learning adoption is framed as a professional learning issue, not merely a technological one. Teachers require:",
+          "technical confidence",
+          "pedagogical support",
+          "institutional backing"
+        ],
+        "quotes": [
+          "Australia: Lab Champions and ongoing support",
+          "China: Emphasis on teacher proficiency",
+          "Singapore: Professional learning communities"
+        ]
+      },
+      {
+        "label": "CASE STUDY THEME 8",
+        "statement": "Equity, inclusion, and learner diversity increasingly shape immersive learning initiatives",
+        "focused_codes": [
+          "Inclusive access",
+          "Support for diverse learners",
+          "Accessibility and wellbeing considerations"
+        ],
+        "explanation": [
+          "Immersive technologies are increasingly framed as tools to:",
+          "support diverse learners",
+          "improve accessibility",
+          "address equity concerns",
+          "Rather than being positioned as elite technologies, they are often justified in terms of inclusive education."
+        ],
+        "quotes": [
+          "Australia: Support for neurodiverse learners",
+          "China: Usability and accessibility optimisation",
+          "Singapore: Differentiated instruction"
+        ]
+      },
+      {
+        "label": "CASE STUDY THEME 9",
+        "statement": "There is no single global model for immersive learning, but shared patterns of strategic adoption",
+        "focused_codes": [
+          "Variation in scale and implementation",
+          "Strategic and selective adoption",
+          "Context-dependent approaches"
+        ],
+        "explanation": [
+          "While practices differ across countries, common patterns emerge:",
+          "selective rather than universal use",
+          "blending immersive tools with traditional teaching",
+          "context-sensitive implementation",
+          "Global trends reflect convergence in principles, not uniformity in practice."
+        ],
+        "quotes": [
+          "Australia: School-level innovation",
+          "China: System-level rollout",
+          "Singapore: Depth-focused, pedagogy-led implementation"
+        ]
+      }
+    ]
+  },
+  "final": {
+    "themes": [
+      {
+        "text": "Theme 1: Learning challenges arising from abstract and invisible biological systems",
+        "sq": "1"
+      },
+      {
+        "text": "Theme 2: Student disengagement linked to breakdowns in understanding",
+        "sq": "1"
+      },
+      {
+        "text": "Theme 3: Visual, interactive, and embodied learning supporting deeper understanding",
+        "sq": "2"
+      },
+      {
+        "text": "Theme 4: Alignment between immersive learning and students’ digital practices",
+        "sq": "2"
+      },
+      {
+        "text": "Theme 5: Immersive technologies are used globally to reduce abstraction through visualisation",
+        "sq": "3"
+      },
+      {
+        "text": "Theme 6: Immersive learning is increasingly curriculum-aligned and pedagogically structured",
+        "sq": "3"
+      },
+      {
+        "text": "Theme 9: Global adoption shaped by shared principles rather than a single model",
+        "sq": "3"
+      },
+      {
+        "text": "Theme 7: Teachers play a central role as designers and mediators of immersive learning",
+        "sq": "4"
+      },
+      {
+        "text": "Theme 8: Practical, ethical, and wellbeing considerations shaping adoption",
+        "sq": "4"
+      }
+    ],
+    "directions": [
+      {
+        "text": "DESIGN DIRECTION 1: PROTOTYPES SHOULD PRIORITISE ENGAGING, INTERACTIVE LEARNER EXPERIENCES",
+        "sq": "5"
+      },
+      {
+        "text": "DESIGN DIRECTION 2: PROTOTYPES SHOULD BE DESIGNED THROUGH STRUCTURED DESIGN PROCESSES AND MOCK-UPS",
+        "sq": "5"
+      },
+      {
+        "text": "DESIGN DIRECTION 3: PROTOTYPES SHOULD USE APPROPRIATE TOOLS FOR MODELLING COMPLEX HUMAN BODY SYSTEMS",
+        "sq": "5"
+      },
+      {
+        "text": "DESIGN DIRECTION 4: PROTOTYPES MAY BE DEVELOPED USING BOTH ADVANCED AND SIMPLIFIED AR/VR PLATFORMS",
+        "sq": "5"
+      },
+      {
+        "text": "DESIGN DIRECTION 5: PROTOTYPES MUST BE AGE-APPROPRIATE, ETHICAL, AND DESIGNED FOR LEARNER WELLBEING",
+        "sq": "5"
+      }
+    ]
+  }
+};
+
+const SOURCES = [
+  {key:'teachers', cls:'t', label:'Teachers', color:'#e86f3b', short:'TE'},
+  {key:'experts',  cls:'e', label:'Experts',  color:'#2e8c81', short:'EX'},
+  {key:'cases',    cls:'c', label:'Case Studies', color:'#d49a15', short:'CS'},
+];
+
+const STAGES = [
+  {id:1, label:'Initial Coding', sub:'Transcript extracts + initial descriptive codes'},
+  {id:2, label:'Focused Codes',  sub:'Grouped initial codes into focused concepts'},
+  {id:3, label:'Source Themes',  sub:'Themes developed per data source'},
+  {id:4, label:'Final',          sub:'9 consolidated themes + 5 design directions'},
+];
+
+let currentStage = 1;
+let currentSource = 'teachers';
+let currentParticipant = 0;
+const openSegments = new Set();
+
+// ════ HERO → APP ════
+function enterApp(){
+  document.getElementById('hero').style.display = 'none';
+  document.getElementById('app').classList.add('on');
+  renderSteps();
+  renderStage();
+  window.scrollTo(0,0);
+}
+function goHome(){
+  document.getElementById('hero').style.display = '';
+  document.getElementById('app').classList.remove('on');
+  window.scrollTo(0,0);
+}
+
+// ════ STEP PROGRESS ════
+function renderSteps(){
+  const nav = document.getElementById('steps');
+  nav.innerHTML = '';
+  STAGES.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.className = 'step' + (currentStage === s.id ? ' on' : '');
+    b.innerHTML = `<span class="step-num">${s.id === 4 ? '★' : s.id}</span><span>${s.label}</span>`;
+    b.onclick = () => { currentStage = s.id; currentParticipant = 0; openSegments.clear(); renderSteps(); renderStage(); window.scrollTo(0,0); };
+    nav.appendChild(b);
+    if(i < STAGES.length-1){
+      const a = document.createElement('span');
+      a.className = 'step-arrow';
+      a.textContent = '→';
+      nav.appendChild(a);
+    }
+  });
+}
+
+// ════ MAIN RENDER ════
+function renderStage(){
+  const c = document.getElementById('content');
+  c.innerHTML = '';
+  const stage = STAGES[currentStage - 1];
+
+  // Header
+  const hdr = document.createElement('header');
+  hdr.className = 'stage-header';
+  hdr.innerHTML = `
+    <p class="stage-eyebrow">Stage ${currentStage === 4 ? 'Final' : currentStage} of 4</p>
+    <h2 class="stage-title">${stage.label}</h2>
+    <p class="stage-desc">${stage.sub}</p>
+  `;
+  c.appendChild(hdr);
+
+  if(currentStage === 4){
+    renderFinal(c);
+  } else {
+    renderSourceTabs(c);
+    const body = document.createElement('div');
+    body.id = 'stage-body';
+    c.appendChild(body);
+    renderStageBody();
+  }
+}
+
+function renderSourceTabs(parent){
+  const tabs = document.createElement('div');
+  tabs.className = 'src-tabs';
+  SOURCES.forEach(s => {
+    const data = DATA[`stage${currentStage}`][s.key];
+    const count = currentStage === 1 ? data.length : data.length;
+    const btn = document.createElement('button');
+    btn.className = `src-tab ${s.cls}${currentSource === s.key ? ' on' : ''}`;
+    btn.innerHTML = `<span class="src-dot"></span><span>${s.label}</span><span class="src-count">${count}</span>`;
+    btn.onclick = () => { currentSource = s.key; currentParticipant = 0; openSegments.clear(); renderStage(); };
+    tabs.appendChild(btn);
+  });
+  parent.appendChild(tabs);
+}
+
+function renderStageBody(){
+  const body = document.getElementById('stage-body');
+  body.innerHTML = '';
+  body.className = SOURCES.find(s => s.key === currentSource).cls;
+
+  if(currentStage === 1) renderStage1(body);
+  else if(currentStage === 2) renderStage2(body);
+  else if(currentStage === 3) renderStage3(body);
+}
+
+// ════ STAGE 1 ════
+function renderStage1(parent){
+  const participants = DATA.stage1[currentSource];
+  const srcCls = SOURCES.find(s => s.key === currentSource).cls;
+
+  // Participant selector
+  const sel = document.createElement('div');
+  sel.className = 'p-select';
+  participants.forEach((p, i) => {
+    const chip = document.createElement('button');
+    chip.className = 'p-chip' + (currentParticipant === i ? ' on' : '');
+    const shortLabel = p.label.split(' — ')[0] || p.label;
+    chip.innerHTML = `<span class="p-idx">${String(i+1).padStart(2,'0')}</span><span>${shortLabel}</span>`;
+    chip.onclick = () => { currentParticipant = i; openSegments.clear(); renderStageBody(); };
+    sel.appendChild(chip);
+  });
+  parent.appendChild(sel);
+
+  const p = participants[currentParticipant];
+  const totalExtracts = p.segments.reduce((s, seg) => s + seg.extracts.length, 0);
+
+  // Participant card
+  const info = document.createElement('div');
+  info.className = 'participant-info';
+  const initials = getInitials(p.label);
+  info.innerHTML = `
+    <div class="pi-avatar">${initials}</div>
+    <div class="pi-text">
+      <div class="pi-label">${p.label}</div>
+      <div class="pi-sub">${p.segments.length} segments · ${totalExtracts} extracts &amp; initial codes</div>
+    </div>
+  `;
+  parent.appendChild(info);
+
+  // Segments
+  p.segments.forEach((seg, idx) => {
+    if(!seg.title && seg.extracts.length === 0) return;
+    const segId = `${currentSource}-${currentParticipant}-${idx}`;
+    const isOpen = openSegments.has(segId);
+    const el = document.createElement('div');
+    el.className = 'segment' + (isOpen ? ' open' : '');
+    el.innerHTML = `
+      <div class="seg-header">
+        <span class="seg-num">${String(idx+1).padStart(2,'0')}</span>
+        <span class="seg-title">${seg.title || '(Segment)'}</span>
+        <span class="seg-count">${seg.extracts.length}</span>
+        <span class="seg-toggle">▶</span>
+      </div>
+      <div class="seg-body"></div>
+    `;
+    const body = el.querySelector('.seg-body');
+    seg.extracts.forEach(ex => {
+      const d = document.createElement('div');
+      d.className = 'extract';
+      d.innerHTML = `
+        <div class="ex-quote">${escapeHtml(ex.q)}</div>
+        <div class="ex-code">${escapeHtml(ex.c)}</div>
+      `;
+      body.appendChild(d);
+    });
+    el.querySelector('.seg-header').onclick = () => {
+      if(openSegments.has(segId)) openSegments.delete(segId);
+      else openSegments.add(segId);
+      el.classList.toggle('open');
+    };
+    parent.appendChild(el);
+  });
+}
+
+// ════ STAGE 2 ════
+function renderStage2(parent){
+  const codes = DATA.stage2[currentSource];
+  const grid = document.createElement('div');
+  grid.className = 'fc-grid';
+  codes.forEach((fc, i) => {
+    const card = document.createElement('div');
+    card.className = 'fc-card';
+    const codesHtml = fc.grouped.map(c => `<div class="fc-code-item">${escapeHtml(c)}</div>`).join('');
+    // Parse the "why" — remove the 📌 and "Why this focused code matters" prefix
+    const whyText = fc.why.replace(/^📌\s*Why this focused code matters\s*\n?/i, '').trim();
+
+    // Use the matching Stage 3 theme's focused-code label as the display headline,
+    // since Stage 2 only has "Focused Code N" — the descriptive name lives in Stage 3
+    const st3 = DATA.stage3[currentSource];
+    let headline = '';
+    for(const th of st3){
+      const found = th.focused_codes.find(fc2 => fc2 === headlineFor(i, currentSource));
+      if(found){ headline = found; break; }
+    }
+    // Fallback: first stage 3 focused_code at this index across all themes, else blank
+    if(!headline){
+      const fcNames = st3.flatMap(th => th.focused_codes);
+      headline = fcNames[i] || '';
+    }
+
+    card.innerHTML = `
+      <div class="fc-label">${escapeHtml(fc.title)}</div>
+      ${headline ? `<div class="fc-title">${escapeHtml(headline)}</div>` : ''}
+      <div class="fc-divider"></div>
+      <div class="fc-section-label">Grouped initial codes included</div>
+      <div class="fc-codes">${codesHtml}</div>
+      <div class="fc-section-label">Representative voices</div>
+      <div class="fc-quote">${escapeHtml(fc.quote)}</div>
+      <div class="fc-why"><strong>Why this focused code matters</strong>${escapeHtml(whyText)}</div>
+    `;
+    grid.appendChild(card);
+  });
+  parent.appendChild(grid);
+}
+
+// Get the descriptive headline for focused code index from Stage 3 (that's where they live)
+function headlineFor(idx, src){
+  const fcNames = DATA.stage3[src].flatMap(th => th.focused_codes);
+  return fcNames[idx] || '';
+}
+
+// ════ STAGE 3 ════
+function renderStage3(parent){
+  const themes = DATA.stage3[currentSource];
+  const grid = document.createElement('div');
+  grid.className = 't-grid';
+
+  themes.forEach(t => {
+    const card = document.createElement('div');
+    card.className = 't-card';
+
+    // Build explanation block — look for "bullet" patterns (short lines after ":")
+    let explHtml = '';
+    const lines = t.explanation;
+    let i = 0;
+    while(i < lines.length){
+      const line = lines[i];
+      if(line.endsWith(':') && i + 1 < lines.length){
+        // Paragraph header; gather bullets until a non-bullet-like line
+        explHtml += `<p>${escapeHtml(line)}</p>`;
+        const bullets = [];
+        let j = i + 1;
+        while(j < lines.length){
+          const next = lines[j];
+          // stop if next line is a long sentence (>80 chars) or ends with period & sentence-like
+          if(next.length > 80 || next.endsWith('.')) break;
+          bullets.push(next);
+          j++;
+        }
+        if(bullets.length > 0){
+          explHtml += '<ul class="bullet-list">' + bullets.map(b => `<li>${escapeHtml(b)}</li>`).join('') + '</ul>';
+          i = j;
+        } else {
+          i++;
+        }
+      } else {
+        explHtml += `<p>${escapeHtml(line)}</p>`;
+        i++;
+      }
+    }
+
+    const fcList = t.focused_codes.map(fc => `<li>${escapeHtml(fc)}</li>`).join('');
+
+    let quotesHtml = '';
+    if(t.quotes.length > 0){
+      quotesHtml = `
+        <div class="t-section">
+          <div class="t-section-label">${currentSource === 'cases' ? 'Cross-case grounding' : 'Supporting evidence'}</div>
+          <div class="t-quotes">${t.quotes.map(q => `<div class="t-quote">${escapeHtml(q)}</div>`).join('')}</div>
+        </div>`;
+    }
+
+    card.innerHTML = `
+      <div class="t-badge">${escapeHtml(t.label)}</div>
+      <h3 class="t-statement">${escapeHtml(t.statement)}</h3>
+      <div class="t-section">
+        <div class="t-section-label">Built from focused codes</div>
+        <ul class="t-fc-list">${fcList}</ul>
+      </div>
+      <div class="t-section">
+        <div class="t-section-label">What this theme is saying</div>
+        <div class="t-explanation">${explHtml}</div>
+      </div>
+      ${quotesHtml}
+    `;
+    grid.appendChild(card);
+  });
+  parent.appendChild(grid);
+}
+
+// ════ FINAL ════
+function renderFinal(parent){
+  const wrap = document.createElement('div');
+  wrap.className = 'final-wrap';
+
+  // ── Final themes section ──
+  const themesSection = document.createElement('section');
+  themesSection.className = 'final-section';
+  themesSection.innerHTML = `
+    <div class="final-section-header">
+      <h3 class="final-section-title">Final Consolidated Themes</h3>
+      <span class="final-section-count">${DATA.final.themes.length} themes · grouped by sub-question</span>
+    </div>
+  `;
+
+  // Group by sub-question
+  const bySq = {};
+  DATA.final.themes.forEach(t => {
+    if(!bySq[t.sq]) bySq[t.sq] = [];
+    bySq[t.sq].push(t);
+  });
+  Object.keys(bySq).sort().forEach(sq => {
+    const group = document.createElement('div');
+    group.className = 'sq-group';
+    group.innerHTML = `
+      <div class="sq-header">
+        <span class="sq-pill">Sub Question ${sq}</span>
+      </div>
+      <div class="ft-grid"></div>
+    `;
+    const grid = group.querySelector('.ft-grid');
+    bySq[sq].forEach(t => {
+      const match = t.text.match(/^Theme (\d+):\s*(.+)$/);
+      const num = match ? match[1] : '';
+      const text = match ? match[2] : t.text;
+      const card = document.createElement('div');
+      card.className = 'ft-card';
+      card.innerHTML = `
+        <div class="ft-num">${num}</div>
+        <div class="ft-label">Theme ${num}</div>
+        <div class="ft-text">${escapeHtml(text)}</div>
+      `;
+      grid.appendChild(card);
+    });
+    themesSection.appendChild(group);
+  });
+  wrap.appendChild(themesSection);
+
+  // ── Design directions section ──
+  const ddSection = document.createElement('section');
+  ddSection.className = 'final-section';
+  ddSection.innerHTML = `
+    <div class="final-section-header">
+      <h3 class="final-section-title">Design Directions</h3>
+      <span class="final-section-count">${DATA.final.directions.length} directions · from Sub Question 5</span>
+    </div>
+    <div class="dd-grid"></div>
+  `;
+  const ddGrid = ddSection.querySelector('.dd-grid');
+  DATA.final.directions.forEach((d, i) => {
+    const match = d.text.match(/^DESIGN DIRECTION (\d+):\s*(.+)$/);
+    const num = match ? match[1] : String(i+1);
+    const text = match ? match[2] : d.text;
+    const card = document.createElement('div');
+    card.className = 'dd-card';
+    card.innerHTML = `
+      <div class="dd-num">${num}</div>
+      <div class="dd-body">
+        <div class="dd-label">Design Direction ${num}</div>
+        <div class="dd-text">${escapeHtml(text)}</div>
+      </div>
+    `;
+    ddGrid.appendChild(card);
+  });
+  wrap.appendChild(ddSection);
+
+  parent.appendChild(wrap);
+}
+
+// ════ UTILS ════
+function escapeHtml(s){
+  if(!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function getInitials(label){
+  if(label.includes('TEACHER')) return label.replace('TEACHER ', 'T');
+  if(label.includes('EXPERT')) return label.replace('EXPERT ', 'E');
+  if(label.includes('CASE STUDY')){
+    const m = label.match(/CASE STUDY (\d+)/);
+    return m ? 'CS' + m[1] : 'CS';
+  }
+  return label.substring(0,2);
+}
+
+</script>
+</body>
+</html>
