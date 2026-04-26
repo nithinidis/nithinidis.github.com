@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MixTechBook · Slide 7 · Other Technologies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FFF8EC; --paper-deep: #FBEFD4; --cream: #FFFDF8;
+    --ink: #2A2622; --ink-soft: #5A524A; --ink-dim: #8A7F74;
+    --coral: #FF6B47; --coral-deep: #E04D2A;
+    --sunshine: #FFC93C; --sky: #4FB6D8;
+    --leaf: #7BC950; --rose: #FF8FA3;
+    --positive: #4F8A33; --caution: #C8542A;
+    --font-serif: 'Fraunces', Georgia, serif;
+    --font-sans: 'Geist', -apple-system, sans-serif;
+    --font-mono: 'Geist Mono', monospace;
+    --font-hand: 'Caveat', cursive;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100vh; overflow: hidden;
+    background: var(--paper); color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: radial-gradient(rgba(42, 38, 34, 0.035) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none; z-index: 1;
+  }
+  .slide {
+    position: relative; width: 100vw; height: 100vh;
+    padding: 3.5vh 5vw 6vh;
+    display: flex; flex-direction: column; z-index: 2;
+  }
+
+  /* CHROME */
+  .chrome-top {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-shrink: 0; height: 36px;
+  }
+  .section-marker {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--coral); letter-spacing: 0.18em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px; font-weight: 500;
+  }
+  .section-marker::before {
+    content: ''; width: 24px; height: 2px;
+    background: var(--coral); border-radius: 2px;
+  }
+  .deck-meta {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--ink-dim); letter-spacing: 0.12em;
+  }
+  .deck-meta .current { color: var(--ink); font-weight: 500; }
+  .chrome-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 0 5vw 1.75vh; z-index: 10;
+  }
+  .references {
+    font-family: var(--font-sans); font-size: 10.5px; color: var(--ink-dim);
+    line-height: 1.5; padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(42, 38, 34, 0.12);
+  }
+  .references .label {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--coral); margin-right: 0.5rem; font-weight: 500;
+  }
+  .progress-rail {
+    height: 3px; background: rgba(42, 38, 34, 0.08);
+    border-radius: 2px; margin-top: 0.85rem; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; width: calc(7 * 100% / 17);
+    background: var(--coral); border-radius: 2px;
+  }
+
+  /* SLIDE 7 */
+
+  .slide-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 1.5vh 0 4vh;
+  }
+
+  .header-zone {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2.5vh;
+  }
+
+  .header-text {
+    flex-grow: 1;
+    max-width: 75%;
+  }
+
+  .zone-eyebrow {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .zone-eyebrow .dot {
+    width: 5px; height: 5px;
+    background: var(--sunshine); border-radius: 50%;
+  }
+
+  .header-title {
+    font-family: var(--font-hand);
+    font-size: clamp(34px, 4vw, 54px);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .header-title .accent {
+    color: var(--coral);
+    position: relative;
+    display: inline-block;
+  }
+  .header-title .accent::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 0; right: 0;
+    height: 7px;
+    background: var(--sunshine);
+    opacity: 0.55;
+    z-index: -1;
+    border-radius: 2px;
+    transform: skew(-3deg);
+  }
+
+  .header-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(14px, 1.3vw, 18px);
+    color: var(--ink-soft);
+    line-height: 1.4;
+    max-width: 700px;
+  }
+
+  .narrator-mini {
+    width: 95px;
+    flex-shrink: 0;
+  }
+
+  /* COMPARISON TABLE */
+  .compare-table {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--cream);
+    border: 1.5px solid var(--ink);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 3px 4px 0 rgba(42, 38, 34, 0.08);
+    min-height: 0;
+  }
+
+  /* table header row */
+  .table-head {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .table-head > div {
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .table-head > div + div {
+    border-left: 1px solid rgba(255, 253, 248, 0.15);
+  }
+
+  .col-icon-pos { color: var(--leaf); font-size: 14px; }
+  .col-icon-cau { color: var(--sunshine); font-size: 14px; }
+
+  /* table body */
+  .table-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .tech-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    border-top: 1px solid rgba(42, 38, 34, 0.12);
+    flex: 1;
+    min-height: 0;
+  }
+
+  .tech-row:first-child {
+    border-top: none;
+  }
+
+  .tech-cell {
+    padding: 1.1rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .tech-cell + .tech-cell {
+    border-left: 1px solid rgba(42, 38, 34, 0.12);
+  }
+
+  /* first column - tech name */
+  .tech-name-cell {
+    background: linear-gradient(to right, rgba(255, 201, 60, 0.08), transparent);
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.3rem;
+  }
+
+  .tech-row.ai .tech-name-cell {
+    background: linear-gradient(to right, rgba(255, 107, 71, 0.1), transparent);
+  }
+
+  .tech-row.xr .tech-name-cell {
+    background: linear-gradient(to right, rgba(79, 182, 216, 0.12), transparent);
+  }
+
+  .tech-row.mr .tech-name-cell {
+    background: linear-gradient(to right, rgba(123, 201, 80, 0.12), transparent);
+  }
+
+  .tech-acronym {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(28px, 3.2vw, 42px);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    color: var(--coral);
+    font-variation-settings: "SOFT" 60, "opsz" 144;
+  }
+
+  .tech-row.xr .tech-acronym { color: #2C7E9C; }
+  .tech-row.mr .tech-acronym { color: #4F8A33; }
+
+  .tech-fullname {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .tech-shortdesc {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    margin-top: 0.2rem;
+  }
+
+  /* possibilities cell */
+  .pos-cell .cell-content,
+  .cau-cell .cell-content {
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .pos-cell .cell-content::before,
+  .cau-cell .cell-content::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  .pos-cell .cell-content::before {
+    background: var(--leaf);
+  }
+
+  .cau-cell .cell-content::before {
+    background: var(--sunshine);
+  }
+
+  .pos-cell {
+    background: rgba(123, 201, 80, 0.04);
+  }
+
+  .cau-cell {
+    background: rgba(255, 201, 60, 0.05);
+  }
+
+  /* small footer note inside table */
+  .table-foot {
+    background: rgba(42, 38, 34, 0.04);
+    border-top: 1px solid rgba(42, 38, 34, 0.15);
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .foot-icon {
+    width: 32px; height: 32px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--coral);
+    color: var(--cream);
+    border-radius: 50%;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 16px;
+    border: 1.5px solid var(--ink);
+  }
+
+  .foot-text {
+    font-family: var(--font-hand);
+    font-size: 19px;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .foot-text strong {
+    color: var(--coral-deep);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-15px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .zone-eyebrow { animation: fadeUp 0.5s 0.2s backwards; }
+  .header-title { animation: fadeUp 0.7s 0.4s backwards; }
+  .header-sub { animation: fadeUp 0.6s 0.6s backwards; }
+  .narrator-mini { animation: fadeUp 0.7s 0.5s backwards; }
+
+  .compare-table { animation: fadeUp 0.7s 0.8s backwards; }
+  .table-head { animation: fadeUp 0.4s 1.0s backwards; }
+  .tech-row.ai { animation: slideInLeft 0.5s 1.2s backwards; }
+  .tech-row.xr { animation: slideInLeft 0.5s 1.4s backwards; }
+  .tech-row.mr { animation: slideInLeft 0.5s 1.6s backwards; }
+  .table-foot { animation: fadeUp 0.5s 1.9s backwards; }
+</style>
+</head>
+<body>
+
+<section class="slide">
+
+  <!-- Top chrome -->
+  <div class="chrome-top">
+    <div class="section-marker">Other technologies · what's next</div>
+    <div class="deck-meta"><span class="current">07</span> / 17 · MixTechBook</div>
+  </div>
+
+  <div class="slide-body">
+
+    <!-- HEADER -->
+    <div class="header-zone">
+      <div class="header-text">
+        <div class="zone-eyebrow">
+          beyond the scope <span class="dot"></span> what's coming next
+        </div>
+        <h2 class="header-title">
+          What about <span class="accent">AI · XR · MR</span>?
+        </h2>
+        <p class="header-sub">
+          These technologies are emerging fast, and they will absolutely shape the next wave of immersive learning. They're outside this study's scope — but worth knowing where they stand.
+        </p>
+      </div>
+
+      <!-- Curious narrator -->
+      <div class="narrator-mini">
+        <svg viewBox="0 0 220 280" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#2A2622" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="110" cy="262" rx="40" ry="4" fill="#2A2622" fill-opacity="0.08" stroke="none"/>
+          <g>
+            <circle cx="78" cy="50" r="8" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="92" cy="40" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="108" cy="36" r="10" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="124" cy="40" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="140" cy="50" r="8" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <path d="M 72 56 Q 66 46 76 42 Q 84 40 86 50" stroke-width="1.2"/>
+            <path d="M 84 44 Q 86 32 100 32 Q 110 34 108 46" stroke-width="1.2"/>
+            <path d="M 106 32 Q 114 22 126 30 Q 132 38 124 46" stroke-width="1.2"/>
+            <path d="M 124 40 Q 140 36 144 50 Q 146 60 136 62" stroke-width="1.2"/>
+            <path d="M 68 62 Q 58 68 62 82" stroke-width="1.2"/>
+            <path d="M 68 92 Q 62 100 66 112" stroke-width="1.2"/>
+            <path d="M 152 92 Q 158 100 154 112" stroke-width="1.2"/>
+          </g>
+          <path d="M 82 72 Q 82 58 110 56 Q 138 58 138 72 Q 138 100 110 112 Q 82 100 82 72 Z" fill="#FFF8EC"/>
+          <!-- curious eyes looking forward -->
+          <circle cx="94" cy="80" r="2.2" fill="#2A2622"/>
+          <circle cx="122" cy="80" r="2.2" fill="#2A2622"/>
+          <path d="M 88 71 Q 94 67 100 71"/>
+          <path d="M 116 71 Q 122 67 128 71"/>
+          <path d="M 110 87 L 110 93"/>
+          <!-- slight curious smile -->
+          <path d="M 102 100 Q 110 105 118 100" stroke="#C8542A" stroke-width="1.5"/>
+          <ellipse cx="91" cy="97" rx="4" ry="2.5" fill="#FF8FA3" fill-opacity="0.55" stroke="none"/>
+          <ellipse cx="129" cy="97" rx="4" ry="2.5" fill="#FF8FA3" fill-opacity="0.55" stroke="none"/>
+          <path d="M 102 114 L 102 124"/>
+          <path d="M 118 114 L 118 124"/>
+          <path d="M 78 128 Q 76 125 80 124 L 102 124 Q 110 130 118 124 L 140 124 Q 144 125 142 128 L 138 162 L 82 162 Z" fill="#FF6B47" stroke="#2A2622"/>
+          <path d="M 82 162 L 60 220 L 160 220 L 138 162 Z" fill="#FF6B47" stroke="#2A2622"/>
+          <line x1="82" y1="162" x2="138" y2="162" stroke="#2A2622" stroke-width="1"/>
+          <circle cx="92" cy="190" r="2.5" fill="#FFC93C" stroke="none"/>
+          <circle cx="118" cy="190" r="2.5" fill="#FFC93C" stroke="none"/>
+          <circle cx="105" cy="208" r="2.5" fill="#FFC93C" stroke="none"/>
+          <path d="M 102 124 Q 110 132 118 124"/>
+          <!-- right arm holding magnifying glass -->
+          <path d="M 140 132 Q 158 132 168 122"/>
+          <!-- magnifying glass -->
+          <circle cx="180" cy="100" r="14" fill="#FFFDF8" stroke="#2A2622" stroke-width="1.8"/>
+          <circle cx="180" cy="100" r="9" fill="#4FB6D8" fill-opacity="0.18" stroke="#2A2622" stroke-width="1"/>
+          <line x1="190" y1="111" x2="200" y2="121" stroke="#2A2622" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- hand grip -->
+          <circle cx="170" cy="118" r="5" fill="#FFF8EC"/>
+          <!-- left arm relaxed -->
+          <path d="M 80 132 Q 68 158 72 188"/>
+          <circle cx="72" cy="192" r="5" fill="#FFF8EC"/>
+          <!-- legs -->
+          <path d="M 92 220 L 90 250"/>
+          <path d="M 100 220 L 102 250"/>
+          <path d="M 118 220 L 120 250"/>
+          <path d="M 126 220 L 130 250"/>
+          <path d="M 90 250 L 102 250"/>
+          <path d="M 120 250 L 130 250"/>
+          <ellipse cx="96" cy="256" rx="10" ry="4" fill="#2A2622" stroke="none"/>
+          <ellipse cx="125" cy="256" rx="10" ry="4" fill="#2A2622" stroke="none"/>
+          <path d="M 91 252 L 101 252" stroke="#FFC93C" stroke-width="1.3"/>
+          <path d="M 120 252 L 130 252" stroke="#FFC93C" stroke-width="1.3"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <div class="compare-table">
+
+      <!-- table header -->
+      <div class="table-head">
+        <div>Technology</div>
+        <div>
+          <span class="col-icon-pos">●</span>
+          The Possibilities
+        </div>
+        <div>
+          <span class="col-icon-cau">●</span>
+          The Difficulties
+        </div>
+      </div>
+
+      <!-- table body -->
+      <div class="table-body">
+
+        <!-- AI ROW -->
+        <div class="tech-row ai">
+          <div class="tech-cell tech-name-cell">
+            <div class="tech-acronym">AI</div>
+            <div class="tech-fullname">Artificial Intelligence</div>
+            <div class="tech-shortdesc">Adaptive, intelligent systems that personalise the learning experience.</div>
+          </div>
+          <div class="tech-cell pos-cell">
+            <div class="cell-content">Personalised pacing, instant feedback, and tutoring at scale. Could free teachers to focus on relational, deeper learning.</div>
+          </div>
+          <div class="tech-cell cau-cell">
+            <div class="cell-content">Concerns around bias, hallucination, student dependency, and ethical use. Schools still working out healthy boundaries.</div>
+          </div>
+        </div>
+
+        <!-- XR ROW -->
+        <div class="tech-row xr">
+          <div class="tech-cell tech-name-cell">
+            <div class="tech-acronym">XR</div>
+            <div class="tech-fullname">Extended Reality</div>
+            <div class="tech-shortdesc">An umbrella term covering AR, VR, MR — and everything in between.</div>
+          </div>
+          <div class="tech-cell pos-cell">
+            <div class="cell-content">A flexible framework for designing learning across the immersion spectrum, not locked into one device or modality.</div>
+          </div>
+          <div class="tech-cell cau-cell">
+            <div class="cell-content">More of a category than a tool. Hard to teach with directly until the underlying technologies mature individually.</div>
+          </div>
+        </div>
+
+        <!-- MR ROW -->
+        <div class="tech-row mr">
+          <div class="tech-cell tech-name-cell">
+            <div class="tech-acronym">MR</div>
+            <div class="tech-fullname">Mixed Reality</div>
+            <div class="tech-shortdesc">Digital content that interacts with physical surroundings in real time.</div>
+          </div>
+          <div class="tech-cell pos-cell">
+            <div class="cell-content">Best of AR and VR combined — place a virtual heart on the desk, walk around it, step inside, all without leaving the classroom.</div>
+          </div>
+          <div class="tech-cell cau-cell">
+            <div class="cell-content">Still emerging. Relies on advanced hardware like Microsoft HoloLens. Cost &amp; access remain significant barriers.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- table footer note -->
+      <div class="table-foot">
+        <div class="foot-icon">!</div>
+        <div class="foot-text">
+          Excluded from this study to <strong>maintain a clear, manageable scope at Master's level</strong> — but they are exactly where this work could grow next.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Bottom chrome -->
+  <div class="chrome-bottom">
+    <div class="references">
+      <span class="label">References</span>
+      Dissanayake, N. L. (2026). Technological Scope, §1.7.1.1 &amp; §2.1 — <em>MixTechBook: The Future of Immersive Learning</em>. · Microsoft. (2023). <em>The Spectrum of AR &amp; VR</em>. · Cevik, M. (2024). <em>Mixed Reality in Education</em>.
+    </div>
+    <div class="progress-rail">
+      <div class="progress-fill"></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ╔════════════════════════════════════════════════════════════════╗
+     ║  DECK NAVIGATION                                                ║
+     ║  Keyboard: ← → arrows · Space · Page Up/Down · Home · End      ║
+     ║  On-screen: prev/next buttons bottom-right                     ║
+     ╚════════════════════════════════════════════════════════════════╝ -->
+<style>
+  /* Navigation widget */
+  .deck-nav {
+    position: fixed;
+    bottom: 14px;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 6px;
+    background: rgba(255, 248, 236, 0.92);
+    border: 1px solid rgba(42, 38, 34, 0.18);
+    border-radius: 22px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(42, 38, 34, 0.08);
+    z-index: 9999;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: #5A524A;
+    transition: opacity 0.3s;
+    user-select: none;
+  }
+  .deck-nav:hover { opacity: 1 !important; }
+  .deck-nav.idle { opacity: 0.35; }
+  .deck-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: #2A2622;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 1;
+  }
+  .deck-nav-btn:hover {
+    background: rgba(255, 107, 71, 0.18);
+  }
+  .deck-nav-btn:active {
+    transform: scale(0.92);
+  }
+  .deck-nav-btn:disabled,
+  .deck-nav-btn[aria-disabled="true"] {
+    opacity: 0.25;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .deck-nav-counter {
+    padding: 0 6px;
+    letter-spacing: 0.06em;
+    color: #5A524A;
+    min-width: 38px;
+    text-align: center;
+  }
+  .deck-nav-counter strong {
+    color: #2A2622;
+    font-weight: 600;
+  }
+  .deck-nav-help {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(42, 38, 34, 0.06);
+    color: #5A524A;
+    font-size: 11px;
+    cursor: help;
+    margin-left: 2px;
+    font-style: italic;
+  }
+  .deck-nav-help:hover {
+    background: rgba(42, 38, 34, 0.12);
+  }
+  /* Hide nav when printing or in minimal-screen mode */
+  @media print {
+    .deck-nav { display: none !important; }
+  }
+</style>
+
+<nav class="deck-nav" aria-label="Slide navigation">
+  <a class="deck-nav-btn" id="deck-nav-prev" href="#" aria-label="Previous slide" title="Previous (←)">‹</a>
+  <span class="deck-nav-counter"><strong id="deck-nav-current">--</strong>/17</span>
+  <a class="deck-nav-btn" id="deck-nav-next" href="#" aria-label="Next slide" title="Next (→ or Space)">›</a>
+  <a class="deck-nav-btn" id="deck-nav-home" href="slide-01.html" aria-label="First slide" title="First slide (Home)" style="font-size:13px;">⌂</a>
+  <span class="deck-nav-help" title="Keyboard: ← → Space · Page Up/Down · Home · End · F11 fullscreen">?</span>
+</nav>
+
+<script>
+(function() {
+  // Detect current slide number from URL
+  const match = window.location.pathname.match(/slide-(\d{2})\.html/);
+  const total = 17;
+  const current = match ? parseInt(match[1], 10) : 1;
+
+  // Update counter
+  const counterEl = document.getElementById('deck-nav-current');
+  if (counterEl) counterEl.textContent = String(current).padStart(2, '0');
+
+  // Build prev/next URLs
+  const padNum = n => String(n).padStart(2, '0');
+  const prevUrl = current > 1 ? `slide-${padNum(current - 1)}.html` : null;
+  const nextUrl = current < total ? `slide-${padNum(current + 1)}.html` : null;
+
+  const prevBtn = document.getElementById('deck-nav-prev');
+  const nextBtn = document.getElementById('deck-nav-next');
+
+  if (prevBtn) {
+    if (prevUrl) {
+      prevBtn.href = prevUrl;
+    } else {
+      prevBtn.setAttribute('aria-disabled', 'true');
+      prevBtn.removeAttribute('href');
+    }
+  }
+
+  if (nextBtn) {
+    if (nextUrl) {
+      nextBtn.href = nextUrl;
+    } else {
+      nextBtn.setAttribute('aria-disabled', 'true');
+      nextBtn.removeAttribute('href');
+    }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    // Don't hijack keys when user is typing in an input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    // Don't hijack when modifier keys held (e.g. Cmd+R for refresh)
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    let dest = null;
+
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'PageDown':
+      case ' ': // spacebar
+        if (nextUrl) dest = nextUrl;
+        break;
+      case 'ArrowLeft':
+      case 'PageUp':
+      case 'Backspace':
+        if (prevUrl) dest = prevUrl;
+        break;
+      case 'Home':
+        dest = 'slide-01.html';
+        break;
+      case 'End':
+        dest = `slide-${padNum(total)}.html`;
+        break;
+    }
+
+    if (dest) {
+      e.preventDefault();
+      window.location.href = dest;
+    }
+  });
+
+  // Auto-fade nav after inactivity, restore on movement
+  const navEl = document.querySelector('.deck-nav');
+  if (navEl) {
+    let idleTimer = null;
+    const setIdle = () => navEl.classList.add('idle');
+    const setActive = () => {
+      navEl.classList.remove('idle');
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(setIdle, 2500);
+    };
+    setActive();
+    document.addEventListener('mousemove', setActive);
+    document.addEventListener('keydown', setActive);
+    document.addEventListener('touchstart', setActive);
+  }
+})();
+</script>
+
+</body>
+</html>

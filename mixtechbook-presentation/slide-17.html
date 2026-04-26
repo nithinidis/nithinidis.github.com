@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MixTechBook · Slide 17 · References &amp; Thank You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FFF8EC; --paper-deep: #FBEFD4; --cream: #FFFDF8;
+    --ink: #2A2622; --ink-soft: #5A524A; --ink-dim: #8A7F74;
+    --coral: #FF6B47; --coral-deep: #E04D2A;
+    --sunshine: #FFC93C; --sky: #4FB6D8;
+    --leaf: #7BC950; --rose: #FF8FA3; --mauve: #A87FBF;
+    --font-serif: 'Fraunces', Georgia, serif;
+    --font-sans: 'Geist', -apple-system, sans-serif;
+    --font-mono: 'Geist Mono', monospace;
+    --font-hand: 'Caveat', cursive;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100vh; overflow: hidden;
+    background: var(--paper); color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: radial-gradient(rgba(42, 38, 34, 0.035) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none; z-index: 1;
+  }
+  .slide {
+    position: relative; width: 100vw; height: 100vh;
+    padding: 3.5vh 5vw 4vh;
+    display: flex; flex-direction: column; z-index: 2;
+  }
+
+  /* CHROME */
+  .chrome-top {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-shrink: 0; height: 36px;
+  }
+  .section-marker {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--coral); letter-spacing: 0.18em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px; font-weight: 500;
+  }
+  .section-marker::before {
+    content: ''; width: 24px; height: 2px;
+    background: var(--coral); border-radius: 2px;
+  }
+  .deck-meta {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--ink-dim); letter-spacing: 0.12em;
+  }
+  .deck-meta .current { color: var(--ink); font-weight: 500; }
+  .progress-rail-final {
+    height: 3px; background: rgba(42, 38, 34, 0.08);
+    border-radius: 2px; margin-top: 0.85rem; overflow: hidden;
+    position: absolute;
+    bottom: 1.5vh; left: 5vw; right: 5vw;
+    z-index: 10;
+  }
+  .progress-fill-final {
+    height: 100%; width: 100%;
+    background: var(--coral); border-radius: 2px;
+  }
+
+  /* SLIDE BODY */
+  .slide-body {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 3vw;
+    align-items: stretch;
+    min-height: 0;
+    padding: 2vh 0 4vh;
+  }
+
+  /* LEFT — references */
+  .refs-zone {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .zone-eyebrow {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .zone-eyebrow .dot {
+    width: 5px; height: 5px;
+    background: var(--sunshine); border-radius: 50%;
+  }
+
+  .refs-headline {
+    font-family: var(--font-hand);
+    font-size: clamp(34px, 4vw, 50px);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .refs-headline .accent {
+    color: var(--coral);
+    position: relative;
+    display: inline-block;
+  }
+  .refs-headline .accent::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 0; right: 0;
+    height: 7px;
+    background: var(--sunshine);
+    opacity: 0.55;
+    z-index: -1;
+    border-radius: 2px;
+    transform: skew(-3deg);
+  }
+
+  .refs-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(13px, 1.2vw, 16px);
+    color: var(--ink-soft);
+    line-height: 1.4;
+    margin-bottom: 1.2rem;
+  }
+
+  /* The reference list */
+  .refs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    flex-grow: 1;
+    overflow: hidden;
+  }
+
+  .ref-item {
+    font-family: var(--font-sans);
+    font-size: clamp(11px, 1vw, 12.5px);
+    line-height: 1.45;
+    color: var(--ink-soft);
+    padding-left: 22px;
+    position: relative;
+  }
+
+  .ref-item .marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    color: var(--coral);
+    font-weight: 600;
+    width: 18px;
+    text-align: right;
+  }
+
+  .ref-item em {
+    color: var(--ink);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .ref-item strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* Full list pointer */
+  .full-list-note {
+    margin-top: 0.85rem;
+    padding: 0.65rem 0.85rem;
+    background: rgba(42, 38, 34, 0.04);
+    border: 1px dashed rgba(42, 38, 34, 0.25);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    flex-shrink: 0;
+  }
+
+  .full-list-icon {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--coral);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .full-list-text {
+    font-family: var(--font-hand);
+    font-size: 16px;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .full-list-text strong {
+    color: var(--coral-deep);
+  }
+
+  /* RIGHT — thank you */
+  .thanks-zone {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem 1.5rem;
+    background: var(--cream);
+    border: 1.5px solid var(--ink);
+    border-radius: 14px;
+    box-shadow: 4px 5px 0 rgba(42, 38, 34, 0.1);
+    transform: rotate(0.5deg);
+    overflow: visible;
+  }
+
+  .thanks-tab {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    background: var(--coral);
+    color: var(--cream);
+    padding: 5px 16px;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+  }
+
+  .thanks-character {
+    width: 75%;
+    max-width: 200px;
+    margin: 0.5rem auto 0.4rem;
+  }
+
+  .thanks-headline {
+    font-family: var(--font-hand);
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 600;
+    color: var(--coral);
+    line-height: 0.95;
+    margin-bottom: 0.2rem;
+  }
+
+  .thanks-sub {
+    font-family: var(--font-hand);
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .thanks-sub strong {
+    color: var(--coral-deep);
+  }
+
+  .qa-strip {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: clamp(13px, 1.15vw, 15px);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.005em;
+  }
+
+  .qa-strip strong {
+    color: var(--sunshine);
+  }
+
+  /* Sparkles around the thank you card */
+  .deco-spark {
+    position: absolute;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .deco-spark.s1 { top: 8%; left: -3%; }
+  .deco-spark.s2 { bottom: 12%; right: -4%; }
+  .deco-spark.s3 { top: 30%; right: -2%; }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95) rotate(0.5deg); }
+    to { opacity: 1; transform: scale(1) rotate(0.5deg); }
+  }
+
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes wave {
+    0%, 100% { transform: rotate(-12deg); }
+    25% { transform: rotate(8deg); }
+    50% { transform: rotate(-8deg); }
+    75% { transform: rotate(12deg); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  .zone-eyebrow { animation: fadeUp 0.4s 0.2s backwards; }
+  .refs-headline { animation: fadeUp 0.6s 0.4s backwards; }
+  .refs-sub { animation: fadeUp 0.5s 0.55s backwards; }
+
+  .ref-item:nth-child(1) { animation: slideInLeft 0.4s 0.7s backwards; }
+  .ref-item:nth-child(2) { animation: slideInLeft 0.4s 0.78s backwards; }
+  .ref-item:nth-child(3) { animation: slideInLeft 0.4s 0.86s backwards; }
+  .ref-item:nth-child(4) { animation: slideInLeft 0.4s 0.94s backwards; }
+  .ref-item:nth-child(5) { animation: slideInLeft 0.4s 1.02s backwards; }
+  .ref-item:nth-child(6) { animation: slideInLeft 0.4s 1.10s backwards; }
+  .ref-item:nth-child(7) { animation: slideInLeft 0.4s 1.18s backwards; }
+  .ref-item:nth-child(8) { animation: slideInLeft 0.4s 1.26s backwards; }
+  .ref-item:nth-child(9) { animation: slideInLeft 0.4s 1.34s backwards; }
+  .ref-item:nth-child(10) { animation: slideInLeft 0.4s 1.42s backwards; }
+  .full-list-note { animation: fadeUp 0.5s 1.55s backwards; }
+
+  .thanks-zone { animation: scaleIn 0.7s 0.6s backwards; }
+  .thanks-character { animation: fadeUp 0.6s 0.9s backwards; }
+  .thanks-headline { animation: fadeUp 0.6s 1.0s backwards; }
+  .thanks-sub { animation: fadeUp 0.5s 1.2s backwards; }
+  .qa-strip { animation: fadeUp 0.5s 1.4s backwards; }
+
+  .waving-hand {
+    transform-origin: 200px 130px;
+    animation: wave 1.6s 1.5s ease-in-out 4;
+  }
+
+  .deco-spark { animation: float 2.5s ease-in-out infinite; }
+  .deco-spark.s2 { animation-delay: 0.5s; }
+  .deco-spark.s3 { animation-delay: 1s; }
+</style>
+</head>
+<body>
+
+<section class="slide">
+
+  <div class="chrome-top">
+    <div class="section-marker">References · Thank you · Q&amp;A</div>
+    <div class="deck-meta"><span class="current">17</span> / 17 · MixTechBook</div>
+  </div>
+
+  <div class="slide-body">
+
+    <!-- LEFT — REFERENCES -->
+    <div class="refs-zone">
+
+      <div class="zone-eyebrow">
+        references <span class="dot"></span> the work this stands on
+      </div>
+
+      <h2 class="refs-headline">
+        Standing on <span class="accent">good shoulders.</span>
+      </h2>
+
+      <p class="refs-sub">
+        Selected key sources from across the deck. The full reference list lives in the report.
+      </p>
+
+      <ul class="refs-list">
+
+        <li class="ref-item">
+          <span class="marker">01</span>
+          Braun, V. &amp; Clarke, V. (2006). Using Thematic Analysis in Psychology. <em>Qualitative Research in Psychology, 3(2)</em>, 77–101.
+        </li>
+
+        <li class="ref-item">
+          <span class="marker">02</span>
+          Kriukow, J. <em>Qualitative Analysis Approach</em> (custom ChatGPT instance) · drkriukow.com
+        </li>
+
+        <li class="ref-item">
+          <span class="marker">03</span>
+          Ministry of Education. (2007). <em>The New Zealand Curriculum</em>. Wellington: Learning Media.
+        </li>
+
+        <li class="ref-item">
+          <span class="marker">04</span>
+          Beale, J. (2020). <em>The Limits of the Science of Learning</em>.
+        </li>
+
+        <li class="ref-item">
+          <span class="marker">05</span>
+          Caduceus International Publishing. (2022). <em>Why Is Science So Hard To Learn?</em>
+        </li>
+
+        <li class="ref-item">
+          <span class="marker">06</span>
+          Zhang, X. &amp; Wang, Y. (2021). <em>Immersive science education for primary and secondary schools</em>.
+        </li>
+
+        <li class="ref-item">
+          <span class="marker">07</span>
+          Drivas, G. (2025). <em>Understanding Students Beyond Two Dimensions</em>.
+        </li>
+
+        <li class="ref-item">
+          <span class="marker">08</span>
+          Ding, A. E., et al. (2024). <em>Integrating Immersive Virtual Reality in Scaffolded Game-Based Learning</em>.
+        </li>
+
+        <li class="ref-item">
+          <span class="marker">09</span>
+          Cybernetyx Global. (2024). <em>3D Models and Interactive Simulations for Teaching</em>. YouTube · youtube.com/watch?v=1YTUY3xdSgI
+        </li>
+
+        <li class="ref-item">
+          <span class="marker">10</span>
+          <em>Heart Structure Worksheets</em>. TES Teaching Resources · tes.com/teaching-resource/heart-structure-worksheets-12767365
+        </li>
+
+      </ul>
+
+      <div class="full-list-note">
+        <span class="full-list-icon">§</span>
+        <span class="full-list-text">
+          The <strong>full reference list</strong> &amp; appendices live in the report.
+        </span>
+      </div>
+
+    </div>
+
+    <!-- RIGHT — THANK YOU -->
+    <div class="thanks-zone">
+      <span class="thanks-tab">⚡ End of presentation</span>
+
+      <!-- waving character -->
+      <div class="thanks-character">
+        <svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#2A2622" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="115" cy="262" rx="42" ry="4" fill="#2A2622" fill-opacity="0.08" stroke="none"/>
+          <g>
+            <circle cx="83" cy="55" r="8" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="97" cy="45" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="113" cy="41" r="10" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="129" cy="45" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="145" cy="55" r="8" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <path d="M 77 61 Q 71 51 81 47 Q 89 45 91 55" stroke-width="1.2"/>
+            <path d="M 89 49 Q 91 37 105 37 Q 115 39 113 51" stroke-width="1.2"/>
+            <path d="M 111 37 Q 119 27 131 35 Q 137 43 129 51" stroke-width="1.2"/>
+            <path d="M 129 45 Q 145 41 149 55 Q 151 65 141 67" stroke-width="1.2"/>
+            <path d="M 73 67 Q 63 73 67 87" stroke-width="1.2"/>
+            <path d="M 73 97 Q 67 105 71 117" stroke-width="1.2"/>
+            <path d="M 157 97 Q 163 105 159 117" stroke-width="1.2"/>
+          </g>
+          <path d="M 87 77 Q 87 63 115 61 Q 143 63 143 77 Q 143 105 115 117 Q 87 105 87 77 Z" fill="#FFF8EC"/>
+          <!-- happy eyes -->
+          <path d="M 95 84 Q 100 80 105 84" stroke-width="1.7"/>
+          <path d="M 125 84 Q 130 80 135 84" stroke-width="1.7"/>
+          <path d="M 92 75 Q 98 72 104 75"/>
+          <path d="M 126 75 Q 132 72 138 75"/>
+          <path d="M 115 91 L 115 97"/>
+          <!-- big smile -->
+          <path d="M 105 105 Q 115 113 125 105" stroke="#C8542A" stroke-width="1.7"/>
+          <ellipse cx="96" cy="101" rx="4" ry="2.5" fill="#FF8FA3" fill-opacity="0.6" stroke="none"/>
+          <ellipse cx="134" cy="101" rx="4" ry="2.5" fill="#FF8FA3" fill-opacity="0.6" stroke="none"/>
+          <path d="M 107 119 L 107 129"/>
+          <path d="M 123 119 L 123 129"/>
+          <!-- frock -->
+          <path d="M 83 133 Q 81 130 85 129 L 107 129 Q 115 135 123 129 L 145 129 Q 149 130 147 133 L 143 167 L 87 167 Z" fill="#FF6B47" stroke="#2A2622"/>
+          <path d="M 87 167 L 65 225 L 165 225 L 143 167 Z" fill="#FF6B47" stroke="#2A2622"/>
+          <line x1="87" y1="167" x2="143" y2="167" stroke="#2A2622" stroke-width="1"/>
+          <circle cx="97" cy="195" r="2.5" fill="#FFC93C" stroke="none"/>
+          <circle cx="123" cy="195" r="2.5" fill="#FFC93C" stroke="none"/>
+          <circle cx="110" cy="213" r="2.5" fill="#FFC93C" stroke="none"/>
+          <path d="M 107 129 Q 115 137 123 129"/>
+
+          <!-- LEFT arm down -->
+          <path d="M 85 137 Q 73 165 78 195"/>
+          <circle cx="78" cy="200" r="5" fill="#FFF8EC"/>
+
+          <!-- RIGHT arm UP, waving -->
+          <g class="waving-hand">
+            <path d="M 145 137 Q 175 110 200 80"/>
+            <circle cx="203" cy="74" r="7" fill="#FFF8EC"/>
+            <path d="M 198 70 L 196 60" stroke-width="1.3"/>
+            <path d="M 203 67 L 203 56" stroke-width="1.3"/>
+            <path d="M 208 70 L 211 60" stroke-width="1.3"/>
+            <path d="M 211 76 L 215 73" stroke-width="1.3"/>
+          </g>
+
+          <!-- legs -->
+          <path d="M 97 225 L 95 255"/>
+          <path d="M 105 225 L 107 255"/>
+          <path d="M 123 225 L 125 255"/>
+          <path d="M 131 225 L 135 255"/>
+          <path d="M 95 255 L 107 255"/>
+          <path d="M 125 255 L 135 255"/>
+          <ellipse cx="101" cy="261" rx="10" ry="4" fill="#2A2622" stroke="none"/>
+          <ellipse cx="130" cy="261" rx="10" ry="4" fill="#2A2622" stroke="none"/>
+          <path d="M 96 257 L 106 257" stroke="#FFC93C" stroke-width="1.3"/>
+          <path d="M 125 257 L 135 257" stroke="#FFC93C" stroke-width="1.3"/>
+        </svg>
+      </div>
+
+      <h2 class="thanks-headline">
+        Thank you!
+      </h2>
+      <p class="thanks-sub">
+        for your time, your attention, <strong>and your questions.</strong>
+      </p>
+
+      <div class="qa-strip">
+        ⚡ <strong>Q&amp;A</strong> · 30 minutes · the floor is yours
+      </div>
+
+      <!-- Decorative sparkles around the card -->
+      <svg class="deco-spark s1" width="22" height="22" viewBox="0 0 22 22">
+        <path d="M 11 2 L 12 9 L 19 10 L 12 11 L 11 19 L 10 11 L 3 10 L 10 9 Z" fill="#FFC93C" stroke="#2A2622" stroke-width="1.2" stroke-linejoin="round"/>
+      </svg>
+      <svg class="deco-spark s2" width="20" height="20" viewBox="0 0 20 20">
+        <path d="M 10 2 L 11 8 L 17 9 L 11 10 L 10 17 L 9 10 L 3 9 L 9 8 Z" fill="#FF8FA3" stroke="#2A2622" stroke-width="1.1" stroke-linejoin="round"/>
+      </svg>
+      <svg class="deco-spark s3" width="16" height="16" viewBox="0 0 16 16">
+        <circle cx="8" cy="8" r="3" fill="#FF6B47" stroke="#2A2622" stroke-width="1.1"/>
+      </svg>
+
+    </div>
+
+  </div>
+
+  <!-- final progress rail showing complete -->
+  <div class="progress-rail-final">
+    <div class="progress-fill-final"></div>
+  </div>
+
+</section>
+
+<!-- ╔════════════════════════════════════════════════════════════════╗
+     ║  DECK NAVIGATION                                                ║
+     ║  Keyboard: ← → arrows · Space · Page Up/Down · Home · End      ║
+     ║  On-screen: prev/next buttons bottom-right                     ║
+     ╚════════════════════════════════════════════════════════════════╝ -->
+<style>
+  /* Navigation widget */
+  .deck-nav {
+    position: fixed;
+    bottom: 14px;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 6px;
+    background: rgba(255, 248, 236, 0.92);
+    border: 1px solid rgba(42, 38, 34, 0.18);
+    border-radius: 22px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(42, 38, 34, 0.08);
+    z-index: 9999;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: #5A524A;
+    transition: opacity 0.3s;
+    user-select: none;
+  }
+  .deck-nav:hover { opacity: 1 !important; }
+  .deck-nav.idle { opacity: 0.35; }
+  .deck-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: #2A2622;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 1;
+  }
+  .deck-nav-btn:hover {
+    background: rgba(255, 107, 71, 0.18);
+  }
+  .deck-nav-btn:active {
+    transform: scale(0.92);
+  }
+  .deck-nav-btn:disabled,
+  .deck-nav-btn[aria-disabled="true"] {
+    opacity: 0.25;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .deck-nav-counter {
+    padding: 0 6px;
+    letter-spacing: 0.06em;
+    color: #5A524A;
+    min-width: 38px;
+    text-align: center;
+  }
+  .deck-nav-counter strong {
+    color: #2A2622;
+    font-weight: 600;
+  }
+  .deck-nav-help {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(42, 38, 34, 0.06);
+    color: #5A524A;
+    font-size: 11px;
+    cursor: help;
+    margin-left: 2px;
+    font-style: italic;
+  }
+  .deck-nav-help:hover {
+    background: rgba(42, 38, 34, 0.12);
+  }
+  /* Hide nav when printing or in minimal-screen mode */
+  @media print {
+    .deck-nav { display: none !important; }
+  }
+</style>
+
+<nav class="deck-nav" aria-label="Slide navigation">
+  <a class="deck-nav-btn" id="deck-nav-prev" href="#" aria-label="Previous slide" title="Previous (←)">‹</a>
+  <span class="deck-nav-counter"><strong id="deck-nav-current">--</strong>/17</span>
+  <a class="deck-nav-btn" id="deck-nav-next" href="#" aria-label="Next slide" title="Next (→ or Space)">›</a>
+  <a class="deck-nav-btn" id="deck-nav-home" href="slide-01.html" aria-label="First slide" title="First slide (Home)" style="font-size:13px;">⌂</a>
+  <span class="deck-nav-help" title="Keyboard: ← → Space · Page Up/Down · Home · End · F11 fullscreen">?</span>
+</nav>
+
+<script>
+(function() {
+  // Detect current slide number from URL
+  const match = window.location.pathname.match(/slide-(\d{2})\.html/);
+  const total = 17;
+  const current = match ? parseInt(match[1], 10) : 1;
+
+  // Update counter
+  const counterEl = document.getElementById('deck-nav-current');
+  if (counterEl) counterEl.textContent = String(current).padStart(2, '0');
+
+  // Build prev/next URLs
+  const padNum = n => String(n).padStart(2, '0');
+  const prevUrl = current > 1 ? `slide-${padNum(current - 1)}.html` : null;
+  const nextUrl = current < total ? `slide-${padNum(current + 1)}.html` : null;
+
+  const prevBtn = document.getElementById('deck-nav-prev');
+  const nextBtn = document.getElementById('deck-nav-next');
+
+  if (prevBtn) {
+    if (prevUrl) {
+      prevBtn.href = prevUrl;
+    } else {
+      prevBtn.setAttribute('aria-disabled', 'true');
+      prevBtn.removeAttribute('href');
+    }
+  }
+
+  if (nextBtn) {
+    if (nextUrl) {
+      nextBtn.href = nextUrl;
+    } else {
+      nextBtn.setAttribute('aria-disabled', 'true');
+      nextBtn.removeAttribute('href');
+    }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    // Don't hijack keys when user is typing in an input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    // Don't hijack when modifier keys held (e.g. Cmd+R for refresh)
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    let dest = null;
+
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'PageDown':
+      case ' ': // spacebar
+        if (nextUrl) dest = nextUrl;
+        break;
+      case 'ArrowLeft':
+      case 'PageUp':
+      case 'Backspace':
+        if (prevUrl) dest = prevUrl;
+        break;
+      case 'Home':
+        dest = 'slide-01.html';
+        break;
+      case 'End':
+        dest = `slide-${padNum(total)}.html`;
+        break;
+    }
+
+    if (dest) {
+      e.preventDefault();
+      window.location.href = dest;
+    }
+  });
+
+  // Auto-fade nav after inactivity, restore on movement
+  const navEl = document.querySelector('.deck-nav');
+  if (navEl) {
+    let idleTimer = null;
+    const setIdle = () => navEl.classList.add('idle');
+    const setActive = () => {
+      navEl.classList.remove('idle');
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(setIdle, 2500);
+    };
+    setActive();
+    document.addEventListener('mousemove', setActive);
+    document.addEventListener('keydown', setActive);
+    document.addEventListener('touchstart', setActive);
+  }
+})();
+</script>
+
+</body>
+</html>

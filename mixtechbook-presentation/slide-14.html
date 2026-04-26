@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MixTechBook · Slide 14 · Future Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FFF8EC; --paper-deep: #FBEFD4; --cream: #FFFDF8;
+    --ink: #2A2622; --ink-soft: #5A524A; --ink-dim: #8A7F74;
+    --coral: #FF6B47; --coral-deep: #E04D2A;
+    --sunshine: #FFC93C; --sky: #4FB6D8;
+    --leaf: #7BC950; --rose: #FF8FA3; --mauve: #A87FBF;
+    --font-serif: 'Fraunces', Georgia, serif;
+    --font-sans: 'Geist', -apple-system, sans-serif;
+    --font-mono: 'Geist Mono', monospace;
+    --font-hand: 'Caveat', cursive;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100vh; overflow: hidden;
+    background: var(--paper); color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: radial-gradient(rgba(42, 38, 34, 0.035) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none; z-index: 1;
+  }
+  .slide {
+    position: relative; width: 100vw; height: 100vh;
+    padding: 3.5vh 5vw 6vh;
+    display: flex; flex-direction: column; z-index: 2;
+  }
+
+  /* CHROME */
+  .chrome-top {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-shrink: 0; height: 36px;
+  }
+  .section-marker {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--coral); letter-spacing: 0.18em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px; font-weight: 500;
+  }
+  .section-marker::before {
+    content: ''; width: 24px; height: 2px;
+    background: var(--coral); border-radius: 2px;
+  }
+  .deck-meta {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--ink-dim); letter-spacing: 0.12em;
+  }
+  .deck-meta .current { color: var(--ink); font-weight: 500; }
+  .chrome-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 0 5vw 1.75vh; z-index: 10;
+  }
+  .references {
+    font-family: var(--font-sans); font-size: 10.5px; color: var(--ink-dim);
+    line-height: 1.65; padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(42, 38, 34, 0.12);
+  }
+  .references em { color: var(--ink-soft); font-style: italic; }
+  .references .label {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--coral); margin-right: 0.5rem; font-weight: 500;
+  }
+  .progress-rail {
+    height: 3px; background: rgba(42, 38, 34, 0.08);
+    border-radius: 2px; margin-top: 0.85rem; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; width: calc(14 * 100% / 17);
+    background: var(--coral); border-radius: 2px;
+  }
+
+  /* SLIDE BODY */
+  .slide-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 0;
+    padding: 1.5vh 0 8vh;
+  }
+
+  /* HEADER */
+  .header-zone {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2.5vh;
+  }
+
+  .header-text { flex-grow: 1; max-width: 78%; }
+
+  .zone-eyebrow {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .zone-eyebrow .dot {
+    width: 5px; height: 5px;
+    background: var(--sunshine); border-radius: 50%;
+  }
+
+  .header-title {
+    font-family: var(--font-hand);
+    font-size: clamp(36px, 4.4vw, 60px);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 0.95;
+    margin-bottom: 0.4rem;
+  }
+
+  .header-title .accent {
+    color: var(--coral);
+    position: relative;
+    display: inline-block;
+  }
+
+  .header-title .accent::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 0; right: 0;
+    height: 8px;
+    background: var(--sunshine);
+    opacity: 0.55;
+    z-index: -1;
+    border-radius: 2px;
+    transform: skew(-3deg);
+  }
+
+  .header-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(14px, 1.3vw, 18px);
+    color: var(--ink-soft);
+    line-height: 1.45;
+    max-width: 720px;
+  }
+
+  .narrator-mini { width: 95px; flex-shrink: 0; }
+
+  /* THE FUTURE PATH — vertical road */
+  .future-zone {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1vw;
+    align-items: stretch;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .step-card {
+    position: relative;
+    background: var(--cream);
+    border: 1.5px solid var(--ink);
+    border-radius: 10px;
+    padding: 1rem 1.1rem 1.1rem;
+    box-shadow: 2.5px 3px 0 rgba(42, 38, 34, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .step-card.s1 { border-top: 4px solid var(--coral); transform: rotate(-0.5deg); }
+  .step-card.s2 { border-top: 4px solid var(--sunshine); transform: rotate(0.4deg); }
+  .step-card.s3 { border-top: 4px solid var(--leaf); transform: rotate(-0.3deg); }
+  .step-card.s4 { border-top: 4px solid var(--sky); transform: rotate(0.5deg); }
+  .step-card.s5 { border-top: 4px solid var(--mauve); transform: rotate(-0.4deg); }
+
+  .step-num {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 38px;
+    line-height: 0.85;
+    margin-bottom: 0.2rem;
+    font-variation-settings: "SOFT" 100, "opsz" 144;
+  }
+
+  .step-card.s1 .step-num { color: var(--coral); }
+  .step-card.s2 .step-num { color: #C9A027; }
+  .step-card.s3 .step-num { color: var(--leaf); }
+  .step-card.s4 .step-num { color: var(--sky); }
+  .step-card.s5 .step-num { color: var(--mauve); }
+
+  .step-tag {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    font-weight: 500;
+    margin-bottom: 0.15rem;
+  }
+
+  .step-title {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(14px, 1.3vw, 17px);
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    font-variation-settings: "opsz" 144;
+    margin-bottom: 0.3rem;
+  }
+
+  .step-text {
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+  }
+
+  .step-text em {
+    color: var(--coral-deep);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* "And more in the report" footer */
+  .more-strip {
+    margin-top: 2.5vh;
+    padding: 0.85rem 1.1rem;
+    background: rgba(42, 38, 34, 0.04);
+    border: 1px dashed rgba(42, 38, 34, 0.25);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .more-icon {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--coral);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .more-text {
+    font-family: var(--font-hand);
+    font-size: 17px;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .more-text strong {
+    color: var(--coral-deep);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes popInRot {
+    0% { opacity: 0; transform: scale(0.85) rotate(var(--rot, 0deg)); }
+    70% { transform: scale(1.04) rotate(var(--rot, 0deg)); }
+    100% { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)); }
+  }
+
+  .zone-eyebrow { animation: fadeUp 0.5s 0.2s backwards; }
+  .header-title { animation: fadeUp 0.7s 0.4s backwards; }
+  .header-sub { animation: fadeUp 0.6s 0.6s backwards; }
+  .narrator-mini { animation: fadeUp 0.7s 0.5s backwards; }
+
+  .step-card.s1 { --rot: -0.5deg; animation: popInRot 0.5s 0.9s backwards; }
+  .step-card.s2 { --rot: 0.4deg; animation: popInRot 0.5s 1.05s backwards; }
+  .step-card.s3 { --rot: -0.3deg; animation: popInRot 0.5s 1.2s backwards; }
+  .step-card.s4 { --rot: 0.5deg; animation: popInRot 0.5s 1.35s backwards; }
+  .step-card.s5 { --rot: -0.4deg; animation: popInRot 0.5s 1.5s backwards; }
+  .more-strip { animation: fadeUp 0.5s 1.7s backwards; }
+</style>
+</head>
+<body>
+
+<section class="slide">
+
+  <div class="chrome-top">
+    <div class="section-marker">Future research · what comes next</div>
+    <div class="deck-meta"><span class="current">14</span> / 17 · MixTechBook</div>
+  </div>
+
+  <div class="slide-body">
+
+    <!-- HEADER -->
+    <div class="header-zone">
+      <div class="header-text">
+        <div class="zone-eyebrow">
+          recommendations <span class="dot"></span> from foundation to classroom
+        </div>
+        <h2 class="header-title">
+          What I'd <span class="accent">build next.</span>
+        </h2>
+        <p class="header-sub">
+          This research has built a foundation — evidence, design directions, and a working prototype. Here's what should come after, in order of urgency.
+        </p>
+      </div>
+
+      <!-- Pointing forward narrator -->
+      <div class="narrator-mini">
+        <svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#2A2622" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="110" cy="262" rx="40" ry="4" fill="#2A2622" fill-opacity="0.08" stroke="none"/>
+          <g>
+            <circle cx="78" cy="50" r="8" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="92" cy="40" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="108" cy="36" r="10" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="124" cy="40" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="140" cy="50" r="8" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <path d="M 72 56 Q 66 46 76 42 Q 84 40 86 50" stroke-width="1.2"/>
+            <path d="M 84 44 Q 86 32 100 32 Q 110 34 108 46" stroke-width="1.2"/>
+            <path d="M 106 32 Q 114 22 126 30 Q 132 38 124 46" stroke-width="1.2"/>
+            <path d="M 124 40 Q 140 36 144 50 Q 146 60 136 62" stroke-width="1.2"/>
+          </g>
+          <path d="M 82 72 Q 82 58 110 56 Q 138 58 138 72 Q 138 100 110 112 Q 82 100 82 72 Z" fill="#FFF8EC"/>
+          <!-- determined eyes looking right (toward future) -->
+          <circle cx="98" cy="80" r="2.2" fill="#2A2622"/>
+          <circle cx="126" cy="80" r="2.2" fill="#2A2622"/>
+          <path d="M 91 71 Q 97 67 103 71"/>
+          <path d="M 119 71 Q 125 67 131 71"/>
+          <path d="M 110 87 L 110 93"/>
+          <!-- determined slight smile -->
+          <path d="M 102 100 Q 110 105 118 100" stroke="#C8542A" stroke-width="1.5"/>
+          <ellipse cx="91" cy="97" rx="4" ry="2.5" fill="#FF8FA3" fill-opacity="0.55" stroke="none"/>
+          <ellipse cx="129" cy="97" rx="4" ry="2.5" fill="#FF8FA3" fill-opacity="0.55" stroke="none"/>
+          <path d="M 102 114 L 102 124"/>
+          <path d="M 118 114 L 118 124"/>
+          <!-- frock -->
+          <path d="M 78 128 Q 76 125 80 124 L 102 124 Q 110 130 118 124 L 140 124 Q 144 125 142 128 L 138 162 L 82 162 Z" fill="#FF6B47" stroke="#2A2622"/>
+          <path d="M 82 162 L 60 220 L 160 220 L 138 162 Z" fill="#FF6B47" stroke="#2A2622"/>
+          <line x1="82" y1="162" x2="138" y2="162" stroke="#2A2622" stroke-width="1"/>
+          <circle cx="92" cy="190" r="2.5" fill="#FFC93C" stroke="none"/>
+          <circle cx="118" cy="190" r="2.5" fill="#FFC93C" stroke="none"/>
+          <circle cx="105" cy="208" r="2.5" fill="#FFC93C" stroke="none"/>
+          <path d="M 102 124 Q 110 132 118 124"/>
+          <!-- left arm relaxed -->
+          <path d="M 80 132 Q 68 158 72 188"/>
+          <circle cx="72" cy="192" r="5" fill="#FFF8EC"/>
+          <!-- RIGHT arm extended forward POINTING -->
+          <path d="M 140 132 Q 175 130 198 132"/>
+          <!-- pointing hand with extended index -->
+          <circle cx="200" cy="132" r="5" fill="#FFF8EC"/>
+          <path d="M 205 130 L 220 124" stroke-width="1.8"/>
+          <circle cx="222" cy="123" r="2" fill="#FFF8EC"/>
+          <!-- direction/sparkle markers -->
+          <path d="M 215 116 L 225 113 M 218 110 L 220 119" stroke="#FFC93C" stroke-width="1.4"/>
+          <path d="M 230 130 L 235 133" stroke="#FFC93C" stroke-width="1.3"/>
+          <!-- legs slight forward stride -->
+          <path d="M 92 220 L 88 250"/>
+          <path d="M 100 220 L 100 250"/>
+          <path d="M 118 220 L 122 250"/>
+          <path d="M 126 220 L 132 250"/>
+          <path d="M 88 250 L 100 250"/>
+          <path d="M 122 250 L 132 250"/>
+          <ellipse cx="94" cy="256" rx="10" ry="4" fill="#2A2622" stroke="none"/>
+          <ellipse cx="127" cy="256" rx="10" ry="4" fill="#2A2622" stroke="none"/>
+          <path d="M 89 252 L 99 252" stroke="#FFC93C" stroke-width="1.3"/>
+          <path d="M 122 252 L 132 252" stroke="#FFC93C" stroke-width="1.3"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- THE FIVE FUTURE STEPS -->
+    <div class="future-zone">
+
+      <div class="step-card s1">
+        <span class="step-num">01</span>
+        <span class="step-tag">Most urgent</span>
+        <h3 class="step-title">Test it in a real classroom.</h3>
+        <p class="step-text">Bring the prototype into a Year 9 classroom and run <em>structured trials with students</em>. Move it from early stage prototype to evidence-based tool.</p>
+      </div>
+
+      <div class="step-card s2">
+        <span class="step-num">02</span>
+        <span class="step-tag">Voices missing</span>
+        <h3 class="step-title">Put students at the centre.</h3>
+        <p class="step-text">Year 9 students didn't take part in this research. Future studies should involve them as <em>active participants</em>, not just users.</p>
+      </div>
+
+      <div class="step-card s3">
+        <span class="step-num">03</span>
+        <span class="step-tag">Validation</span>
+        <h3 class="step-title">Curriculum &amp; expert review.</h3>
+        <p class="step-text">Formal evaluation by curriculum specialists and ed-tech experts to <em>fully align</em> with Level 5 achievement objectives.</p>
+      </div>
+
+      <div class="step-card s4">
+        <span class="step-num">04</span>
+        <span class="step-tag">Build it properly</span>
+        <h3 class="step-title">Realise all 5 design directions.</h3>
+        <p class="step-text">A complete prototype that fully addresses <em>all five directions</em> — including ethical review and learner wellbeing for the ~10% who can't use VR.</p>
+      </div>
+
+      <div class="step-card s5">
+        <span class="step-num">05</span>
+        <span class="step-tag">Core obligation</span>
+        <h3 class="step-title">Embed mātauranga Māori.</h3>
+        <p class="step-text">In Aotearoa, this is <em>not optional</em>. Genuine collaboration with Māori educators and knowledge holders, from the earliest design stage.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="chrome-bottom">
+    <div class="references">
+      <span class="label">References</span>
+      Dissanayake, N. L. (2026). Recommendations for Future Research, Chapter 11 — <em>MixTechBook: The Future of Immersive Learning</em>.
+    </div>
+    <div class="progress-rail">
+      <div class="progress-fill"></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ╔════════════════════════════════════════════════════════════════╗
+     ║  DECK NAVIGATION                                                ║
+     ║  Keyboard: ← → arrows · Space · Page Up/Down · Home · End      ║
+     ║  On-screen: prev/next buttons bottom-right                     ║
+     ╚════════════════════════════════════════════════════════════════╝ -->
+<style>
+  /* Navigation widget */
+  .deck-nav {
+    position: fixed;
+    bottom: 14px;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 6px;
+    background: rgba(255, 248, 236, 0.92);
+    border: 1px solid rgba(42, 38, 34, 0.18);
+    border-radius: 22px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(42, 38, 34, 0.08);
+    z-index: 9999;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: #5A524A;
+    transition: opacity 0.3s;
+    user-select: none;
+  }
+  .deck-nav:hover { opacity: 1 !important; }
+  .deck-nav.idle { opacity: 0.35; }
+  .deck-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: #2A2622;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 1;
+  }
+  .deck-nav-btn:hover {
+    background: rgba(255, 107, 71, 0.18);
+  }
+  .deck-nav-btn:active {
+    transform: scale(0.92);
+  }
+  .deck-nav-btn:disabled,
+  .deck-nav-btn[aria-disabled="true"] {
+    opacity: 0.25;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .deck-nav-counter {
+    padding: 0 6px;
+    letter-spacing: 0.06em;
+    color: #5A524A;
+    min-width: 38px;
+    text-align: center;
+  }
+  .deck-nav-counter strong {
+    color: #2A2622;
+    font-weight: 600;
+  }
+  .deck-nav-help {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(42, 38, 34, 0.06);
+    color: #5A524A;
+    font-size: 11px;
+    cursor: help;
+    margin-left: 2px;
+    font-style: italic;
+  }
+  .deck-nav-help:hover {
+    background: rgba(42, 38, 34, 0.12);
+  }
+  /* Hide nav when printing or in minimal-screen mode */
+  @media print {
+    .deck-nav { display: none !important; }
+  }
+</style>
+
+<nav class="deck-nav" aria-label="Slide navigation">
+  <a class="deck-nav-btn" id="deck-nav-prev" href="#" aria-label="Previous slide" title="Previous (←)">‹</a>
+  <span class="deck-nav-counter"><strong id="deck-nav-current">--</strong>/17</span>
+  <a class="deck-nav-btn" id="deck-nav-next" href="#" aria-label="Next slide" title="Next (→ or Space)">›</a>
+  <a class="deck-nav-btn" id="deck-nav-home" href="slide-01.html" aria-label="First slide" title="First slide (Home)" style="font-size:13px;">⌂</a>
+  <span class="deck-nav-help" title="Keyboard: ← → Space · Page Up/Down · Home · End · F11 fullscreen">?</span>
+</nav>
+
+<script>
+(function() {
+  // Detect current slide number from URL
+  const match = window.location.pathname.match(/slide-(\d{2})\.html/);
+  const total = 17;
+  const current = match ? parseInt(match[1], 10) : 1;
+
+  // Update counter
+  const counterEl = document.getElementById('deck-nav-current');
+  if (counterEl) counterEl.textContent = String(current).padStart(2, '0');
+
+  // Build prev/next URLs
+  const padNum = n => String(n).padStart(2, '0');
+  const prevUrl = current > 1 ? `slide-${padNum(current - 1)}.html` : null;
+  const nextUrl = current < total ? `slide-${padNum(current + 1)}.html` : null;
+
+  const prevBtn = document.getElementById('deck-nav-prev');
+  const nextBtn = document.getElementById('deck-nav-next');
+
+  if (prevBtn) {
+    if (prevUrl) {
+      prevBtn.href = prevUrl;
+    } else {
+      prevBtn.setAttribute('aria-disabled', 'true');
+      prevBtn.removeAttribute('href');
+    }
+  }
+
+  if (nextBtn) {
+    if (nextUrl) {
+      nextBtn.href = nextUrl;
+    } else {
+      nextBtn.setAttribute('aria-disabled', 'true');
+      nextBtn.removeAttribute('href');
+    }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    // Don't hijack keys when user is typing in an input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    // Don't hijack when modifier keys held (e.g. Cmd+R for refresh)
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    let dest = null;
+
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'PageDown':
+      case ' ': // spacebar
+        if (nextUrl) dest = nextUrl;
+        break;
+      case 'ArrowLeft':
+      case 'PageUp':
+      case 'Backspace':
+        if (prevUrl) dest = prevUrl;
+        break;
+      case 'Home':
+        dest = 'slide-01.html';
+        break;
+      case 'End':
+        dest = `slide-${padNum(total)}.html`;
+        break;
+    }
+
+    if (dest) {
+      e.preventDefault();
+      window.location.href = dest;
+    }
+  });
+
+  // Auto-fade nav after inactivity, restore on movement
+  const navEl = document.querySelector('.deck-nav');
+  if (navEl) {
+    let idleTimer = null;
+    const setIdle = () => navEl.classList.add('idle');
+    const setActive = () => {
+      navEl.classList.remove('idle');
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(setIdle, 2500);
+    };
+    setActive();
+    document.addEventListener('mousemove', setActive);
+    document.addEventListener('keydown', setActive);
+    document.addEventListener('touchstart', setActive);
+  }
+})();
+</script>
+
+</body>
+</html>

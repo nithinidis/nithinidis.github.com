@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MixTechBook · The Future of Immersive Learning</title>
+<meta name="description" content="Master's research project deck — AR, VR, and 3D simulation for teaching human body systems to Year 9 students in Aotearoa New Zealand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FFF8EC;
+    --cream: #FFFDF8;
+    --ink: #2A2622;
+    --ink-soft: #5A524A;
+    --ink-dim: #8A7F74;
+    --coral: #FF6B47;
+    --coral-deep: #E04D2A;
+    --sunshine: #FFC93C;
+    --sky: #4FB6D8;
+    --leaf: #7BC950;
+    --rose: #FF8FA3;
+    --mauve: #A87FBF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Geist', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: radial-gradient(rgba(42, 38, 34, 0.035) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .container {
+    position: relative;
+    z-index: 2;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 8vh 5vw 6vh;
+  }
+  .eyebrow {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: var(--coral);
+    border-radius: 2px;
+  }
+  h1 {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 0.95;
+    margin-bottom: 0.6rem;
+  }
+  h1 .accent {
+    color: var(--coral);
+    position: relative;
+    display: inline-block;
+  }
+  h1 .accent::after {
+    content: '';
+    position: absolute;
+    bottom: 4px; left: 0; right: 0;
+    height: 11px;
+    background: var(--sunshine);
+    opacity: 0.55;
+    z-index: -1;
+    border-radius: 3px;
+    transform: skew(-3deg);
+  }
+  .subtitle {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(16px, 1.6vw, 22px);
+    color: var(--ink-soft);
+    line-height: 1.45;
+    max-width: 720px;
+    margin-bottom: 2.5rem;
+    font-variation-settings: "SOFT" 60, "opsz" 144;
+  }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+  .meta-chip {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 5px 10px;
+    background: var(--cream);
+    border: 1px solid var(--ink);
+    border-radius: 4px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .meta-chip strong {
+    color: var(--coral);
+    font-weight: 600;
+    margin-right: 4px;
+  }
+  .start-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 28px;
+    background: var(--coral);
+    color: var(--cream);
+    border: 1.5px solid var(--ink);
+    border-radius: 50px;
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 3px 4px 0 rgba(42, 38, 34, 0.12);
+    transition: transform 0.15s, box-shadow 0.15s;
+    margin-bottom: 4rem;
+  }
+  .start-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 3px 6px 0 rgba(42, 38, 34, 0.18);
+  }
+  .start-cta:active {
+    transform: translateY(0);
+    box-shadow: 2px 2px 0 rgba(42, 38, 34, 0.12);
+  }
+  .start-cta .arrow {
+    color: var(--sunshine);
+    font-size: 26px;
+  }
+  .section-h {
+    font-family: 'Caveat', cursive;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .section-h .accent { color: var(--coral); }
+  .slide-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.85rem;
+    margin-bottom: 3rem;
+  }
+  .slide-link {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem 1rem;
+    background: var(--cream);
+    border: 1.5px solid var(--ink);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--ink);
+    box-shadow: 2px 2px 0 rgba(42, 38, 34, 0.06);
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  }
+  .slide-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 2px 4px 0 rgba(42, 38, 34, 0.1);
+    background: rgba(255, 107, 71, 0.04);
+  }
+  .slide-num {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 0.85;
+    color: var(--coral);
+    width: 36px;
+    text-align: center;
+    flex-shrink: 0;
+    font-variation-settings: "SOFT" 100, "opsz" 144;
+  }
+  .slide-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .slide-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 14.5px;
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .slide-section {
+    font-family: 'Geist Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    font-weight: 500;
+    margin-top: 1px;
+  }
+  .helper {
+    background: var(--cream);
+    border: 1.5px dashed rgba(42, 38, 34, 0.25);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    margin-bottom: 2rem;
+  }
+  .helper strong { color: var(--ink); font-weight: 500; }
+  .helper kbd {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--paper);
+    border: 1px solid var(--ink-dim);
+    border-radius: 4px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--ink);
+    margin: 0 1px;
+    box-shadow: 0 1px 0 rgba(42, 38, 34, 0.1);
+  }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(42, 38, 34, 0.12);
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-dim);
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="eyebrow">Master's research presentation · AcademyEX MTFC9890</div>
+
+  <h1>
+    MixTechBook<br>
+    <span class="accent">The Future of Immersive Learning</span>
+  </h1>
+
+  <p class="subtitle">
+    A research deck exploring how AR, VR, and 3D simulation technologies can be used to teach human body systems to Year 9 students, in alignment with Level 5 of the New Zealand Science Curriculum.
+  </p>
+
+  <div class="meta-row">
+    <span class="meta-chip"><strong>By</strong>Nithin Lanka Dissanayake</span>
+    <span class="meta-chip"><strong>Module</strong>MTFC9890 · Level 9</span>
+    <span class="meta-chip"><strong>Format</strong>17 slides · ~30 min</span>
+    <span class="meta-chip"><strong>Year</strong>2026</span>
+  </div>
+
+  <a class="start-cta" href="slide-01.html">
+    Start the presentation
+    <span class="arrow">→</span>
+  </a>
+
+  <div class="helper">
+    <strong>How to navigate:</strong>
+    Press <kbd>→</kbd> or <kbd>Space</kbd> for next slide ·
+    <kbd>←</kbd> for previous ·
+    <kbd>Home</kbd> / <kbd>End</kbd> to jump to first/last ·
+    <kbd>F11</kbd> for fullscreen.
+    On-screen prev/next buttons in the bottom-right of every slide.
+  </div>
+
+  <h2 class="section-h">All <span class="accent">17 slides</span> ·</h2>
+
+  <div class="slide-grid">
+
+    <a class="slide-link" href="slide-01.html">
+      <div class="slide-num">01</div>
+      <div class="slide-info">
+        <div class="slide-title">Title</div>
+        <div class="slide-section">opening</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-02.html">
+      <div class="slide-num">02</div>
+      <div class="slide-info">
+        <div class="slide-title">Research Question</div>
+        <div class="slide-section">today vs tomorrow</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-03.html">
+      <div class="slide-num">03</div>
+      <div class="slide-info">
+        <div class="slide-title">Research Objective</div>
+        <div class="slide-section">purpose · aim</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-04.html">
+      <div class="slide-num">04</div>
+      <div class="slide-info">
+        <div class="slide-title">About me · Nithini</div>
+        <div class="slide-section">researcher · context</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-05.html">
+      <div class="slide-num">05</div>
+      <div class="slide-info">
+        <div class="slide-title">MixTechBook origin</div>
+        <div class="slide-section">why this project</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-06.html">
+      <div class="slide-num">06</div>
+      <div class="slide-info">
+        <div class="slide-title">Three technologies</div>
+        <div class="slide-section">AR · VR · 3D simulation</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-07.html">
+      <div class="slide-num">07</div>
+      <div class="slide-info">
+        <div class="slide-title">Other technologies</div>
+        <div class="slide-section">AI · XR · MR</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-08.html">
+      <div class="slide-num">08</div>
+      <div class="slide-info">
+        <div class="slide-title">Why science is hard</div>
+        <div class="slide-section">the challenge</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-09.html">
+      <div class="slide-num">09</div>
+      <div class="slide-info">
+        <div class="slide-title">Methodology</div>
+        <div class="slide-section">method · how I went about it</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-10.html">
+      <div class="slide-num">10</div>
+      <div class="slide-info">
+        <div class="slide-title">Thematic analysis</div>
+        <div class="slide-section">live demo · github</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-11.html">
+      <div class="slide-num">11</div>
+      <div class="slide-info">
+        <div class="slide-title">Findings + Discussion</div>
+        <div class="slide-section">overview</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-12.html">
+      <div class="slide-num">12</div>
+      <div class="slide-info">
+        <div class="slide-title">Insights gained</div>
+        <div class="slide-section">9 themes + 5 directions</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-13.html">
+      <div class="slide-num">13</div>
+      <div class="slide-info">
+        <div class="slide-title">The prototype</div>
+        <div class="slide-section">live in your hands</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-14.html">
+      <div class="slide-num">14</div>
+      <div class="slide-info">
+        <div class="slide-title">Future research</div>
+        <div class="slide-section">what comes next</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-15.html">
+      <div class="slide-num">15</div>
+      <div class="slide-info">
+        <div class="slide-title">Conclusion</div>
+        <div class="slide-section">question by question</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-16.html">
+      <div class="slide-num">16</div>
+      <div class="slide-info">
+        <div class="slide-title">Learning outcomes</div>
+        <div class="slide-section">reflection</div>
+      </div>
+    </a>
+
+    <a class="slide-link" href="slide-17.html">
+      <div class="slide-num">17</div>
+      <div class="slide-info">
+        <div class="slide-title">References &amp; Thank you</div>
+        <div class="slide-section">Q&amp;A · the floor is yours</div>
+      </div>
+    </a>
+
+  </div>
+
+  <footer>
+    Built for AcademyEX · MTFC9890 · Technological Futures Project
+  </footer>
+
+</div>
+
+</body>
+</html>

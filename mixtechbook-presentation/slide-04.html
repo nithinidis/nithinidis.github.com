@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MixTechBook · Slide 4 · About Me</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FFF8EC;
+    --paper-deep: #FBEFD4;
+    --cream: #FFFDF8;
+    --ink: #2A2622;
+    --ink-soft: #5A524A;
+    --ink-dim: #8A7F74;
+    --coral: #FF6B47;
+    --coral-deep: #E04D2A;
+    --sunshine: #FFC93C;
+    --sky: #4FB6D8;
+    --leaf: #7BC950;
+    --rose: #FF8FA3;
+    --font-serif: 'Fraunces', Georgia, serif;
+    --font-sans: 'Geist', -apple-system, sans-serif;
+    --font-mono: 'Geist Mono', monospace;
+    --font-hand: 'Caveat', cursive;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100vh;
+    overflow: hidden;
+    background: var(--paper); color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: radial-gradient(rgba(42, 38, 34, 0.035) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none; z-index: 1;
+  }
+  .slide {
+    position: relative;
+    width: 100vw; height: 100vh;
+    padding: 3.5vh 5vw 6vh;
+    display: flex; flex-direction: column;
+    z-index: 2;
+  }
+
+  /* ============= CHROME ============= */
+  .chrome-top {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-shrink: 0; height: 36px;
+  }
+  .section-marker {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--coral); letter-spacing: 0.18em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px; font-weight: 500;
+  }
+  .section-marker::before {
+    content: ''; width: 24px; height: 2px;
+    background: var(--coral); border-radius: 2px;
+  }
+  .deck-meta {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--ink-dim); letter-spacing: 0.12em;
+  }
+  .deck-meta .current { color: var(--ink); font-weight: 500; }
+  .chrome-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 0 5vw 1.75vh; z-index: 10;
+  }
+  .references {
+    font-family: var(--font-sans); font-size: 10.5px;
+    color: var(--ink-dim); line-height: 1.5;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(42, 38, 34, 0.12);
+  }
+  .references .label {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--coral); margin-right: 0.5rem; font-weight: 500;
+  }
+  .progress-rail {
+    height: 3px; background: rgba(42, 38, 34, 0.08);
+    border-radius: 2px; margin-top: 0.85rem; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; width: calc(4 * 100% / 17);
+    background: var(--coral); border-radius: 2px;
+  }
+
+  /* ============= SLIDE 4 LAYOUT ============= */
+
+  .slide-body {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4vw;
+    align-items: center;
+    min-height: 0;
+    padding: 1vh 0 4vh;
+  }
+
+  /* LEFT: greeting + character */
+  .me-zone {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .greeting-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .greeting-eyebrow .dot {
+    width: 5px; height: 5px;
+    background: var(--sunshine);
+    border-radius: 50%;
+  }
+
+  .greeting-headline {
+    font-family: var(--font-hand);
+    font-size: clamp(58px, 7vw, 96px);
+    font-weight: 600;
+    color: var(--coral);
+    line-height: 0.95;
+    letter-spacing: 0.005em;
+    margin-bottom: 0.5rem;
+    position: relative;
+    display: inline-block;
+  }
+
+  .greeting-name {
+    color: var(--ink);
+    position: relative;
+    display: inline-block;
+  }
+
+  .greeting-name::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--sunshine);
+    opacity: 0.6;
+    z-index: -1;
+    border-radius: 3px;
+    transform: skew(-3deg);
+  }
+
+  .greeting-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(18px, 1.8vw, 24px);
+    color: var(--ink-soft);
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .greeting-tagline {
+    font-family: var(--font-hand);
+    font-size: clamp(22px, 2vw, 30px);
+    color: var(--coral-deep);
+    line-height: 1.2;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    max-width: 420px;
+  }
+
+  .heart-emoji {
+    display: inline-block;
+    color: var(--rose);
+    margin: 0 2px;
+  }
+
+  /* RIGHT: post-it labels stage with character */
+  .stage-zone {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .character-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    height: 100%;
+    max-height: 70vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .character-svg {
+    width: 75%;
+    max-width: 280px;
+    height: auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* POST-IT NOTES around character */
+  .postit {
+    position: absolute;
+    background: var(--cream);
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+    padding: 14px 18px;
+    box-shadow: 3px 3px 0 rgba(42, 38, 34, 0.12);
+    font-family: var(--font-sans);
+    z-index: 3;
+    min-width: 145px;
+    max-width: 200px;
+  }
+
+  .postit .pin-icon {
+    font-size: 16px;
+    line-height: 1;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .postit .pin-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .postit .pin-value {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .postit-1 {
+    top: 4%;
+    left: -8%;
+    background: #FFF1D6;
+    transform: rotate(-3deg);
+  }
+  .postit-2 {
+    top: 6%;
+    right: -2%;
+    background: #FFE4DC;
+    transform: rotate(2.5deg);
+  }
+  .postit-3 {
+    top: 38%;
+    left: -14%;
+    background: #DFF5D9;
+    transform: rotate(-2deg);
+  }
+  .postit-4 {
+    top: 42%;
+    right: -8%;
+    background: #DCEEF7;
+    transform: rotate(3deg);
+  }
+  .postit-5 {
+    bottom: 8%;
+    left: 12%;
+    background: #FFE4DC;
+    transform: rotate(-2deg);
+    background: var(--coral);
+    color: var(--cream);
+  }
+  .postit-5 .pin-label {
+    color: rgba(255, 253, 248, 0.75);
+  }
+  .postit-5 .pin-value {
+    color: var(--cream);
+  }
+
+  /* NZ silhouette decoration */
+  .nz-silhouette {
+    position: absolute;
+    bottom: 6%;
+    right: 4%;
+    width: 90px;
+    z-index: 1;
+    opacity: 0.85;
+  }
+
+  /* Floating fern decoration */
+  .fern-deco {
+    position: absolute;
+    z-index: 1;
+  }
+  .fern-1 {
+    top: 12%;
+    right: 14%;
+    width: 60px;
+    transform: rotate(15deg);
+  }
+  .fern-2 {
+    bottom: 22%;
+    left: 8%;
+    width: 50px;
+    transform: rotate(-25deg);
+  }
+
+  /* Floating sparkles */
+  .spark {
+    position: absolute;
+    z-index: 1;
+  }
+  .spark-1 { top: 28%; right: 32%; }
+  .spark-2 { bottom: 32%; right: 38%; }
+
+  /* ============= ANIMATIONS ============= */
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0.6) rotate(var(--rot, 0deg)); }
+    70% { transform: scale(1.05) rotate(var(--rot, 0deg)); }
+    100% { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+    50% { transform: translateY(-5px) rotate(var(--rot, 0deg)); }
+  }
+
+  @keyframes drawLine {
+    from { stroke-dashoffset: 100%; }
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes wiggleHeart {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.2) rotate(-8deg); }
+    75% { transform: scale(1.2) rotate(8deg); }
+  }
+
+  .greeting-eyebrow { animation: fadeUp 0.6s 0.2s backwards; }
+  .greeting-headline { animation: fadeUp 0.8s 0.4s backwards; }
+  .greeting-sub { animation: fadeUp 0.7s 0.7s backwards; }
+  .greeting-tagline { animation: fadeUp 0.7s 1s backwards; }
+  .character-wrap { animation: fadeUp 0.9s 0.6s backwards; }
+
+  .postit-1 { --rot: -3deg; animation: popIn 0.5s 1.2s backwards; }
+  .postit-2 { --rot: 2.5deg; animation: popIn 0.5s 1.4s backwards; }
+  .postit-3 { --rot: -2deg; animation: popIn 0.5s 1.6s backwards; }
+  .postit-4 { --rot: 3deg; animation: popIn 0.5s 1.8s backwards; }
+  .postit-5 { --rot: -2deg; animation: popIn 0.5s 2.0s backwards; }
+
+  .heart-emoji { animation: wiggleHeart 1.5s 1.5s ease-in-out 3; display: inline-block; }
+  .nz-silhouette { animation: fadeUp 0.8s 1.5s backwards; }
+  .fern-1, .fern-2 { animation: fadeUp 0.6s 1.7s backwards; }
+  .spark-1, .spark-2 { animation: fadeUp 0.5s 1.9s backwards; }
+
+</style>
+</head>
+<body>
+
+<section class="slide">
+
+  <!-- Top chrome -->
+  <div class="chrome-top">
+    <div class="section-marker">Researcher · context</div>
+    <div class="deck-meta"><span class="current">04</span> / 17 · MixTechBook</div>
+  </div>
+
+  <!-- Main body -->
+  <div class="slide-body">
+
+    <!-- LEFT: greeting -->
+    <div class="me-zone">
+
+      <div class="greeting-eyebrow">
+        before we go further <span class="dot"></span> meet the researcher
+      </div>
+
+      <h1 class="greeting-headline">
+        Hi, I'm <span class="greeting-name">Nithini</span>!
+      </h1>
+
+      <p class="greeting-sub">
+        Technical Writer by day. Tech researcher in every spare hour.
+      </p>
+
+      <p class="greeting-tagline">
+        Research with tech is my job <span class="heart-emoji">❤</span> AND my passion.<br>
+        So this project? It's the most natural thing I could do.
+      </p>
+
+    </div>
+
+    <!-- RIGHT: character + post-its -->
+    <div class="stage-zone">
+      <div class="character-wrap">
+
+        <!-- Decorative ferns -->
+        <svg class="fern-deco fern-1" viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#7BC950" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 30 75 Q 32 50 38 28 Q 42 14 36 4"/>
+          <!-- leaflets -->
+          <path d="M 32 65 Q 22 60 18 55"/>
+          <path d="M 32 60 Q 42 56 48 52"/>
+          <path d="M 33 55 Q 23 50 18 44"/>
+          <path d="M 34 50 Q 44 46 50 40"/>
+          <path d="M 35 45 Q 26 40 22 34"/>
+          <path d="M 36 40 Q 45 36 50 30"/>
+          <path d="M 37 35 Q 30 30 28 22"/>
+          <path d="M 38 30 Q 44 26 47 20"/>
+        </svg>
+
+        <svg class="fern-deco fern-2" viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#7BC950" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 30 75 Q 32 50 38 28 Q 42 14 36 4"/>
+          <path d="M 32 65 Q 22 60 18 55"/>
+          <path d="M 32 60 Q 42 56 48 52"/>
+          <path d="M 33 55 Q 23 50 18 44"/>
+          <path d="M 34 50 Q 44 46 50 40"/>
+          <path d="M 35 45 Q 26 40 22 34"/>
+          <path d="M 36 40 Q 45 36 50 30"/>
+        </svg>
+
+        <!-- Sparkles -->
+        <svg class="spark spark-1" width="20" height="20" viewBox="0 0 20 20">
+          <path d="M 10 2 L 11 8 L 17 9 L 11 11 L 10 18 L 9 11 L 3 9 L 9 8 Z" fill="#FFC93C" stroke="#2A2622" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+        <svg class="spark spark-2" width="16" height="16" viewBox="0 0 16 16">
+          <path d="M 8 2 L 9 6 L 13 7 L 9 9 L 8 14 L 7 9 L 3 7 L 7 6 Z" fill="#FF8FA3" stroke="#2A2622" stroke-width="1" stroke-linejoin="round"/>
+        </svg>
+
+        <!-- POST-IT NOTES -->
+
+        <div class="postit postit-1">
+          <span class="pin-icon">📍</span>
+          <div class="pin-label">Where</div>
+          <div class="pin-value">Auckland, NZ<br><em style="font-size:14px;color:var(--ink-soft);">1.5 years &amp; counting</em></div>
+        </div>
+
+        <div class="postit postit-2">
+          <span class="pin-icon">🎓</span>
+          <div class="pin-label">Studying</div>
+          <div class="pin-value">Master's at AcademyEX</div>
+        </div>
+
+        <div class="postit postit-3">
+          <span class="pin-icon">💼</span>
+          <div class="pin-label">By day</div>
+          <div class="pin-value">Technical Writer<br><em style="font-size:14px;color:var(--ink-soft);">Watercare, Auckland</em></div>
+        </div>
+
+        <div class="postit postit-4">
+          <span class="pin-icon">🛠️</span>
+          <div class="pin-label">My remit</div>
+          <div class="pin-value">Tech-led training<br>&amp; control docs</div>
+        </div>
+
+        <div class="postit postit-5">
+          <span class="pin-icon">✨</span>
+          <div class="pin-label">Always</div>
+          <div class="pin-value">Researching<br>with technology</div>
+        </div>
+
+        <!-- NZ Silhouette decoration -->
+        <svg class="nz-silhouette" viewBox="0 0 90 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- North Island -->
+          <path d="M 35 8 Q 42 4 48 10 Q 55 14 58 22 Q 62 28 60 35 Q 58 42 52 45 Q 48 50 50 56 Q 52 62 48 66 Q 42 70 36 66 Q 32 60 30 54 Q 28 48 32 42 Q 36 36 34 28 Q 32 20 35 8 Z"
+                fill="#7BC950" fill-opacity="0.85" stroke="#2A2622" stroke-width="1.3"/>
+          <!-- South Island -->
+          <path d="M 25 70 Q 30 68 36 72 Q 42 76 44 82 Q 48 92 44 102 Q 40 112 32 118 Q 24 122 18 118 Q 12 112 14 104 Q 16 94 20 86 Q 22 78 25 70 Z"
+                fill="#7BC950" fill-opacity="0.85" stroke="#2A2622" stroke-width="1.3"/>
+          <!-- Auckland marker -->
+          <circle cx="44" cy="22" r="3.5" fill="#FF6B47" stroke="#2A2622" stroke-width="1.3"/>
+          <text x="50" y="22" font-family="Caveat, cursive" font-size="13" fill="#2A2622" font-weight="600">Auckland</text>
+          <text x="50" y="33" font-family="Caveat, cursive" font-size="11" fill="#FF6B47" font-style="italic">— me, here</text>
+        </svg>
+
+        <!-- THE CHARACTER - Confident pose, hands on hips -->
+        <svg class="character-svg" viewBox="0 0 280 360" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#2A2622" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+
+          <!-- ground shadow -->
+          <ellipse cx="140" cy="335" rx="62" ry="6" fill="#2A2622" fill-opacity="0.1" stroke="none"/>
+
+          <!-- HAIR -->
+          <g>
+            <circle cx="100" cy="58" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="116" cy="48" r="10" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="134" cy="42" r="11" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="152" cy="44" r="10" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="168" cy="52" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="90" cy="80" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="180" cy="74" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <path d="M 93 67 Q 86 56 96 50 Q 104 48 106 59"/>
+            <path d="M 104 52 Q 108 40 123 40 Q 134 42 132 56"/>
+            <path d="M 130 40 Q 140 30 153 36 Q 160 44 152 54"/>
+            <path d="M 152 44 Q 170 42 174 58 Q 176 68 164 70"/>
+            <path d="M 170 62 Q 182 66 178 82"/>
+            <path d="M 86 70 Q 76 76 80 90"/>
+            <path d="M 100 70 Q 96 74 99 78 Q 103 80 102 76" stroke-width="1.2"/>
+            <path d="M 116 54 Q 112 58 115 62 Q 119 64 118 60" stroke-width="1.2"/>
+            <path d="M 138 50 Q 135 54 138 58 Q 142 60 141 56" stroke-width="1.2"/>
+            <path d="M 156 54 Q 153 58 156 62 Q 160 64 159 60" stroke-width="1.2"/>
+            <path d="M 168 72 Q 165 76 168 80 Q 172 82 171 78" stroke-width="1.2"/>
+            <path d="M 86 102 Q 80 112 84 126 Q 90 132 94 128"/>
+            <path d="M 182 102 Q 188 112 184 126 Q 178 132 174 128"/>
+          </g>
+
+          <!-- FACE -->
+          <path d="M 102 84 Q 102 68 136 66 Q 170 68 170 84 Q 170 116 136 128 Q 102 116 102 84 Z" fill="#FFF8EC"/>
+
+          <!-- confident eyes -->
+          <path d="M 116 92 Q 122 88 128 92" stroke-width="2"/>
+          <path d="M 144 92 Q 150 88 156 92" stroke-width="2"/>
+
+          <!-- brows -->
+          <path d="M 113 82 Q 122 79 130 82"/>
+          <path d="M 142 82 Q 151 79 159 82"/>
+
+          <!-- lashes -->
+          <path d="M 116 89 L 114 85" stroke-width="1.1"/>
+          <path d="M 128 89 L 130 85" stroke-width="1.1"/>
+          <path d="M 144 89 L 142 85" stroke-width="1.1"/>
+          <path d="M 156 89 L 158 85" stroke-width="1.1"/>
+
+          <!-- nose -->
+          <path d="M 136 101 L 136 108" stroke-width="1.3"/>
+
+          <!-- confident smirk smile -->
+          <path d="M 124 116 Q 136 122 148 116" stroke="#C8542A" stroke-width="1.8"/>
+
+          <!-- blush -->
+          <ellipse cx="114" cy="112" rx="6" ry="3.5" fill="#FF8FA3" fill-opacity="0.55" stroke="none"/>
+          <ellipse cx="158" cy="112" rx="6" ry="3.5" fill="#FF8FA3" fill-opacity="0.55" stroke="none"/>
+
+          <!-- neck -->
+          <path d="M 128 130 L 128 142"/>
+          <path d="M 144 130 L 144 142"/>
+
+          <!-- FROCK bodice -->
+          <path d="M 104 146 Q 102 143 106 142 L 128 142 Q 136 148 144 142 L 166 142 Q 170 143 168 146 L 164 184 L 108 184 Z" fill="#FF6B47" stroke="#2A2622"/>
+
+          <!-- FROCK skirt -->
+          <path d="M 108 184 L 78 268 L 194 268 L 164 184 Z" fill="#FF6B47" stroke="#2A2622"/>
+
+          <!-- waist seam -->
+          <line x1="108" y1="184" x2="164" y2="184" stroke="#2A2622" stroke-width="1"/>
+
+          <!-- dot pattern -->
+          <circle cx="104" cy="216" r="3" fill="#FFC93C" stroke="none"/>
+          <circle cx="130" cy="222" r="3" fill="#FFC93C" stroke="none"/>
+          <circle cx="156" cy="216" r="3" fill="#FFC93C" stroke="none"/>
+          <circle cx="116" cy="240" r="3" fill="#FFC93C" stroke="none"/>
+          <circle cx="142" cy="246" r="3" fill="#FFC93C" stroke="none"/>
+          <circle cx="168" cy="240" r="3" fill="#FFC93C" stroke="none"/>
+          <circle cx="92" cy="246" r="3" fill="#FFC93C" stroke="none"/>
+          <circle cx="180" cy="252" r="3" fill="#FFC93C" stroke="none"/>
+
+          <!-- collar -->
+          <path d="M 128 142 Q 136 152 144 142" stroke="#2A2622"/>
+
+          <!-- LEFT arm (her left, viewer's right) BENT, hand on hip -->
+          <path d="M 166 152 Q 192 168 180 188"/>
+          <!-- hand on hip area -->
+          <path d="M 180 188 Q 168 188 166 184"/>
+          <circle cx="167" cy="186" r="5" fill="#FFF8EC"/>
+
+          <!-- RIGHT arm (her right, viewer's left) BENT, hand on hip -->
+          <path d="M 106 152 Q 80 168 92 188"/>
+          <path d="M 92 188 Q 104 188 106 184"/>
+          <circle cx="105" cy="186" r="5" fill="#FFF8EC"/>
+
+          <!-- LEGS -->
+          <path d="M 118 268 L 114 322"/>
+          <path d="M 128 268 L 130 322"/>
+          <path d="M 146 268 L 148 322"/>
+          <path d="M 156 268 L 160 322"/>
+          <path d="M 114 322 L 130 322"/>
+          <path d="M 148 322 L 160 322"/>
+
+          <!-- shoes -->
+          <ellipse cx="122" cy="330" rx="13" ry="5" fill="#2A2622" stroke="none"/>
+          <ellipse cx="154" cy="330" rx="13" ry="5" fill="#2A2622" stroke="none"/>
+          <path d="M 116 325 L 128 325" stroke="#FFC93C" stroke-width="1.5"/>
+          <path d="M 148 325 L 160 325" stroke="#FFC93C" stroke-width="1.5"/>
+
+        </svg>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom chrome -->
+  <div class="chrome-bottom">
+    <div class="references">
+      <span class="label">References</span>
+      Dissanayake, N. L. (2026). Researcher Positionality, §1.9 — <em>MixTechBook: The Future of Immersive Learning</em>.
+    </div>
+    <div class="progress-rail">
+      <div class="progress-fill"></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ╔════════════════════════════════════════════════════════════════╗
+     ║  DECK NAVIGATION                                                ║
+     ║  Keyboard: ← → arrows · Space · Page Up/Down · Home · End      ║
+     ║  On-screen: prev/next buttons bottom-right                     ║
+     ╚════════════════════════════════════════════════════════════════╝ -->
+<style>
+  /* Navigation widget */
+  .deck-nav {
+    position: fixed;
+    bottom: 14px;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 6px;
+    background: rgba(255, 248, 236, 0.92);
+    border: 1px solid rgba(42, 38, 34, 0.18);
+    border-radius: 22px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(42, 38, 34, 0.08);
+    z-index: 9999;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: #5A524A;
+    transition: opacity 0.3s;
+    user-select: none;
+  }
+  .deck-nav:hover { opacity: 1 !important; }
+  .deck-nav.idle { opacity: 0.35; }
+  .deck-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: #2A2622;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 1;
+  }
+  .deck-nav-btn:hover {
+    background: rgba(255, 107, 71, 0.18);
+  }
+  .deck-nav-btn:active {
+    transform: scale(0.92);
+  }
+  .deck-nav-btn:disabled,
+  .deck-nav-btn[aria-disabled="true"] {
+    opacity: 0.25;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .deck-nav-counter {
+    padding: 0 6px;
+    letter-spacing: 0.06em;
+    color: #5A524A;
+    min-width: 38px;
+    text-align: center;
+  }
+  .deck-nav-counter strong {
+    color: #2A2622;
+    font-weight: 600;
+  }
+  .deck-nav-help {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(42, 38, 34, 0.06);
+    color: #5A524A;
+    font-size: 11px;
+    cursor: help;
+    margin-left: 2px;
+    font-style: italic;
+  }
+  .deck-nav-help:hover {
+    background: rgba(42, 38, 34, 0.12);
+  }
+  /* Hide nav when printing or in minimal-screen mode */
+  @media print {
+    .deck-nav { display: none !important; }
+  }
+</style>
+
+<nav class="deck-nav" aria-label="Slide navigation">
+  <a class="deck-nav-btn" id="deck-nav-prev" href="#" aria-label="Previous slide" title="Previous (←)">‹</a>
+  <span class="deck-nav-counter"><strong id="deck-nav-current">--</strong>/17</span>
+  <a class="deck-nav-btn" id="deck-nav-next" href="#" aria-label="Next slide" title="Next (→ or Space)">›</a>
+  <a class="deck-nav-btn" id="deck-nav-home" href="slide-01.html" aria-label="First slide" title="First slide (Home)" style="font-size:13px;">⌂</a>
+  <span class="deck-nav-help" title="Keyboard: ← → Space · Page Up/Down · Home · End · F11 fullscreen">?</span>
+</nav>
+
+<script>
+(function() {
+  // Detect current slide number from URL
+  const match = window.location.pathname.match(/slide-(\d{2})\.html/);
+  const total = 17;
+  const current = match ? parseInt(match[1], 10) : 1;
+
+  // Update counter
+  const counterEl = document.getElementById('deck-nav-current');
+  if (counterEl) counterEl.textContent = String(current).padStart(2, '0');
+
+  // Build prev/next URLs
+  const padNum = n => String(n).padStart(2, '0');
+  const prevUrl = current > 1 ? `slide-${padNum(current - 1)}.html` : null;
+  const nextUrl = current < total ? `slide-${padNum(current + 1)}.html` : null;
+
+  const prevBtn = document.getElementById('deck-nav-prev');
+  const nextBtn = document.getElementById('deck-nav-next');
+
+  if (prevBtn) {
+    if (prevUrl) {
+      prevBtn.href = prevUrl;
+    } else {
+      prevBtn.setAttribute('aria-disabled', 'true');
+      prevBtn.removeAttribute('href');
+    }
+  }
+
+  if (nextBtn) {
+    if (nextUrl) {
+      nextBtn.href = nextUrl;
+    } else {
+      nextBtn.setAttribute('aria-disabled', 'true');
+      nextBtn.removeAttribute('href');
+    }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    // Don't hijack keys when user is typing in an input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    // Don't hijack when modifier keys held (e.g. Cmd+R for refresh)
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    let dest = null;
+
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'PageDown':
+      case ' ': // spacebar
+        if (nextUrl) dest = nextUrl;
+        break;
+      case 'ArrowLeft':
+      case 'PageUp':
+      case 'Backspace':
+        if (prevUrl) dest = prevUrl;
+        break;
+      case 'Home':
+        dest = 'slide-01.html';
+        break;
+      case 'End':
+        dest = `slide-${padNum(total)}.html`;
+        break;
+    }
+
+    if (dest) {
+      e.preventDefault();
+      window.location.href = dest;
+    }
+  });
+
+  // Auto-fade nav after inactivity, restore on movement
+  const navEl = document.querySelector('.deck-nav');
+  if (navEl) {
+    let idleTimer = null;
+    const setIdle = () => navEl.classList.add('idle');
+    const setActive = () => {
+      navEl.classList.remove('idle');
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(setIdle, 2500);
+    };
+    setActive();
+    document.addEventListener('mousemove', setActive);
+    document.addEventListener('keydown', setActive);
+    document.addEventListener('touchstart', setActive);
+  }
+})();
+</script>
+
+</body>
+</html>

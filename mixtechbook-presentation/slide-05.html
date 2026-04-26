@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MixTechBook · Slide 5 · The Origin Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FFF8EC;
+    --paper-deep: #FBEFD4;
+    --cream: #FFFDF8;
+    --ink: #2A2622;
+    --ink-soft: #5A524A;
+    --ink-dim: #8A7F74;
+    --coral: #FF6B47;
+    --coral-deep: #E04D2A;
+    --sunshine: #FFC93C;
+    --sky: #4FB6D8;
+    --leaf: #7BC950;
+    --rose: #FF8FA3;
+    --font-serif: 'Fraunces', Georgia, serif;
+    --font-sans: 'Geist', -apple-system, sans-serif;
+    --font-mono: 'Geist Mono', monospace;
+    --font-hand: 'Caveat', cursive;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100vh;
+    overflow: hidden;
+    background: var(--paper); color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: radial-gradient(rgba(42, 38, 34, 0.035) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none; z-index: 1;
+  }
+  .slide {
+    position: relative; width: 100vw; height: 100vh;
+    padding: 3.5vh 5vw 6vh;
+    display: flex; flex-direction: column; z-index: 2;
+  }
+
+  /* ============= CHROME ============= */
+  .chrome-top {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-shrink: 0; height: 36px;
+  }
+  .section-marker {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--coral); letter-spacing: 0.18em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px; font-weight: 500;
+  }
+  .section-marker::before {
+    content: ''; width: 24px; height: 2px;
+    background: var(--coral); border-radius: 2px;
+  }
+  .deck-meta {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--ink-dim); letter-spacing: 0.12em;
+  }
+  .deck-meta .current { color: var(--ink); font-weight: 500; }
+  .chrome-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 0 5vw 1.75vh; z-index: 10;
+  }
+  .references {
+    font-family: var(--font-sans); font-size: 10.5px; color: var(--ink-dim);
+    line-height: 1.5; padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(42, 38, 34, 0.12);
+  }
+  .references .label {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--coral); margin-right: 0.5rem; font-weight: 500;
+  }
+  .progress-rail {
+    height: 3px; background: rgba(42, 38, 34, 0.08);
+    border-radius: 2px; margin-top: 0.85rem; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; width: calc(5 * 100% / 17);
+    background: var(--coral); border-radius: 2px;
+  }
+
+  /* ============= SLIDE 5 LAYOUT ============= */
+
+  .slide-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding-bottom: 4vh;
+  }
+
+  /* Header zone */
+  .header-zone {
+    margin-top: 2vh;
+    margin-bottom: 3vh;
+    display: flex;
+    align-items: flex-end;
+    gap: 2rem;
+  }
+
+  .header-text {
+    flex-grow: 1;
+  }
+
+  .zone-eyebrow {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .zone-eyebrow .dot {
+    width: 5px; height: 5px;
+    background: var(--sunshine); border-radius: 50%;
+  }
+
+  .header-title {
+    font-family: var(--font-hand);
+    font-size: clamp(40px, 4.5vw, 64px);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: 0.005em;
+    margin-bottom: 0.5rem;
+  }
+
+  .header-title .accent {
+    color: var(--coral);
+    position: relative;
+    display: inline-block;
+  }
+  .header-title .accent::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 4px;
+    background: var(--sunshine);
+    opacity: 0.7;
+    z-index: -1;
+    border-radius: 2px;
+    transform: skew(-3deg);
+  }
+
+  .header-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(15px, 1.4vw, 19px);
+    color: var(--ink-soft);
+    line-height: 1.4;
+    max-width: 700px;
+  }
+
+  /* small reminiscing character on right of header */
+  .reminiscing-character {
+    width: 110px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .reminiscing-character svg {
+    width: 100%; height: auto;
+  }
+
+  /* JOURNEY TIMELINE */
+  .journey-zone {
+    flex-grow: 1;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 2vw;
+    align-items: stretch;
+    min-height: 0;
+  }
+
+  /* horizontal connector line behind cards */
+  .journey-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .stage-card {
+    position: relative;
+    background: var(--cream);
+    border: 1.5px solid var(--ink);
+    border-radius: 12px;
+    padding: 1.5rem 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    box-shadow: 3px 4px 0 rgba(42, 38, 34, 0.1);
+  }
+
+  .stage-1 {
+    background: #FFF1D6;
+    transform: rotate(-1deg) translateY(8px);
+  }
+  .stage-2 {
+    background: #DCEEF7;
+    transform: rotate(0.5deg);
+  }
+  .stage-3 {
+    background: var(--coral);
+    color: var(--cream);
+    transform: rotate(-0.8deg) translateY(-4px);
+  }
+
+  .stage-tab {
+    position: absolute;
+    top: -14px;
+    left: 1.5rem;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .stage-3 .stage-tab {
+    background: var(--ink);
+    color: var(--sunshine);
+  }
+
+  .stage-year {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 0.4rem;
+  }
+
+  .stage-3 .stage-year {
+    color: rgba(255, 253, 248, 0.85);
+  }
+
+  .stage-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(20px, 1.9vw, 28px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    font-variation-settings: "SOFT" 60, "opsz" 144;
+  }
+
+  .stage-3 .stage-title {
+    color: var(--cream);
+  }
+
+  .stage-body {
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 0.85rem;
+  }
+
+  .stage-3 .stage-body {
+    color: rgba(255, 253, 248, 0.92);
+  }
+
+  /* tools used stack */
+  .tools-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: auto;
+  }
+
+  .tool-chip {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border: 1px solid var(--ink);
+    border-radius: 3px;
+    background: rgba(42, 38, 34, 0.04);
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .stage-3 .tool-chip {
+    background: rgba(255, 253, 248, 0.18);
+    border-color: var(--cream);
+    color: var(--cream);
+  }
+
+  /* bullet list for Stage 1 tools */
+  .tool-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .tool-list li {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.3;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .tool-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    background: var(--coral);
+    border-radius: 50%;
+  }
+
+  /* big highlight callout */
+  .highlight-stat {
+    margin-top: 0.5rem;
+    padding: 8px 12px;
+    background: rgba(255, 107, 71, 0.1);
+    border-left: 3px solid var(--coral);
+    border-radius: 0 4px 4px 0;
+    font-family: var(--font-hand);
+    font-size: 18px;
+    color: var(--coral-deep);
+    font-weight: 600;
+    line-height: 1.15;
+  }
+
+  /* connector arrows */
+  .connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    position: relative;
+  }
+
+  .connector svg {
+    width: 50px; height: 30px;
+  }
+
+  /* small label hovering above connector */
+  .connector-label {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-hand);
+    font-size: 16px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  /* ============= ANIMATIONS ============= */
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes popInRotate {
+    0% { opacity: 0; transform: scale(0.8) rotate(var(--rot, 0deg)) translateY(var(--ty, 0)); }
+    70% { transform: scale(1.04) rotate(var(--rot, 0deg)) translateY(var(--ty, 0)); }
+    100% { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)) translateY(var(--ty, 0)); }
+  }
+
+  @keyframes drawArrow {
+    from { stroke-dashoffset: 100; }
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)) translateY(var(--ty, 0)); }
+    50% { transform: translateY(-4px) rotate(var(--rot, 0deg)) translateY(var(--ty, 0)); }
+  }
+
+  .zone-eyebrow { animation: fadeUp 0.6s 0.2s backwards; }
+  .header-title { animation: fadeUp 0.7s 0.4s backwards; }
+  .header-sub { animation: fadeUp 0.6s 0.7s backwards; }
+  .reminiscing-character { animation: fadeUp 0.7s 0.6s backwards; }
+
+  .stage-1 { --rot: -1deg; --ty: 8px; animation: popInRotate 0.6s 1.0s backwards; }
+  .stage-2 { --rot: 0.5deg; animation: popInRotate 0.6s 1.4s backwards; }
+  .stage-3 { --rot: -0.8deg; --ty: -4px; animation: popInRotate 0.6s 1.8s backwards; }
+
+  .arrow-1-path {
+    stroke-dasharray: 100; stroke-dashoffset: 100;
+    animation: drawArrow 0.6s 1.3s forwards ease-out;
+  }
+  .arrow-2-path {
+    stroke-dasharray: 100; stroke-dashoffset: 100;
+    animation: drawArrow 0.6s 1.7s forwards ease-out;
+  }
+  .connector-label-1 { animation: fadeUp 0.4s 1.5s backwards; }
+  .connector-label-2 { animation: fadeUp 0.4s 1.9s backwards; }
+
+</style>
+</head>
+<body>
+
+<section class="slide">
+
+  <!-- Top chrome -->
+  <div class="chrome-top">
+    <div class="section-marker">Origin · why MixTechBook</div>
+    <div class="deck-meta"><span class="current">05</span> / 17 · MixTechBook</div>
+  </div>
+
+  <!-- Main body -->
+  <div class="slide-body">
+
+    <!-- HEADER -->
+    <div class="header-zone">
+      <div class="header-text">
+        <div class="zone-eyebrow">
+          how this project began <span class="dot"></span> a personal arc
+        </div>
+        <h2 class="header-title">
+          This isn't my <span class="accent">first</span> rodeo with smart learning.
+        </h2>
+        <p class="header-sub">
+          Ten years ago I helped bring textbooks online for students in Sri Lanka. MixTechBook is what comes <em>next</em>.
+        </p>
+      </div>
+
+      <!-- small reminiscing character -->
+      <div class="reminiscing-character">
+        <svg viewBox="0 0 220 280" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#2A2622" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="110" cy="262" rx="40" ry="4" fill="#2A2622" fill-opacity="0.08" stroke="none"/>
+          <!-- hair -->
+          <g>
+            <circle cx="78" cy="50" r="8" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="92" cy="40" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="108" cy="36" r="10" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="124" cy="40" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="140" cy="50" r="8" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <path d="M 72 56 Q 66 46 76 42 Q 84 40 86 50" stroke-width="1.2"/>
+            <path d="M 84 44 Q 86 32 100 32 Q 110 34 108 46" stroke-width="1.2"/>
+            <path d="M 106 32 Q 114 22 126 30 Q 132 38 124 46" stroke-width="1.2"/>
+            <path d="M 124 40 Q 140 36 144 50 Q 146 60 136 62" stroke-width="1.2"/>
+            <path d="M 68 62 Q 58 68 62 82" stroke-width="1.2"/>
+            <path d="M 68 92 Q 62 100 66 112 Q 72 118 76 114" stroke-width="1.2"/>
+            <path d="M 152 92 Q 158 100 154 112 Q 148 118 144 114" stroke-width="1.2"/>
+          </g>
+          <path d="M 82 72 Q 82 58 110 56 Q 138 58 138 72 Q 138 100 110 112 Q 82 100 82 72 Z" fill="#FFF8EC"/>
+          <!-- eyes looking up-left, dreamy -->
+          <circle cx="93" cy="80" r="2" fill="#2A2622"/>
+          <circle cx="121" cy="80" r="2" fill="#2A2622"/>
+          <path d="M 88 73 Q 93 70 98 73"/>
+          <path d="M 116 73 Q 121 70 126 73"/>
+          <path d="M 110 87 L 110 93"/>
+          <!-- soft dreamy smile -->
+          <path d="M 102 100 Q 110 105 118 100" stroke="#C8542A" stroke-width="1.5"/>
+          <ellipse cx="91" cy="97" rx="4" ry="2.5" fill="#FF8FA3" fill-opacity="0.55" stroke="none"/>
+          <ellipse cx="129" cy="97" rx="4" ry="2.5" fill="#FF8FA3" fill-opacity="0.55" stroke="none"/>
+          <path d="M 102 114 L 102 124"/>
+          <path d="M 118 114 L 118 124"/>
+          <!-- frock -->
+          <path d="M 78 128 Q 76 125 80 124 L 102 124 Q 110 130 118 124 L 140 124 Q 144 125 142 128 L 138 162 L 82 162 Z" fill="#FF6B47" stroke="#2A2622"/>
+          <path d="M 82 162 L 60 220 L 160 220 L 138 162 Z" fill="#FF6B47" stroke="#2A2622"/>
+          <line x1="82" y1="162" x2="138" y2="162" stroke="#2A2622" stroke-width="1"/>
+          <circle cx="92" cy="190" r="2.5" fill="#FFC93C" stroke="none"/>
+          <circle cx="118" cy="195" r="2.5" fill="#FFC93C" stroke="none"/>
+          <circle cx="80" cy="208" r="2.5" fill="#FFC93C" stroke="none"/>
+          <circle cx="130" cy="208" r="2.5" fill="#FFC93C" stroke="none"/>
+          <path d="M 102 124 Q 110 132 118 124"/>
+          <!-- left arm relaxed -->
+          <path d="M 80 132 Q 68 158 72 188"/>
+          <circle cx="72" cy="192" r="5" fill="#FFF8EC"/>
+          <!-- right arm holding little book -->
+          <path d="M 140 132 Q 152 152 148 174"/>
+          <circle cx="148" cy="178" r="5" fill="#FFF8EC"/>
+          <!-- thought cloud above showing memory -->
+          <ellipse cx="40" cy="40" rx="22" ry="14" fill="#FFFDF8" stroke="#2A2622" stroke-width="1.3"/>
+          <circle cx="56" cy="58" r="4" fill="#FFFDF8" stroke="#2A2622" stroke-width="1.1"/>
+          <circle cx="68" cy="68" r="2.5" fill="#FFFDF8" stroke="#2A2622" stroke-width="1"/>
+          <!-- little book in cloud -->
+          <rect x="32" y="34" width="16" height="12" fill="#FFC93C" stroke="#2A2622" stroke-width="1"/>
+          <line x1="40" y1="34" x2="40" y2="46" stroke="#2A2622" stroke-width="0.8"/>
+          <!-- legs -->
+          <path d="M 92 220 L 90 250"/>
+          <path d="M 100 220 L 102 250"/>
+          <path d="M 118 220 L 120 250"/>
+          <path d="M 126 220 L 130 250"/>
+          <path d="M 90 250 L 102 250"/>
+          <path d="M 120 250 L 130 250"/>
+          <ellipse cx="96" cy="256" rx="10" ry="4" fill="#2A2622" stroke="none"/>
+          <ellipse cx="125" cy="256" rx="10" ry="4" fill="#2A2622" stroke="none"/>
+          <path d="M 91 252 L 101 252" stroke="#FFC93C" stroke-width="1.3"/>
+          <path d="M 120 252 L 130 252" stroke="#FFC93C" stroke-width="1.3"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- JOURNEY TIMELINE -->
+    <div class="journey-zone">
+
+      <!-- STAGE 1 — Sri Lanka -->
+      <div class="stage-card stage-1">
+        <span class="stage-tab">Then</span>
+        <div class="stage-year">~10 years ago · Sri Lanka</div>
+        <h3 class="stage-title">An e-learning science textbook project.</h3>
+        <ul class="tool-list">
+          <li>Photoshop</li>
+          <li>Illustrator</li>
+          <li>Captivate</li>
+          <li>Flash</li>
+          <li>HTML5</li>
+        </ul>
+      </div>
+
+      <!-- Connector arrow 1 -->
+      <div class="connector">
+        <span class="connector-label connector-label-1">a decade later…</span>
+        <svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+          <path class="arrow-1-path" d="M 5 15 Q 30 5 50 15" fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round"/>
+          <path d="M 50 15 L 44 10 M 50 15 L 44 20" fill="none" stroke="#2A2622" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <!-- STAGE 2 — A new question -->
+      <div class="stage-card stage-2">
+        <span class="stage-tab">Now</span>
+        <div class="stage-year">2025 · Auckland, NZ</div>
+        <h3 class="stage-title">A harder question.</h3>
+        <p class="stage-body">
+          Tech moves fast. The next generation is even more tech-savvy. Static and even animated content isn't enough anymore — they expect to <em>experience</em> learning. So I asked: <strong>what does learning look like for the next generation?</strong>
+        </p>
+        <div class="tools-stack">
+          <span class="tool-chip">Literature review</span>
+          <span class="tool-chip">Teacher voices</span>
+          <span class="tool-chip">Expert input</span>
+        </div>
+      </div>
+
+      <!-- Connector arrow 2 -->
+      <div class="connector">
+        <span class="connector-label connector-label-2">becomes…</span>
+        <svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+          <path class="arrow-2-path" d="M 5 15 Q 30 25 50 15" fill="none" stroke="#FF6B47" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M 50 15 L 44 10 M 50 15 L 44 20" fill="none" stroke="#FF6B47" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <!-- STAGE 3 — MixTechBook -->
+      <div class="stage-card stage-3">
+        <span class="stage-tab">Next</span>
+        <div class="stage-year">This research · 2026</div>
+        <h3 class="stage-title">MixTechBook</h3>
+        <p class="stage-body">
+          Not a flat page. Not a video. A <em>3D, immersive, interactive</em> way to teach what's invisible — body systems you can step inside, hearts you can watch beat, parts you can pull apart.
+        </p>
+        <div class="tools-stack">
+          <span class="tool-chip">AR</span>
+          <span class="tool-chip">VR</span>
+          <span class="tool-chip">3D simulation</span>
+          <span class="tool-chip">Unity</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Bottom chrome -->
+  <div class="chrome-bottom">
+    <div class="references">
+      <span class="label">References</span>
+      Dissanayake, N. L. (2026). Researcher Background &amp; Project Origin, §1.1 &amp; §1.9 — <em>MixTechBook: The Future of Immersive Learning</em>.
+    </div>
+    <div class="progress-rail">
+      <div class="progress-fill"></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ╔════════════════════════════════════════════════════════════════╗
+     ║  DECK NAVIGATION                                                ║
+     ║  Keyboard: ← → arrows · Space · Page Up/Down · Home · End      ║
+     ║  On-screen: prev/next buttons bottom-right                     ║
+     ╚════════════════════════════════════════════════════════════════╝ -->
+<style>
+  /* Navigation widget */
+  .deck-nav {
+    position: fixed;
+    bottom: 14px;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 6px;
+    background: rgba(255, 248, 236, 0.92);
+    border: 1px solid rgba(42, 38, 34, 0.18);
+    border-radius: 22px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(42, 38, 34, 0.08);
+    z-index: 9999;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: #5A524A;
+    transition: opacity 0.3s;
+    user-select: none;
+  }
+  .deck-nav:hover { opacity: 1 !important; }
+  .deck-nav.idle { opacity: 0.35; }
+  .deck-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: #2A2622;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 1;
+  }
+  .deck-nav-btn:hover {
+    background: rgba(255, 107, 71, 0.18);
+  }
+  .deck-nav-btn:active {
+    transform: scale(0.92);
+  }
+  .deck-nav-btn:disabled,
+  .deck-nav-btn[aria-disabled="true"] {
+    opacity: 0.25;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .deck-nav-counter {
+    padding: 0 6px;
+    letter-spacing: 0.06em;
+    color: #5A524A;
+    min-width: 38px;
+    text-align: center;
+  }
+  .deck-nav-counter strong {
+    color: #2A2622;
+    font-weight: 600;
+  }
+  .deck-nav-help {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(42, 38, 34, 0.06);
+    color: #5A524A;
+    font-size: 11px;
+    cursor: help;
+    margin-left: 2px;
+    font-style: italic;
+  }
+  .deck-nav-help:hover {
+    background: rgba(42, 38, 34, 0.12);
+  }
+  /* Hide nav when printing or in minimal-screen mode */
+  @media print {
+    .deck-nav { display: none !important; }
+  }
+</style>
+
+<nav class="deck-nav" aria-label="Slide navigation">
+  <a class="deck-nav-btn" id="deck-nav-prev" href="#" aria-label="Previous slide" title="Previous (←)">‹</a>
+  <span class="deck-nav-counter"><strong id="deck-nav-current">--</strong>/17</span>
+  <a class="deck-nav-btn" id="deck-nav-next" href="#" aria-label="Next slide" title="Next (→ or Space)">›</a>
+  <a class="deck-nav-btn" id="deck-nav-home" href="slide-01.html" aria-label="First slide" title="First slide (Home)" style="font-size:13px;">⌂</a>
+  <span class="deck-nav-help" title="Keyboard: ← → Space · Page Up/Down · Home · End · F11 fullscreen">?</span>
+</nav>
+
+<script>
+(function() {
+  // Detect current slide number from URL
+  const match = window.location.pathname.match(/slide-(\d{2})\.html/);
+  const total = 17;
+  const current = match ? parseInt(match[1], 10) : 1;
+
+  // Update counter
+  const counterEl = document.getElementById('deck-nav-current');
+  if (counterEl) counterEl.textContent = String(current).padStart(2, '0');
+
+  // Build prev/next URLs
+  const padNum = n => String(n).padStart(2, '0');
+  const prevUrl = current > 1 ? `slide-${padNum(current - 1)}.html` : null;
+  const nextUrl = current < total ? `slide-${padNum(current + 1)}.html` : null;
+
+  const prevBtn = document.getElementById('deck-nav-prev');
+  const nextBtn = document.getElementById('deck-nav-next');
+
+  if (prevBtn) {
+    if (prevUrl) {
+      prevBtn.href = prevUrl;
+    } else {
+      prevBtn.setAttribute('aria-disabled', 'true');
+      prevBtn.removeAttribute('href');
+    }
+  }
+
+  if (nextBtn) {
+    if (nextUrl) {
+      nextBtn.href = nextUrl;
+    } else {
+      nextBtn.setAttribute('aria-disabled', 'true');
+      nextBtn.removeAttribute('href');
+    }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    // Don't hijack keys when user is typing in an input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    // Don't hijack when modifier keys held (e.g. Cmd+R for refresh)
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    let dest = null;
+
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'PageDown':
+      case ' ': // spacebar
+        if (nextUrl) dest = nextUrl;
+        break;
+      case 'ArrowLeft':
+      case 'PageUp':
+      case 'Backspace':
+        if (prevUrl) dest = prevUrl;
+        break;
+      case 'Home':
+        dest = 'slide-01.html';
+        break;
+      case 'End':
+        dest = `slide-${padNum(total)}.html`;
+        break;
+    }
+
+    if (dest) {
+      e.preventDefault();
+      window.location.href = dest;
+    }
+  });
+
+  // Auto-fade nav after inactivity, restore on movement
+  const navEl = document.querySelector('.deck-nav');
+  if (navEl) {
+    let idleTimer = null;
+    const setIdle = () => navEl.classList.add('idle');
+    const setActive = () => {
+      navEl.classList.remove('idle');
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(setIdle, 2500);
+    };
+    setActive();
+    document.addEventListener('mousemove', setActive);
+    document.addEventListener('keydown', setActive);
+    document.addEventListener('touchstart', setActive);
+  }
+})();
+</script>
+
+</body>
+</html>

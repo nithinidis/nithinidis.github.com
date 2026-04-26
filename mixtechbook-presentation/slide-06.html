@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MixTechBook · Slide 6 · The Three Technologies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FFF8EC; --paper-deep: #FBEFD4; --cream: #FFFDF8;
+    --ink: #2A2622; --ink-soft: #5A524A; --ink-dim: #8A7F74;
+    --coral: #FF6B47; --coral-deep: #E04D2A;
+    --sunshine: #FFC93C; --sky: #4FB6D8;
+    --leaf: #7BC950; --rose: #FF8FA3;
+    --font-serif: 'Fraunces', Georgia, serif;
+    --font-sans: 'Geist', -apple-system, sans-serif;
+    --font-mono: 'Geist Mono', monospace;
+    --font-hand: 'Caveat', cursive;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100vh; overflow: hidden;
+    background: var(--paper); color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: radial-gradient(rgba(42, 38, 34, 0.035) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none; z-index: 1;
+  }
+  .slide {
+    position: relative; width: 100vw; height: 100vh;
+    padding: 3.5vh 5vw 6vh;
+    display: flex; flex-direction: column; z-index: 2;
+  }
+
+  /* ============= CHROME ============= */
+  .chrome-top {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-shrink: 0; height: 36px;
+  }
+  .section-marker {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--coral); letter-spacing: 0.18em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px; font-weight: 500;
+  }
+  .section-marker::before {
+    content: ''; width: 24px; height: 2px;
+    background: var(--coral); border-radius: 2px;
+  }
+  .deck-meta {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--ink-dim); letter-spacing: 0.12em;
+  }
+  .deck-meta .current { color: var(--ink); font-weight: 500; }
+  .chrome-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 0 5vw 1.75vh; z-index: 10;
+  }
+  .references {
+    font-family: var(--font-sans); font-size: 10.5px; color: var(--ink-dim);
+    line-height: 1.5; padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(42, 38, 34, 0.12);
+  }
+  .references .label {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--coral); margin-right: 0.5rem; font-weight: 500;
+  }
+  .progress-rail {
+    height: 3px; background: rgba(42, 38, 34, 0.08);
+    border-radius: 2px; margin-top: 0.85rem; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; width: calc(6 * 100% / 17);
+    background: var(--coral); border-radius: 2px;
+  }
+
+  /* ============= SLIDE 6 ============= */
+
+  .slide-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 1vh 0 4vh;
+  }
+
+  /* HEADER */
+  .header-zone {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2.5vh;
+  }
+
+  .header-text {
+    flex-grow: 1;
+    max-width: 70%;
+  }
+
+  .zone-eyebrow {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .zone-eyebrow .dot {
+    width: 5px; height: 5px;
+    background: var(--sunshine); border-radius: 50%;
+  }
+
+  .header-title {
+    font-family: var(--font-hand);
+    font-size: clamp(34px, 4vw, 54px);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .header-title .accent { color: var(--coral); }
+  .header-title .underline-num {
+    position: relative;
+    display: inline-block;
+  }
+  .header-title .underline-num::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 0; right: 0;
+    height: 8px;
+    background: var(--sunshine);
+    opacity: 0.6;
+    z-index: -1;
+    border-radius: 2px;
+    transform: skew(-3deg);
+  }
+
+  .header-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(14px, 1.3vw, 18px);
+    color: var(--ink-soft);
+    line-height: 1.4;
+    max-width: 700px;
+  }
+
+  .narrator-mini {
+    width: 95px;
+    flex-shrink: 0;
+  }
+
+  /* THREE TECH CARDS */
+  .tech-grid {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5vw;
+    min-height: 0;
+    margin-bottom: 1.5vh;
+  }
+
+  .tech-card {
+    position: relative;
+    background: var(--cream);
+    border: 1.5px solid var(--ink);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 3px 3px 0 rgba(42, 38, 34, 0.1);
+  }
+
+  .tech-card.ar { transform: rotate(-0.5deg); }
+  .tech-card.vr { transform: rotate(0.5deg) translateY(-6px); }
+  .tech-card.sim { transform: rotate(-0.3deg); }
+
+  /* image placeholder zone */
+  .video-zone {
+    height: 50%;
+    background: #F0E8D6;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1.5px solid var(--ink);
+  }
+
+  /* tech badge top corner */
+  .tech-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--coral);
+    color: var(--cream);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    z-index: 3;
+    border: 1.5px solid var(--ink);
+  }
+
+  .tech-card.vr .tech-badge { background: var(--sky); }
+  .tech-card.sim .tech-badge { background: var(--leaf); }
+
+  /* video placeholder content */
+  .video-placeholder {
+    position: absolute; inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .video-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(42, 38, 34, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-soft);
+  }
+
+  .video-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  .video-filename {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-soft);
+    background: rgba(42, 38, 34, 0.05);
+    border: 1px dashed rgba(42, 38, 34, 0.3);
+    padding: 4px 10px;
+    border-radius: 3px;
+  }
+
+  /* card body content */
+  .tech-body {
+    padding: 1.1rem 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 0.5rem;
+    min-height: 0;
+  }
+
+  .tech-name {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(20px, 2vw, 27px);
+    line-height: 1.05;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    font-variation-settings: "SOFT" 60, "opsz" 144;
+    margin-bottom: 0.2rem;
+  }
+
+  .tech-name .acronym {
+    color: var(--coral);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .tech-card.vr .tech-name .acronym { color: var(--sky); }
+  .tech-card.sim .tech-name .acronym { color: var(--leaf); }
+
+  .tech-blurb {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  .tech-tag {
+    font-family: var(--font-hand);
+    font-size: 17px;
+    color: var(--coral-deep);
+    font-weight: 500;
+    margin-top: auto;
+    padding-top: 0.5rem;
+    border-top: 1px dashed rgba(42, 38, 34, 0.18);
+    line-height: 1.2;
+  }
+
+  .tech-card.vr .tech-tag { color: #2C7E9C; }
+  .tech-card.sim .tech-tag { color: #4F8A33; }
+
+  /* WHY THESE THREE — bottom rationale strip */
+  .rationale-strip {
+    background: var(--cream);
+    border: 1.5px solid var(--ink);
+    border-radius: 10px;
+    padding: 0.85rem 1.5rem;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr;
+    align-items: center;
+    gap: 1rem 1.75rem;
+    box-shadow: 2px 3px 0 rgba(42, 38, 34, 0.08);
+  }
+
+  .rationale-label {
+    font-family: var(--font-hand);
+    font-size: 26px;
+    color: var(--coral);
+    font-weight: 600;
+    line-height: 1;
+    padding-right: 1.25rem;
+    border-right: 1px solid rgba(42, 38, 34, 0.18);
+    white-space: nowrap;
+  }
+
+  .rationale-item {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .rationale-num {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 32px;
+    color: var(--coral);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .rationale-text {
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+
+  .rationale-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* ============= ANIMATIONS ============= */
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes popInRot {
+    0% { opacity: 0; transform: scale(0.85) rotate(var(--rot, 0deg)) translateY(var(--ty, 0)); }
+    70% { transform: scale(1.03) rotate(var(--rot, 0deg)) translateY(var(--ty, 0)); }
+    100% { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)) translateY(var(--ty, 0)); }
+  }
+
+  .zone-eyebrow { animation: fadeUp 0.5s 0.2s backwards; }
+  .header-title { animation: fadeUp 0.7s 0.4s backwards; }
+  .header-sub { animation: fadeUp 0.6s 0.6s backwards; }
+  .narrator-mini { animation: fadeUp 0.7s 0.7s backwards; }
+
+  .tech-card.ar { --rot: -0.5deg; animation: popInRot 0.6s 0.9s backwards; }
+  .tech-card.vr { --rot: 0.5deg; --ty: -6px; animation: popInRot 0.6s 1.1s backwards; }
+  .tech-card.sim { --rot: -0.3deg; animation: popInRot 0.6s 1.3s backwards; }
+
+  .rationale-strip { animation: fadeUp 0.7s 1.6s backwards; }
+
+</style>
+</head>
+<body>
+
+<section class="slide">
+
+  <!-- Top chrome -->
+  <div class="chrome-top">
+    <div class="section-marker">Why these three technologies</div>
+    <div class="deck-meta"><span class="current">06</span> / 17 · MixTechBook</div>
+  </div>
+
+  <!-- Main body -->
+  <div class="slide-body">
+
+    <!-- HEADER -->
+    <div class="header-zone">
+      <div class="header-text">
+        <div class="zone-eyebrow">
+          the toolkit <span class="dot"></span> AR · VR · 3D simulation
+        </div>
+        <h2 class="header-title">
+          Out of <em style="font-style:italic;color:var(--coral);">many</em> technologies, I chose <span class="underline-num">three</span>.
+        </h2>
+        <p class="header-sub">
+          AR, VR, and 3D simulation aren't the only tools that can transform learning — but they're the ones that can do it <em>now</em>, in real classrooms, at this moment in time.
+        </p>
+      </div>
+
+      <!-- Excited mini-character -->
+      <div class="narrator-mini">
+        <svg viewBox="0 0 220 280" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#2A2622" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="110" cy="262" rx="40" ry="4" fill="#2A2622" fill-opacity="0.08" stroke="none"/>
+          <!-- hair -->
+          <g>
+            <circle cx="78" cy="50" r="8" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="92" cy="40" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="108" cy="36" r="10" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="124" cy="40" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="140" cy="50" r="8" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <path d="M 72 56 Q 66 46 76 42 Q 84 40 86 50" stroke-width="1.2"/>
+            <path d="M 84 44 Q 86 32 100 32 Q 110 34 108 46" stroke-width="1.2"/>
+            <path d="M 106 32 Q 114 22 126 30 Q 132 38 124 46" stroke-width="1.2"/>
+            <path d="M 124 40 Q 140 36 144 50 Q 146 60 136 62" stroke-width="1.2"/>
+            <path d="M 68 62 Q 58 68 62 82" stroke-width="1.2"/>
+            <path d="M 68 92 Q 62 100 66 112" stroke-width="1.2"/>
+            <path d="M 152 92 Q 158 100 154 112" stroke-width="1.2"/>
+          </g>
+          <path d="M 82 72 Q 82 58 110 56 Q 138 58 138 72 Q 138 100 110 112 Q 82 100 82 72 Z" fill="#FFF8EC"/>
+          <!-- excited big eyes -->
+          <path d="M 90 80 Q 95 76 100 80" stroke-width="1.8"/>
+          <path d="M 120 80 Q 125 76 130 80" stroke-width="1.8"/>
+          <path d="M 87 70 Q 93 67 99 70"/>
+          <path d="M 121 70 Q 127 67 133 70"/>
+          <path d="M 110 87 L 110 93"/>
+          <path d="M 100 100 Q 110 108 120 100" stroke="#C8542A" stroke-width="1.6"/>
+          <ellipse cx="91" cy="97" rx="4" ry="2.5" fill="#FF8FA3" fill-opacity="0.55" stroke="none"/>
+          <ellipse cx="129" cy="97" rx="4" ry="2.5" fill="#FF8FA3" fill-opacity="0.55" stroke="none"/>
+          <path d="M 102 114 L 102 124"/>
+          <path d="M 118 114 L 118 124"/>
+          <!-- frock -->
+          <path d="M 78 128 Q 76 125 80 124 L 102 124 Q 110 130 118 124 L 140 124 Q 144 125 142 128 L 138 162 L 82 162 Z" fill="#FF6B47" stroke="#2A2622"/>
+          <path d="M 82 162 L 60 220 L 160 220 L 138 162 Z" fill="#FF6B47" stroke="#2A2622"/>
+          <line x1="82" y1="162" x2="138" y2="162" stroke="#2A2622" stroke-width="1"/>
+          <circle cx="92" cy="190" r="2.5" fill="#FFC93C" stroke="none"/>
+          <circle cx="118" cy="190" r="2.5" fill="#FFC93C" stroke="none"/>
+          <circle cx="105" cy="208" r="2.5" fill="#FFC93C" stroke="none"/>
+          <path d="M 102 124 Q 110 132 118 124"/>
+          <!-- BOTH arms wide open showing -->
+          <path d="M 80 132 Q 50 130 35 110"/>
+          <circle cx="35" cy="106" r="5" fill="#FFF8EC"/>
+          <path d="M 140 132 Q 170 130 185 110"/>
+          <circle cx="185" cy="106" r="5" fill="#FFF8EC"/>
+          <!-- sparkles -->
+          <path d="M 22 90 L 25 86 M 24 88 L 28 90" stroke="#FFC93C" stroke-width="1.3"/>
+          <path d="M 195 92 L 198 88 M 196 94 L 200 92" stroke="#FFC93C" stroke-width="1.3"/>
+          <circle cx="20" cy="100" r="2" fill="#FF6B47" stroke="none"/>
+          <circle cx="200" cy="100" r="2" fill="#FF6B47" stroke="none"/>
+          <!-- legs -->
+          <path d="M 92 220 L 90 250"/>
+          <path d="M 100 220 L 102 250"/>
+          <path d="M 118 220 L 120 250"/>
+          <path d="M 126 220 L 130 250"/>
+          <path d="M 90 250 L 102 250"/>
+          <path d="M 120 250 L 130 250"/>
+          <ellipse cx="96" cy="256" rx="10" ry="4" fill="#2A2622" stroke="none"/>
+          <ellipse cx="125" cy="256" rx="10" ry="4" fill="#2A2622" stroke="none"/>
+          <path d="M 91 252 L 101 252" stroke="#FFC93C" stroke-width="1.3"/>
+          <path d="M 120 252 L 130 252" stroke="#FFC93C" stroke-width="1.3"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- THREE TECH CARDS -->
+    <div class="tech-grid">
+
+      <!-- AR -->
+      <div class="tech-card ar">
+        <div class="video-zone">
+          <span class="tech-badge">01 · AR</span>
+          <img src="assets/ar-demo.png" alt="AR demo: anatomy textbook augmented through phone"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="tech-body">
+          <h3 class="tech-name"><span class="acronym">AR</span> Augmented Reality</h3>
+          <p class="tech-blurb">Layers digital content over the real world, accessed through tablets or phones — no headset needed.</p>
+          <p class="tech-tag">~ a heart, on the desk in front of you ~</p>
+        </div>
+      </div>
+
+      <!-- VR -->
+      <div class="tech-card vr">
+        <div class="video-zone">
+          <span class="tech-badge">02 · VR</span>
+          <img src="assets/vr-demo.png" alt="VR demo: student exploring DNA model with VR headset"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="tech-body">
+          <h3 class="tech-name"><span class="acronym">VR</span> Virtual Reality</h3>
+          <p class="tech-blurb">A fully immersive virtual world, experienced through a headset. Students don't watch — they inhabit.</p>
+          <p class="tech-tag">~ step inside the body ~</p>
+        </div>
+      </div>
+
+      <!-- 3D Simulation -->
+      <div class="tech-card sim">
+        <div class="video-zone">
+          <span class="tech-badge">03 · 3D Sim</span>
+          <img src="assets/3d-demo.png" alt="3D simulation demo: teacher with interactive human skeleton on digital board"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="tech-body">
+          <h3 class="tech-name"><span class="acronym">3D</span> Simulation</h3>
+          <p class="tech-blurb">Interactive 3D models on screen — pull apart, zoom in, rotate, watch processes unfold. Works on any device.</p>
+          <p class="tech-tag">~ rotate, zoom, take it apart ~</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- WHY THESE THREE — rationale strip -->
+    <div class="rationale-strip">
+      <div class="rationale-label">
+        Why<br>these<br>three?
+      </div>
+      <div class="rationale-item">
+        <div class="rationale-num">01</div>
+        <div class="rationale-text"><strong>Accessible.</strong> Already practical in real classrooms, on devices students use.</div>
+      </div>
+      <div class="rationale-item">
+        <div class="rationale-num">02</div>
+        <div class="rationale-text"><strong>Well-established.</strong> Mature pedagogy &amp; tooling, not still-emerging tech.</div>
+      </div>
+      <div class="rationale-item">
+        <div class="rationale-num">03</div>
+        <div class="rationale-text"><strong>Feasible.</strong> Manageable scope for a Master's project, with time &amp; resource constraints.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom chrome -->
+  <div class="chrome-bottom">
+    <div class="references">
+      <span class="label">Image sources</span>
+      <strong>AR:</strong> share.google/trrosn2i5DbEu7J0r · <strong>VR:</strong> share.google/4LowCZkNsmgJ5Vpny · <strong>3D Simulation:</strong> Cybernetyx Global. (2024). <em>3D Models and Interactive Simulations for Teaching on EyeRIS Digital Board</em>. YouTube. youtube.com/watch?v=1YTUY3xdSgI
+    </div>
+    <div class="progress-rail">
+      <div class="progress-fill"></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ╔════════════════════════════════════════════════════════════════╗
+     ║  DECK NAVIGATION                                                ║
+     ║  Keyboard: ← → arrows · Space · Page Up/Down · Home · End      ║
+     ║  On-screen: prev/next buttons bottom-right                     ║
+     ╚════════════════════════════════════════════════════════════════╝ -->
+<style>
+  /* Navigation widget */
+  .deck-nav {
+    position: fixed;
+    bottom: 14px;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 6px;
+    background: rgba(255, 248, 236, 0.92);
+    border: 1px solid rgba(42, 38, 34, 0.18);
+    border-radius: 22px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(42, 38, 34, 0.08);
+    z-index: 9999;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: #5A524A;
+    transition: opacity 0.3s;
+    user-select: none;
+  }
+  .deck-nav:hover { opacity: 1 !important; }
+  .deck-nav.idle { opacity: 0.35; }
+  .deck-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: #2A2622;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 1;
+  }
+  .deck-nav-btn:hover {
+    background: rgba(255, 107, 71, 0.18);
+  }
+  .deck-nav-btn:active {
+    transform: scale(0.92);
+  }
+  .deck-nav-btn:disabled,
+  .deck-nav-btn[aria-disabled="true"] {
+    opacity: 0.25;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .deck-nav-counter {
+    padding: 0 6px;
+    letter-spacing: 0.06em;
+    color: #5A524A;
+    min-width: 38px;
+    text-align: center;
+  }
+  .deck-nav-counter strong {
+    color: #2A2622;
+    font-weight: 600;
+  }
+  .deck-nav-help {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(42, 38, 34, 0.06);
+    color: #5A524A;
+    font-size: 11px;
+    cursor: help;
+    margin-left: 2px;
+    font-style: italic;
+  }
+  .deck-nav-help:hover {
+    background: rgba(42, 38, 34, 0.12);
+  }
+  /* Hide nav when printing or in minimal-screen mode */
+  @media print {
+    .deck-nav { display: none !important; }
+  }
+</style>
+
+<nav class="deck-nav" aria-label="Slide navigation">
+  <a class="deck-nav-btn" id="deck-nav-prev" href="#" aria-label="Previous slide" title="Previous (←)">‹</a>
+  <span class="deck-nav-counter"><strong id="deck-nav-current">--</strong>/17</span>
+  <a class="deck-nav-btn" id="deck-nav-next" href="#" aria-label="Next slide" title="Next (→ or Space)">›</a>
+  <a class="deck-nav-btn" id="deck-nav-home" href="slide-01.html" aria-label="First slide" title="First slide (Home)" style="font-size:13px;">⌂</a>
+  <span class="deck-nav-help" title="Keyboard: ← → Space · Page Up/Down · Home · End · F11 fullscreen">?</span>
+</nav>
+
+<script>
+(function() {
+  // Detect current slide number from URL
+  const match = window.location.pathname.match(/slide-(\d{2})\.html/);
+  const total = 17;
+  const current = match ? parseInt(match[1], 10) : 1;
+
+  // Update counter
+  const counterEl = document.getElementById('deck-nav-current');
+  if (counterEl) counterEl.textContent = String(current).padStart(2, '0');
+
+  // Build prev/next URLs
+  const padNum = n => String(n).padStart(2, '0');
+  const prevUrl = current > 1 ? `slide-${padNum(current - 1)}.html` : null;
+  const nextUrl = current < total ? `slide-${padNum(current + 1)}.html` : null;
+
+  const prevBtn = document.getElementById('deck-nav-prev');
+  const nextBtn = document.getElementById('deck-nav-next');
+
+  if (prevBtn) {
+    if (prevUrl) {
+      prevBtn.href = prevUrl;
+    } else {
+      prevBtn.setAttribute('aria-disabled', 'true');
+      prevBtn.removeAttribute('href');
+    }
+  }
+
+  if (nextBtn) {
+    if (nextUrl) {
+      nextBtn.href = nextUrl;
+    } else {
+      nextBtn.setAttribute('aria-disabled', 'true');
+      nextBtn.removeAttribute('href');
+    }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    // Don't hijack keys when user is typing in an input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    // Don't hijack when modifier keys held (e.g. Cmd+R for refresh)
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    let dest = null;
+
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'PageDown':
+      case ' ': // spacebar
+        if (nextUrl) dest = nextUrl;
+        break;
+      case 'ArrowLeft':
+      case 'PageUp':
+      case 'Backspace':
+        if (prevUrl) dest = prevUrl;
+        break;
+      case 'Home':
+        dest = 'slide-01.html';
+        break;
+      case 'End':
+        dest = `slide-${padNum(total)}.html`;
+        break;
+    }
+
+    if (dest) {
+      e.preventDefault();
+      window.location.href = dest;
+    }
+  });
+
+  // Auto-fade nav after inactivity, restore on movement
+  const navEl = document.querySelector('.deck-nav');
+  if (navEl) {
+    let idleTimer = null;
+    const setIdle = () => navEl.classList.add('idle');
+    const setActive = () => {
+      navEl.classList.remove('idle');
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(setIdle, 2500);
+    };
+    setActive();
+    document.addEventListener('mousemove', setActive);
+    document.addEventListener('keydown', setActive);
+    document.addEventListener('touchstart', setActive);
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MixTechBook · Slide 12 · Insights Gained · 9 + 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FFF8EC; --paper-deep: #FBEFD4; --cream: #FFFDF8;
+    --ink: #2A2622; --ink-soft: #5A524A; --ink-dim: #8A7F74;
+    --coral: #FF6B47; --coral-deep: #E04D2A;
+    --sunshine: #FFC93C; --sky: #4FB6D8;
+    --leaf: #7BC950; --rose: #FF8FA3; --mauve: #A87FBF;
+    --font-serif: 'Fraunces', Georgia, serif;
+    --font-sans: 'Geist', -apple-system, sans-serif;
+    --font-mono: 'Geist Mono', monospace;
+    --font-hand: 'Caveat', cursive;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100vh; overflow: hidden;
+    background: var(--paper); color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: radial-gradient(rgba(42, 38, 34, 0.035) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none; z-index: 1;
+  }
+  .slide {
+    position: relative; width: 100vw; height: 100vh;
+    padding: 3.5vh 5vw 6vh;
+    display: flex; flex-direction: column; z-index: 2;
+  }
+
+  .chrome-top {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-shrink: 0; height: 36px;
+  }
+  .section-marker {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--coral); letter-spacing: 0.18em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px; font-weight: 500;
+  }
+  .section-marker::before {
+    content: ''; width: 24px; height: 2px;
+    background: var(--coral); border-radius: 2px;
+  }
+  .deck-meta {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--ink-dim); letter-spacing: 0.12em;
+  }
+  .deck-meta .current { color: var(--ink); font-weight: 500; }
+  .chrome-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 0 5vw 1.75vh; z-index: 10;
+  }
+  .references {
+    font-family: var(--font-sans); font-size: 10.5px; color: var(--ink-dim);
+    line-height: 1.65; padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(42, 38, 34, 0.12);
+  }
+  .references em { color: var(--ink-soft); font-style: italic; }
+  .references .label {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--coral); margin-right: 0.5rem; font-weight: 500;
+  }
+  .progress-rail {
+    height: 3px; background: rgba(42, 38, 34, 0.08);
+    border-radius: 2px; margin-top: 0.85rem; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; width: calc(12 * 100% / 17);
+    background: var(--coral); border-radius: 2px;
+  }
+
+  .slide-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 1.5vh 0 8vh;
+    gap: 1.5vh;
+  }
+
+  .header-zone {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 1.5vh;
+  }
+  .header-text { flex-grow: 1; max-width: 78%; }
+
+  .zone-eyebrow {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: 0.5rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .zone-eyebrow .dot {
+    width: 5px; height: 5px;
+    background: var(--sunshine); border-radius: 50%;
+  }
+
+  .header-title {
+    font-family: var(--font-hand);
+    font-size: clamp(34px, 4vw, 52px);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 0.95;
+    margin-bottom: 0.3rem;
+  }
+  .header-title .accent {
+    color: var(--coral);
+    position: relative;
+    display: inline-block;
+  }
+  .header-title .accent::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 0; right: 0;
+    height: 7px;
+    background: var(--sunshine);
+    opacity: 0.55;
+    z-index: -1;
+    border-radius: 2px;
+    transform: skew(-3deg);
+  }
+
+  .header-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(13px, 1.2vw, 16px);
+    color: var(--ink-soft);
+    line-height: 1.4;
+    max-width: 720px;
+  }
+
+  .narrator-mini { width: 80px; flex-shrink: 0; }
+
+  /* BIG STAT ZONES — the 9 and 5 */
+  .big-stat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5vw;
+    padding: 4vh 2vw;
+    background: var(--cream);
+    border: 1.5px solid var(--ink);
+    border-radius: 14px;
+    box-shadow: 4px 5px 0 rgba(42, 38, 34, 0.08);
+    flex-grow: 1;
+  }
+
+  .themes-stat {
+    transform: rotate(-0.4deg);
+    border-left: 5px solid var(--coral);
+  }
+
+  .directions-stat {
+    transform: rotate(0.4deg);
+    border-left: 5px solid var(--mauve);
+  }
+
+  .big-num {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(120px, 18vw, 220px);
+    line-height: 0.85;
+    color: var(--coral);
+    font-variation-settings: "SOFT" 100, "opsz" 144;
+  }
+
+  .directions-num {
+    color: var(--mauve);
+  }
+
+  .big-label-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .big-label {
+    font-family: var(--font-hand);
+    font-size: clamp(36px, 4.5vw, 60px);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .big-sub {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    font-weight: 500;
+  }
+
+  .themes-section {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-bottom: 1vh;
+  }
+
+  /* Old styles (unused now but kept harmlessly) */
+
+  .themes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .theme-card {
+    position: relative;
+    background: var(--cream);
+    border: 1.5px solid var(--ink);
+    border-radius: 6px;
+    padding: 0.5rem 0.7rem 0.55rem 0.85rem;
+    box-shadow: 1.5px 1.5px 0 rgba(42, 38, 34, 0.07);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .theme-card .theme-num {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 26px;
+    text-align: center;
+    font-variation-settings: "SOFT" 100, "opsz" 144;
+  }
+
+  .theme-card .theme-text {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(10px, 0.85vw, 12px);
+    line-height: 1.25;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    font-variation-settings: "opsz" 144;
+  }
+  .theme-card .theme-text em {
+    font-style: italic;
+    color: var(--coral-deep);
+  }
+
+  .theme-card.t1, .theme-card.t2 { border-left: 3px solid var(--coral); }
+  .theme-card.t3, .theme-card.t4 { border-left: 3px solid var(--leaf); }
+  .theme-card.t5, .theme-card.t6 { border-left: 3px solid var(--sky); }
+  .theme-card.t7, .theme-card.t8 { border-left: 3px solid var(--sunshine); }
+  .theme-card.t9 { border-left: 3px solid var(--mauve); }
+
+  .theme-card.t1 .theme-num, .theme-card.t2 .theme-num { color: var(--coral); }
+  .theme-card.t3 .theme-num, .theme-card.t4 .theme-num { color: var(--leaf); }
+  .theme-card.t5 .theme-num, .theme-card.t6 .theme-num { color: var(--sky); }
+  .theme-card.t7 .theme-num, .theme-card.t8 .theme-num { color: #C9A027; }
+  .theme-card.t9 .theme-num { color: var(--mauve); }
+
+  /* CONNECTOR */
+  .arc-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    margin: 0.5vh 0 0.8vh;
+  }
+
+  .arc-line {
+    flex-grow: 1;
+    height: 2px;
+    background: repeating-linear-gradient(to right,
+      rgba(42, 38, 34, 0.3) 0 4px,
+      transparent 4px 8px);
+    max-width: 220px;
+  }
+
+  .arc-text {
+    font-family: var(--font-hand);
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: 600;
+    color: var(--coral);
+    line-height: 1;
+  }
+  .arc-text .arrow {
+    color: var(--ink);
+    margin-left: 4px;
+  }
+
+  /* DIRECTIONS */
+  .directions-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.65rem;
+    flex-grow: 1;
+    min-height: 0;
+  }
+
+  .direction-card {
+    position: relative;
+    background: var(--cream);
+    border: 1.5px solid var(--ink);
+    border-radius: 8px;
+    padding: 0.85rem 0.85rem 0.85rem;
+    box-shadow: 2px 2.5px 0 rgba(42, 38, 34, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .direction-card.d1 { border-top: 4px solid var(--coral); transform: rotate(-0.4deg); }
+  .direction-card.d2 { border-top: 4px solid var(--sunshine); transform: rotate(0.4deg); }
+  .direction-card.d3 { border-top: 4px solid var(--leaf); transform: rotate(-0.3deg); }
+  .direction-card.d4 { border-top: 4px solid var(--sky); transform: rotate(0.3deg); }
+  .direction-card.d5 { border-top: 4px solid var(--mauve); transform: rotate(-0.4deg); }
+
+  .direction-num {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 38px;
+    line-height: 0.85;
+    font-variation-settings: "SOFT" 100, "opsz" 144;
+  }
+  .direction-card.d1 .direction-num { color: var(--coral); }
+  .direction-card.d2 .direction-num { color: #C9A027; }
+  .direction-card.d3 .direction-num { color: var(--leaf); }
+  .direction-card.d4 .direction-num { color: var(--sky); }
+  .direction-card.d5 .direction-num { color: var(--mauve); }
+
+  .direction-tag {
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    font-weight: 500;
+  }
+
+  .direction-text {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(11px, 0.9vw, 13px);
+    line-height: 1.3;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    font-variation-settings: "opsz" 144;
+  }
+  .direction-text em {
+    font-style: italic;
+    color: var(--coral-deep);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes lightbulb {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+  @keyframes popInRot {
+    0% { opacity: 0; transform: scale(0.85) rotate(var(--rot, 0deg)); }
+    70% { transform: scale(1.04) rotate(var(--rot, 0deg)); }
+    100% { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)); }
+  }
+
+  .zone-eyebrow { animation: fadeUp 0.5s 0.2s backwards; }
+  .header-title { animation: fadeUp 0.6s 0.4s backwards; }
+  .header-sub { animation: fadeUp 0.5s 0.6s backwards; }
+  .narrator-mini { animation: fadeUp 0.6s 0.5s backwards; }
+
+  .themes-stat { animation: popInRot 0.6s 0.9s backwards; --rot: -0.4deg; }
+  .directions-stat { animation: popInRot 0.6s 1.4s backwards; --rot: 0.4deg; }
+
+  .lightbulb-glow { animation: lightbulb 1.8s 1.5s ease-in-out infinite; }
+</style>
+</head>
+<body>
+
+<section class="slide">
+
+  <div class="chrome-top">
+    <div class="section-marker">Insights gained · 9 + 5</div>
+    <div class="deck-meta"><span class="current">12</span> / 17 · MixTechBook</div>
+  </div>
+
+  <div class="slide-body">
+
+    <div class="header-zone">
+      <div class="header-text">
+        <div class="zone-eyebrow">
+          insights gained <span class="dot"></span> from analysis to action
+        </div>
+        <h2 class="header-title">
+          What the analysis <span class="accent">gave us.</span>
+        </h2>
+        <p class="header-sub">
+          The thematic analysis surfaced two things — the patterns in the data, and the directions for the prototype. Both are detailed in the report.
+        </p>
+      </div>
+
+      <div class="narrator-mini">
+        <svg viewBox="0 0 220 280" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#2A2622" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="110" cy="262" rx="40" ry="4" fill="#2A2622" fill-opacity="0.08" stroke="none"/>
+          <g>
+            <circle cx="78" cy="50" r="8" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="92" cy="40" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="108" cy="36" r="10" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="124" cy="40" r="9" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <circle cx="140" cy="50" r="8" fill="#2A2622" fill-opacity="0.07" stroke="none"/>
+            <path d="M 72 56 Q 66 46 76 42 Q 84 40 86 50" stroke-width="1.2"/>
+            <path d="M 84 44 Q 86 32 100 32 Q 110 34 108 46" stroke-width="1.2"/>
+            <path d="M 106 32 Q 114 22 126 30 Q 132 38 124 46" stroke-width="1.2"/>
+            <path d="M 124 40 Q 140 36 144 50 Q 146 60 136 62" stroke-width="1.2"/>
+          </g>
+          <path d="M 82 72 Q 82 58 110 56 Q 138 58 138 72 Q 138 100 110 112 Q 82 100 82 72 Z" fill="#FFF8EC"/>
+          <path d="M 90 80 Q 95 76 100 80" stroke-width="1.8"/>
+          <path d="M 120 80 Q 125 76 130 80" stroke-width="1.8"/>
+          <path d="M 87 70 Q 93 67 99 70"/>
+          <path d="M 121 70 Q 127 67 133 70"/>
+          <path d="M 110 87 L 110 93"/>
+          <ellipse cx="110" cy="102" rx="4.5" ry="3.5" fill="#C8542A" fill-opacity="0.7" stroke="#C8542A" stroke-width="1.4"/>
+          <ellipse cx="91" cy="97" rx="4" ry="2.5" fill="#FF8FA3" fill-opacity="0.55" stroke="none"/>
+          <ellipse cx="129" cy="97" rx="4" ry="2.5" fill="#FF8FA3" fill-opacity="0.55" stroke="none"/>
+          <path d="M 102 114 L 102 124"/>
+          <path d="M 118 114 L 118 124"/>
+          <path d="M 78 128 Q 76 125 80 124 L 102 124 Q 110 130 118 124 L 140 124 Q 144 125 142 128 L 138 162 L 82 162 Z" fill="#FF6B47" stroke="#2A2622"/>
+          <path d="M 82 162 L 60 220 L 160 220 L 138 162 Z" fill="#FF6B47" stroke="#2A2622"/>
+          <line x1="82" y1="162" x2="138" y2="162" stroke="#2A2622" stroke-width="1"/>
+          <circle cx="92" cy="190" r="2.5" fill="#FFC93C" stroke="none"/>
+          <circle cx="118" cy="190" r="2.5" fill="#FFC93C" stroke="none"/>
+          <circle cx="105" cy="208" r="2.5" fill="#FFC93C" stroke="none"/>
+          <path d="M 102 124 Q 110 132 118 124"/>
+          <path d="M 80 132 Q 68 158 72 188"/>
+          <circle cx="72" cy="192" r="5" fill="#FFF8EC"/>
+          <path d="M 140 132 Q 165 110 175 70"/>
+          <circle cx="175" cy="65" r="5" fill="#FFF8EC"/>
+          <path d="M 175 60 L 175 48" stroke-width="2"/>
+          <g class="lightbulb-glow">
+            <circle cx="175" cy="35" r="11" fill="#FFC93C" stroke="#2A2622" stroke-width="1.4"/>
+            <path d="M 170 42 L 180 42 M 171 45 L 179 45" stroke="#2A2622" stroke-width="1.2"/>
+            <path d="M 175 18 L 175 13" stroke="#FFC93C" stroke-width="1.5"/>
+            <path d="M 188 28 L 192 25" stroke="#FFC93C" stroke-width="1.5"/>
+            <path d="M 162 28 L 158 25" stroke="#FFC93C" stroke-width="1.5"/>
+            <path d="M 191 38 L 196 38" stroke="#FFC93C" stroke-width="1.5"/>
+            <path d="M 159 38 L 154 38" stroke="#FFC93C" stroke-width="1.5"/>
+          </g>
+          <path d="M 92 220 L 90 250"/>
+          <path d="M 100 220 L 102 250"/>
+          <path d="M 118 220 L 120 250"/>
+          <path d="M 126 220 L 130 250"/>
+          <path d="M 90 250 L 102 250"/>
+          <path d="M 120 250 L 130 250"/>
+          <ellipse cx="96" cy="256" rx="10" ry="4" fill="#2A2622" stroke="none"/>
+          <ellipse cx="125" cy="256" rx="10" ry="4" fill="#2A2622" stroke="none"/>
+          <path d="M 91 252 L 101 252" stroke="#FFC93C" stroke-width="1.3"/>
+          <path d="M 120 252 L 130 252" stroke="#FFC93C" stroke-width="1.3"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 9 THEMES SECTION -->
+    <div class="themes-section">
+      <div class="big-stat themes-stat">
+        <span class="big-num">9</span>
+        <div class="big-label-stack">
+          <span class="big-label">thematic codes</span>
+          <span class="big-sub">what the data says</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 PROTOTYPE DIRECTIONS SECTION -->
+    <div class="big-stat directions-stat">
+      <span class="big-num directions-num">5</span>
+      <div class="big-label-stack">
+        <span class="big-label">prototype directions</span>
+        <span class="big-sub">what to build</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="chrome-bottom">
+    <div class="references">
+      <span class="label">References</span>
+      Dissanayake, N. L. (2026). Findings, Chapter 7 — <em>MixTechBook: The Future of Immersive Learning</em>.
+    </div>
+    <div class="progress-rail">
+      <div class="progress-fill"></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ╔════════════════════════════════════════════════════════════════╗
+     ║  DECK NAVIGATION                                                ║
+     ║  Keyboard: ← → arrows · Space · Page Up/Down · Home · End      ║
+     ║  On-screen: prev/next buttons bottom-right                     ║
+     ╚════════════════════════════════════════════════════════════════╝ -->
+<style>
+  /* Navigation widget */
+  .deck-nav {
+    position: fixed;
+    bottom: 14px;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 6px;
+    background: rgba(255, 248, 236, 0.92);
+    border: 1px solid rgba(42, 38, 34, 0.18);
+    border-radius: 22px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(42, 38, 34, 0.08);
+    z-index: 9999;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: #5A524A;
+    transition: opacity 0.3s;
+    user-select: none;
+  }
+  .deck-nav:hover { opacity: 1 !important; }
+  .deck-nav.idle { opacity: 0.35; }
+  .deck-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: #2A2622;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 1;
+  }
+  .deck-nav-btn:hover {
+    background: rgba(255, 107, 71, 0.18);
+  }
+  .deck-nav-btn:active {
+    transform: scale(0.92);
+  }
+  .deck-nav-btn:disabled,
+  .deck-nav-btn[aria-disabled="true"] {
+    opacity: 0.25;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .deck-nav-counter {
+    padding: 0 6px;
+    letter-spacing: 0.06em;
+    color: #5A524A;
+    min-width: 38px;
+    text-align: center;
+  }
+  .deck-nav-counter strong {
+    color: #2A2622;
+    font-weight: 600;
+  }
+  .deck-nav-help {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(42, 38, 34, 0.06);
+    color: #5A524A;
+    font-size: 11px;
+    cursor: help;
+    margin-left: 2px;
+    font-style: italic;
+  }
+  .deck-nav-help:hover {
+    background: rgba(42, 38, 34, 0.12);
+  }
+  /* Hide nav when printing or in minimal-screen mode */
+  @media print {
+    .deck-nav { display: none !important; }
+  }
+</style>
+
+<nav class="deck-nav" aria-label="Slide navigation">
+  <a class="deck-nav-btn" id="deck-nav-prev" href="#" aria-label="Previous slide" title="Previous (←)">‹</a>
+  <span class="deck-nav-counter"><strong id="deck-nav-current">--</strong>/17</span>
+  <a class="deck-nav-btn" id="deck-nav-next" href="#" aria-label="Next slide" title="Next (→ or Space)">›</a>
+  <a class="deck-nav-btn" id="deck-nav-home" href="slide-01.html" aria-label="First slide" title="First slide (Home)" style="font-size:13px;">⌂</a>
+  <span class="deck-nav-help" title="Keyboard: ← → Space · Page Up/Down · Home · End · F11 fullscreen">?</span>
+</nav>
+
+<script>
+(function() {
+  // Detect current slide number from URL
+  const match = window.location.pathname.match(/slide-(\d{2})\.html/);
+  const total = 17;
+  const current = match ? parseInt(match[1], 10) : 1;
+
+  // Update counter
+  const counterEl = document.getElementById('deck-nav-current');
+  if (counterEl) counterEl.textContent = String(current).padStart(2, '0');
+
+  // Build prev/next URLs
+  const padNum = n => String(n).padStart(2, '0');
+  const prevUrl = current > 1 ? `slide-${padNum(current - 1)}.html` : null;
+  const nextUrl = current < total ? `slide-${padNum(current + 1)}.html` : null;
+
+  const prevBtn = document.getElementById('deck-nav-prev');
+  const nextBtn = document.getElementById('deck-nav-next');
+
+  if (prevBtn) {
+    if (prevUrl) {
+      prevBtn.href = prevUrl;
+    } else {
+      prevBtn.setAttribute('aria-disabled', 'true');
+      prevBtn.removeAttribute('href');
+    }
+  }
+
+  if (nextBtn) {
+    if (nextUrl) {
+      nextBtn.href = nextUrl;
+    } else {
+      nextBtn.setAttribute('aria-disabled', 'true');
+      nextBtn.removeAttribute('href');
+    }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    // Don't hijack keys when user is typing in an input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    // Don't hijack when modifier keys held (e.g. Cmd+R for refresh)
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    let dest = null;
+
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'PageDown':
+      case ' ': // spacebar
+        if (nextUrl) dest = nextUrl;
+        break;
+      case 'ArrowLeft':
+      case 'PageUp':
+      case 'Backspace':
+        if (prevUrl) dest = prevUrl;
+        break;
+      case 'Home':
+        dest = 'slide-01.html';
+        break;
+      case 'End':
+        dest = `slide-${padNum(total)}.html`;
+        break;
+    }
+
+    if (dest) {
+      e.preventDefault();
+      window.location.href = dest;
+    }
+  });
+
+  // Auto-fade nav after inactivity, restore on movement
+  const navEl = document.querySelector('.deck-nav');
+  if (navEl) {
+    let idleTimer = null;
+    const setIdle = () => navEl.classList.add('idle');
+    const setActive = () => {
+      navEl.classList.remove('idle');
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(setIdle, 2500);
+    };
+    setActive();
+    document.addEventListener('mousemove', setActive);
+    document.addEventListener('keydown', setActive);
+    document.addEventListener('touchstart', setActive);
+  }
+})();
+</script>
+
+</body>
+</html>
