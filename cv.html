@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nithini Dissanayake — Technical Writer &amp; Knowledge Management Specialist</title>
+<meta name="description" content="CV of Nithini Dissanayake, Technical Writer and Knowledge Management Specialist based in Auckland, New Zealand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --ink:        #1B2430;
+    --ink-soft:   #4B5563;
+    --paper:      #F4F5F2;
+    --paper-raised:#FFFFFF;
+    --line:       #DADFE0;
+    --accent:     #2F6F62;   /* documentation-verified teal */
+    --accent-soft:#E4EEEB;
+    --accent-ink: #1E5347;
+    --brass:      #B4813F;   /* secondary accent — used sparingly */
+    --brass-soft: #F6EDE0;
+    --blue:       #3E6A8F;   /* tertiary accent — used sparingly */
+    --blue-soft:  #E6EDF3;
+    --purple:     #6C5B8C;   /* quaternary accent — used sparingly */
+    --purple-soft:#EEEAF3;
+    --radius:     3px;
+    --maxw:       860px;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', -apple-system, sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:var(--accent-ink); }
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- Ribbon ---------- */
+
+  .ribbon{
+    height:6px;
+    width:100%;
+    background:linear-gradient(90deg, var(--accent) 0%, var(--accent) 25%, var(--blue) 25%, var(--blue) 50%, var(--purple) 50%, var(--purple) 75%, var(--brass) 75%, var(--brass) 100%);
+  }
+
+  /* ---------- Header / title block ---------- */
+
+  header.doc-header{
+    background:var(--ink);
+    color:var(--paper);
+    padding:56px 0 0 0;
+  }
+
+  .doc-meta-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:#9AA6B2;
+    padding-bottom:22px;
+    border-bottom:1px solid #333F4C;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  .doc-meta-top .status{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    color:#8FD9C4;
+  }
+  .doc-meta-top .status::before{
+    content:"";
+    width:6px; height:6px;
+    border-radius:50%;
+    background:#3FCB9E;
+    display:inline-block;
+  }
+
+  .title-block{
+    padding:38px 0 34px 0;
+  }
+
+  h1.name{
+    font-family:'Source Serif 4', Georgia, serif;
+    font-weight:600;
+    font-size:clamp(34px, 5vw, 48px);
+    margin:0 0 8px 0;
+    letter-spacing:-0.01em;
+    color:#FFFFFF;
+  }
+
+  .role-line{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+    color:#B9C6BE;
+    margin:0 0 26px 0;
+    letter-spacing:0.02em;
+  }
+
+  .contact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 22px;
+    font-size:14px;
+    color:#CBD3DA;
+    padding-bottom:36px;
+  }
+
+  .contact-row a{
+    color:#CBD3DA;
+    text-decoration:none;
+    border-bottom:1px solid #4B5563;
+    padding-bottom:1px;
+  }
+  .contact-row a:hover{
+    color:#8FD9C4;
+    border-bottom-color:#8FD9C4;
+  }
+
+  .contact-row span.sep{
+    color:#4B5563;
+  }
+
+  /* ---------- Section shell ---------- */
+
+  main{ padding:46px 0 30px 0; }
+
+  section.doc-section{
+    margin-bottom:46px;
+  }
+
+  .section-label{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:18px;
+  }
+
+  .section-label .mark{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:20px;
+    height:20px;
+    border-radius:4px;
+    background:var(--accent);
+    color:#fff;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    font-weight:500;
+    flex:none;
+  }
+
+  .section-label h2{
+    font-family:'IBM Plex Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    font-size:13px;
+    font-weight:500;
+    color:var(--ink);
+    margin:0;
+    padding-bottom:2px;
+  }
+
+  .section-label .rule{
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  /* ---------- Profile ---------- */
+
+  .profile-text{
+    font-size:16px;
+    color:var(--ink-soft);
+    max-width:70ch;
+  }
+  .profile-text p{ margin:0 0 14px 0; }
+  .profile-text p:last-child{ margin-bottom:0; }
+
+  /* ---------- Chips (competencies / skills) ---------- */
+
+  .chip-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+  }
+
+  .chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    padding:6px 12px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--paper-raised);
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+
+  .skill-group{
+    margin-bottom:20px;
+  }
+  .skill-group:last-child{ margin-bottom:0; }
+
+  .skill-group h3{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:13px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--ink);
+    margin:0 0 10px 0;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+
+  .skill-group h3::before{
+    content:"";
+    width:9px;
+    height:9px;
+    border-radius:2px;
+    background:var(--accent);
+    display:inline-block;
+  }
+
+  .skill-group.c-blue h3::before{ background:var(--blue); }
+  .skill-group.c-brass h3::before{ background:var(--brass); }
+  .skill-group.c-purple h3::before{ background:var(--purple); }
+
+  .skill-group.c-blue .chip{ border-color:#C7D6E2; }
+  .skill-group.c-brass .chip{ border-color:#E5CFA9; }
+  .skill-group.c-purple .chip{ border-color:#D9D1E5; }
+
+  /* ---------- Experience entries ---------- */
+
+  .entry{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-top:3px solid var(--accent);
+    border-radius:var(--radius);
+    padding:26px 28px;
+    margin-bottom:20px;
+  }
+  .entry:last-child{ margin-bottom:0; }
+
+  .entry-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:4px;
+  }
+
+  .entry-role{
+    font-family:'Source Serif 4', Georgia, serif;
+    font-size:20px;
+    font-weight:600;
+    color:var(--ink);
+  }
+
+  .entry-dates{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--accent-ink);
+    background:var(--accent-soft);
+    padding:4px 9px;
+    border-radius:var(--radius);
+    white-space:nowrap;
+    margin-top:2px;
+  }
+
+  .entry-org{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-bottom:16px;
+  }
+
+  .entry-org .co{ font-weight:600; color:var(--blue); }
+
+  .entry-summary{
+    font-size:14.5px;
+    color:var(--ink-soft);
+    margin-bottom:16px;
+  }
+
+  .entry h4.sub{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:#8A94A0;
+    margin:0 0 10px 0;
+  }
+
+  ul.bullets{
+    margin:0 0 18px 0;
+    padding-left:20px;
+  }
+  ul.bullets:last-child{ margin-bottom:0; }
+  ul.bullets li{
+    font-size:14.5px;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+    padding-left:2px;
+  }
+  ul.bullets li::marker{ color:var(--accent); }
+
+  /* Achievements callout — styled like a documentation "note" admonition */
+  .callout{
+    background:var(--accent-soft);
+    border-left:3px solid var(--accent);
+    border-radius:0 var(--radius) var(--radius) 0;
+    padding:16px 18px 4px 18px;
+  }
+  .callout h4.sub{
+    color:var(--accent-ink);
+    margin-bottom:10px;
+  }
+  .callout ul.bullets{ padding-left:18px; }
+  .callout ul.bullets li{ color:#274E44; }
+  .callout ul.bullets li::marker{ color:var(--accent-ink); }
+
+  /* ---------- Education ---------- */
+
+  .edu-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+
+  .edu-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-top:3px solid var(--blue);
+    border-radius:var(--radius);
+    padding:20px 22px;
+  }
+
+  .edu-card:nth-child(2){ border-top-color:var(--purple); }
+
+  .edu-card .degree{
+    font-family:'Source Serif 4', Georgia, serif;
+    font-weight:600;
+    font-size:17px;
+    margin-bottom:6px;
+  }
+
+  .edu-card .school{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+
+  .edu-card .desc{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin-bottom:10px;
+  }
+
+  .edu-card .year{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--accent-ink);
+  }
+
+  /* ---------- Referees / footer ---------- */
+
+  .referees{
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:26px 0 60px 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  footer .foot-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:#8A94A0;
+  }
+
+  .print-btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    color:var(--ink);
+    padding:9px 16px;
+    border-radius:var(--radius);
+    cursor:pointer;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .print-btn:hover{
+    border-color:var(--accent);
+    color:var(--accent-ink);
+  }
+
+  /* ---------- Responsive ---------- */
+
+  @media (max-width:640px){
+    .wrap{ padding:0 18px; }
+    header.doc-header{ padding-top:38px; }
+    .entry{ padding:20px; }
+    .edu-grid{ grid-template-columns:1fr; }
+    .entry-head{ flex-direction:column; }
+    footer{ flex-direction:column; align-items:flex-start; }
+  }
+
+  /* ---------- Print ---------- */
+
+  @media print{
+    body{ background:#fff; }
+    header.doc-header{ background:#fff; color:#000; padding-top:0; }
+    h1.name, .role-line, .contact-row, .contact-row a{ color:#000 !important; }
+    .doc-meta-top{ color:#333 !important; border-color:#999 !important; }
+    .doc-meta-top .status{ color:#000 !important; }
+    .doc-meta-top .status::before{ background:#000; }
+    .entry, .edu-card, .chip{ border:1px solid #bbb; break-inside:avoid; }
+    .print-btn{ display:none; }
+    a{ text-decoration:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ribbon"></div>
+
+<header class="doc-header">
+  <div class="wrap">
+    <div class="doc-meta-top">
+      <span>CV · REV 2026.08 · AUCKLAND, NZ</span>
+      <span class="status">Open to opportunities</span>
+    </div>
+    <div class="title-block">
+      <h1 class="name">Nithini Dissanayake</h1>
+      <p class="role-line">Technical Writer · Knowledge Management Specialist · Learning Content Developer</p>
+      <div class="contact-row">
+        <span>Auckland, New Zealand</span>
+        <span class="sep">·</span>
+        <a href="tel:0223751543">022 375 1543</a>
+        <span class="sep">·</span>
+        <a href="mailto:dmnithinidissanayake@gmail.com">dmnithinidissanayake@gmail.com</a>
+        <span class="sep">·</span>
+        <a href="https://www.linkedin.com/in/nithin-dissanayake/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <section class="doc-section" id="profile">
+      <div class="section-label">
+        <span class="mark">§</span>
+        <h2>Professional Profile</h2>
+        <span class="rule"></span>
+      </div>
+      <div class="profile-text">
+        <p>Technical Writer with over six years of experience creating technical documentation, multimedia learning content, online help systems, and knowledge management solutions for enterprise software platforms. Experienced in translating complex technical and business processes into clear, user-focused documentation that improves software adoption and user experience.</p>
+        <p>Skilled in collaborating with product owners, software developers, engineers, QA teams, subject matter experts, and business stakeholders to gather requirements and deliver high-quality technical content. Strong background in technical writing, instructional design, SharePoint knowledge management, content management systems, controlled documentation, and digital learning solutions.</p>
+      </div>
+    </section>
+
+    <section class="doc-section" id="competencies">
+      <div class="section-label">
+        <span class="mark">§</span>
+        <h2>Core Competencies</h2>
+        <span class="rule"></span>
+      </div>
+      <div class="chip-row">
+        <span class="chip">Technical Writing</span>
+        <span class="chip">Technical Communication</span>
+        <span class="chip">Software Documentation</span>
+        <span class="chip">User Guides &amp; Manuals</span>
+        <span class="chip">Online Help Systems</span>
+        <span class="chip">SOPs</span>
+        <span class="chip">Release Notes</span>
+        <span class="chip">Knowledge Management</span>
+        <span class="chip">SharePoint Administration</span>
+        <span class="chip">Content Management Systems</span>
+        <span class="chip">Instructional Design</span>
+        <span class="chip">eLearning Development</span>
+        <span class="chip">Video Tutorials</span>
+        <span class="chip">Document Governance</span>
+      </div>
+    </section>
+
+    <section class="doc-section" id="experience">
+      <div class="section-label">
+        <span class="mark">§</span>
+        <h2>Professional Experience</h2>
+        <span class="rule"></span>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">Technical Writer</span>
+          <span class="entry-dates">Nov 2025 — Aug 2026</span>
+        </div>
+        <div class="entry-org"><span class="co">Watercare Services Ltd.</span> · Auckland</div>
+        <p class="entry-summary">Supported Watercare's Health, Safety and Wellbeing digital transformation programme by delivering technical documentation, multimedia learning resources, and SharePoint knowledge solutions for the implementation of the Donesafe enterprise platform.</p>
+
+        <h4 class="sub">Key Responsibilities</h4>
+        <ul class="bullets">
+          <li>Developed comprehensive technical documentation including user guides, Quick Reference Guides (QRGs), process documentation, system documentation, knowledge articles, and training materials for enterprise software applications.</li>
+          <li>Produced multimedia learning content including video tutorials, software demonstrations, eLearning modules, storyboards, and instructional resources using Synthesia, Camtasia, Clipchamp, Snagit, and Articulate Rise 360.</li>
+          <li>Collaborated with product owners, project managers, software vendors, subject matter experts, QA teams, Learning &amp; Development, and business stakeholders to gather requirements, validate documentation, and ensure technical accuracy.</li>
+          <li>Translated complex Health &amp; Safety business processes into clear, task-based documentation using plain language principles to improve user adoption and learning outcomes.</li>
+          <li>Developed documentation structures, learning pathways, and content strategies that improved navigation, discoverability, and accessibility for different user groups.</li>
+          <li>Designed and maintained SharePoint knowledge sites, pages, document libraries, publications, and digital learning resources supporting organisation-wide knowledge sharing.</li>
+          <li>Developed controlled document management processes, including document governance, review cycles, document lifecycle management, version control, metadata, and workflow automation using Microsoft 365.</li>
+          <li>Managed Teams &amp; SharePoint content, document libraries, permissions, information architecture, and publishing activities to ensure consistent knowledge management practices.</li>
+        </ul>
+
+        <div class="callout">
+          <h4 class="sub">Key Achievements</h4>
+          <ul class="bullets">
+            <li>Delivered the complete documentation and learning package supporting the rollout of Watercare's first Donesafe Risk Management module.</li>
+            <li>Introduced a layered documentation approach using reusable content to create Quick Reference Guides, detailed user guides, eLearning modules, and video tutorials from consistent source material.</li>
+            <li>Developed documentation standards, templates, and content structures that improved consistency across learning resources.</li>
+            <li>Established SharePoint knowledge hubs that centralised technical documentation, training resources, and business publications.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">Technical Writer</span>
+          <span class="entry-dates">May 2022 — Oct 2024</span>
+        </div>
+        <div class="entry-org"><span class="co">Veryon</span> · Canada</div>
+        <p class="entry-summary">Produced customer-facing technical documentation and online help content supporting enterprise aviation management software used by global aviation operators.</p>
+
+        <h4 class="sub">Key Responsibilities</h4>
+        <ul class="bullets">
+          <li>Authored comprehensive user manuals, Quick Reference Guides (QRGs), process documentation, SOPs, release documentation, and customer-facing technical content.</li>
+          <li>Produced software release notes, deployment documentation, release announcements, and development SOPs supporting agile software releases.</li>
+          <li>Created multimedia training resources including software demonstrations, instructional videos, and customer onboarding materials.</li>
+          <li>Developed and maintained integrated online help systems using Umbraco CMS, enabling users to access context-sensitive documentation directly within the application.</li>
+          <li>Published and maintained customer documentation through the Content Management System (CMS), ensuring documentation remained current with software releases.</li>
+          <li>Collaborated with software developers, Product Owners, QA teams, Customer Success teams, and subject matter experts throughout the software development lifecycle.</li>
+          <li>Produced technical documentation and knowledge base articles in response to customer support requests, product enhancements, and software updates.</li>
+          <li>Prepared internal newsletters, customer newsletters, web content, product announcements, and knowledge hub articles supporting customer communication.</li>
+        </ul>
+
+        <div class="callout">
+          <h4 class="sub">Key Achievements</h4>
+          <ul class="bullets">
+            <li>Maintained extensive enterprise software documentation supporting a complex aviation management platform.</li>
+            <li>Improved customer self-service by developing searchable online help systems and knowledge base content integrated within the application.</li>
+            <li>Successfully delivered documentation supporting multiple software releases while maintaining documentation quality and consistency.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry" style="border-top-color:var(--purple);">
+        <div class="entry-head">
+          <span class="entry-role">Freelance Technical Writer &amp; Content Management</span>
+          <span class="entry-dates">2022 — Present</span>
+        </div>
+        <div class="entry-org"><span class="co">Self-employed</span> · Part-time</div>
+        <p class="entry-summary">Provide technical writing and website content management services for SaaS and technology companies, producing technical content, knowledge base articles, product documentation, and website content from stakeholder requirements.</p>
+
+        <ul class="bullets">
+          <li>Develop website content, product information, and knowledge articles based on business requirements.</li>
+          <li>Manage WordPress content publishing, page creation, formatting, site structure, and ongoing website maintenance.</li>
+          <li>Maintain website content to ensure consistency, usability, and an improved user experience.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="doc-section" id="skills">
+      <div class="section-label">
+        <span class="mark">§</span>
+        <h2>Technical Skills</h2>
+        <span class="rule"></span>
+      </div>
+
+      <div class="skill-group">
+        <h3>Technical Writing &amp; Documentation</h3>
+        <div class="chip-row">
+          <span class="chip">Technical Documentation</span>
+          <span class="chip">Software Documentation</span>
+          <span class="chip">User Guides</span>
+          <span class="chip">Process Documentation</span>
+          <span class="chip">Release Notes</span>
+          <span class="chip">SOP Development</span>
+          <span class="chip">Knowledge Base Articles</span>
+          <span class="chip">Online Help Systems</span>
+          <span class="chip">API Documentation (Working Knowledge)</span>
+        </div>
+      </div>
+
+      <div class="skill-group c-blue">
+        <h3>Learning &amp; Multimedia</h3>
+        <div class="chip-row">
+          <span class="chip">Articulate Rise 360</span>
+          <span class="chip">Synthesia</span>
+          <span class="chip">Camtasia</span>
+          <span class="chip">Clipchamp</span>
+          <span class="chip">Snagit</span>
+          <span class="chip">Storyboarding</span>
+          <span class="chip">eLearning Development</span>
+          <span class="chip">Video Production</span>
+          <span class="chip">Screen Recording</span>
+        </div>
+      </div>
+
+      <div class="skill-group c-brass">
+        <h3>Microsoft Technologies</h3>
+        <div class="chip-row">
+          <span class="chip">SharePoint Online</span>
+          <span class="chip">Microsoft Teams</span>
+          <span class="chip">Microsoft 365</span>
+          <span class="chip">Word</span>
+          <span class="chip">Excel</span>
+          <span class="chip">PowerPoint</span>
+          <span class="chip">Visio</span>
+        </div>
+      </div>
+
+      <div class="skill-group c-blue">
+        <h3>Content Management Systems</h3>
+        <div class="chip-row">
+          <span class="chip">SharePoint</span>
+          <span class="chip">WordPress</span>
+          <span class="chip">Umbraco CMS</span>
+        </div>
+      </div>
+
+      <div class="skill-group c-purple">
+        <h3>Additional Skills</h3>
+        <div class="chip-row">
+          <span class="chip">HTML (Basic)</span>
+          <span class="chip">CSS (Basic)</span>
+          <span class="chip">Google Analytics</span>
+          <span class="chip">Usability Testing</span>
+          <span class="chip">Information Architecture</span>
+          <span class="chip">Document Governance</span>
+          <span class="chip">Content Strategy</span>
+          <span class="chip">Knowledge Management</span>
+          <span class="chip">Digital Transformation</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="doc-section" id="education">
+      <div class="section-label">
+        <span class="mark">§</span>
+        <h2>Education</h2>
+        <span class="rule"></span>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="degree">Master's Degree in Technological Futures</div>
+          <div class="school">AcademyEx, Auckland, New Zealand</div>
+          <p class="desc">Postgraduate degree focused on emerging technologies, innovation, digital transformation, and systems thinking for the future of business and society.</p>
+          <div class="year">2026</div>
+        </div>
+        <div class="edu-card">
+          <div class="degree">Master's Degree in Strategic Marketing</div>
+          <div class="school">Asia e University, Malaysia</div>
+          <p class="desc">A master's degree specialising in digital marketing, online customer engagement, strategic brand management, and data-driven marketing in a rapidly evolving digital landscape.</p>
+          <div class="year">2018</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="doc-section" id="referees">
+      <div class="section-label">
+        <span class="mark">§</span>
+        <h2>Referees</h2>
+        <span class="rule"></span>
+      </div>
+      <p class="referees">Available upon request.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; width:100%;">
+    <span class="foot-meta">© 2026 Nithini Dissanayake — Last updated August 2026</span>
+    <button class="print-btn" onclick="window.print()">Download / Print PDF</button>
+  </div>
+</footer>
+
+</body>
+</html>
